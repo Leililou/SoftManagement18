@@ -5,6 +5,7 @@ class Hello {
                 "1. Enter “M” for Manager\n" +
                 "2. Enter “T” for Team member");
         switch (mainMenuChoice) {
+
             case "M" -> {if (mainMenuChoice.equalsIgnoreCase("M")) {
                 managerView.managerMenu(); }
             } case "T" -> {
