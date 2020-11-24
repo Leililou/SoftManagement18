@@ -7,10 +7,15 @@ public class InputHandler {
 
     public static String stringInput (String aMessage ) {
         System.out.println( aMessage );
-        String sentence = input.nextLine();
+        String sentence = input.next();
 
         return sentence;
 
+    }
+    public static void pressAnyKey (){
+        System.out.print("Press enter to continue: ");
+        input.nextLine();
+        System.out.print("");
     }
 
     public static double doubleInput( String aMessage) {
@@ -30,4 +35,5 @@ public class InputHandler {
         int integer = input.nextInt();
         return integer;
     }
+
 }
