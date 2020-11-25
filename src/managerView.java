@@ -1,13 +1,12 @@
-import java.util.UUID;
 
 public class managerView {
 
 
-    public static void managerMenu(){
+    public static void managerMenu() {
         int managerMenuChoice = InputHandler.intInput("Manager Screen - Type one of the options below:\n" +
                 "1. Add a project\n" +
                 "2. Add a task\n" +
-                "3. add a team member\n" +
+                "3. Team members\n" +
                 "4. Remove a task\n" +
                 "5. Remove a team member\n" +
                 "6. Assign a task to a team member\n" +
@@ -15,76 +14,32 @@ public class managerView {
                 "8. View tasks\n" +
                 "9. Schedule a meeting\n" +
                 "10. Return to Main Menu\n");
-        switch (managerMenuChoice){
-            case 1 -> addProject();
-            case 2 -> addTask();
+        switch (managerMenuChoice) {
+            case 1 -> Controller.addProject();
+            case 2 -> Controller.addTask();
             case 3 -> teamMembers();
-            case 4 -> removeTask();
-            case 5 -> removeTM();
-            case 6 -> assignTask();
-            case 7 ->viewProjects();
-            case 8 ->viewTasks();
-            case 9 ->scheduleMeeting();
-            case 10 ->{ }}
-    }
-    public static void addProject() {
-
-    }
-    public static void addTask(){
-
+            case 4 -> Controller.removeTask();
+            case 5 -> Controller.viewTasks();
+            case 6 -> Controller.assignTask();
+            case 7 -> Controller.viewProjects();
+            case 9 -> Controller.scheduleMeeting();
+            default -> Main.intro();
+        }
     }
     public static void teamMembers() {
-       int tmChoice = InputHandler.intInput("1. View all team members." +
-                "\n2. Add new team member." +
-               "\n3. Remove a member");
-       switch (tmChoice){
-           case 1 ->
-                   { showMemberList();teamMembers(); }
-           case 2 ->
-                   { addMember();teamMembers(); }
-           case 3 ->
-                   { showMemberList();
-            String id = InputHandler.stringInput("Which member should be removed? ID: ");
-            Member.removeUser(id); teamMembers(); }
-       }
-    }
-
-
-
-    public static void showMemberList(){
-        for (Member member : Member.memberList) {
-            if (member != null){
-                System.out.println(member );
-            }
+        int tmChoice = InputHandler.intInput("1. Add new team member." +
+                "\n2. Remove a team member." +
+                "\n3. View all team members." +
+                "\n4. Go back to previous menu");
+        switch (tmChoice){
+            case 1 -> { Controller.addMember();teamMembers(); }
+            case 2 -> { Controller.showMemberList();
+                String id = InputHandler.stringInput("Which member should be removed? ID: ");
+                Controller.removeUser(id); teamMembers();}
+            case 3 -> { Controller.showMemberList();teamMembers(); }
+            case 4 -> Controller.searchTM();
+            default -> { }
         }
-
-    }
-    public static void addMember(){
-    String id = UUID.randomUUID().toString();
-    String name = InputHandler.stringInput("Please enter member's name: ");
-    String role = InputHandler.stringInput("Please enter member's role: ");
-    Member member = new Member(id, name, role);
-    Member.registerMember(member);
-    System.out.println(name + " was added successfully as a " + role + ". \n");
-    }
-
-
-    public static void removeTask(){
-
-    }
-    public static void removeTM(){
-
-    }
-    public static void assignTask(){
-
-    }
-    public static void viewProjects(){
-
-    }
-    public static void viewTasks(){
-
-    }
-    public static void scheduleMeeting(){
-
     }
 }
+
