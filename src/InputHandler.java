@@ -5,7 +5,7 @@ public class InputHandler {
     public static Scanner input = new Scanner(System.in);
 
 
-    public static String stringInput (String aMessage ) {
+    public static String stringInput (String aMessage) {
         System.out.println( aMessage );
         String sentence = input.next();
 
@@ -18,7 +18,7 @@ public class InputHandler {
         System.out.print("");
     }
 
-    public static double doubleInput( String aMessage) {
+    public static double doubleInput (String aMessage) {
         System.out.print( aMessage );
         double decimalValue = input.nextDouble();
         input.nextLine();

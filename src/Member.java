@@ -46,15 +46,7 @@ public class Member {
         this.role = role;
     }
 
-    public static void removeUser(String idInput){
-        for (int i = 0; i < memberList.size(); i++){
-            if(memberList.get(i).getId().equals(idInput)){
-                memberList.remove(i);
-                System.out.println("Member removed!");
-            } else System.out.println("ID " + idInput + " is not found\n");
-        }
 
-    }
 
 
 
