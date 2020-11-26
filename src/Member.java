@@ -6,7 +6,7 @@ public class Member {
     protected String id = UUID.randomUUID().toString();
     private String name;
     private String role;
-    static ArrayList<Member> memberList = new ArrayList<>();
+    /* static ArrayList<Member> memberList = new ArrayList<>(); */
 
 
     public Member(String id, String name, String role) {

@@ -2,8 +2,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
+import java.util.ArrayList;
 
 public class Controller {
+
+    private static ArrayList<Member> memberList = new ArrayList<Member>();
+
     public static void addProject() {
 
     }
@@ -22,7 +26,43 @@ public class Controller {
 
     }
 
-    public static void searchTM() {
+    public static void searchTMID(String id) {
+
+        //-2: empty list, -1: invalid ID, i: index
+        // check the list of products (if empty)
+        if (memberList.isEmpty()) {
+            System.err.println("\nThe list of team members is empty! There is no registered team members!\n");
+            // return -2;
+        } else {
+            for (int i = 0; i < memberList.size(); i++) {
+                if (id.equals(memberList.get(i).getID())) {
+                    // return i;//return products.indexOf(products.get(i));
+                    system.out.prinln(memberList.get(i));
+                }
+            }
+        }
+        System.out.println("Invalid ID! Team member of ID: " + id + " not found!");
+        // return -1;
+
+    }
+
+    public static void searchTMName(String name) {
+
+        //-2: empty list, -1: invalid ID, i: index
+        // check the list of products (if empty)
+        if (memberList.isEmpty()) {
+            System.err.println("\nThe list of team members is empty! There is no registered team members!\n");
+            // return -2;
+        } else {
+            for (int i = 0; i < memberList.size(); i++) {
+                if (name.equals(memberList.get(i).getName())) {
+                    // return i;//return products.indexOf(products.get(i));
+                    system.out.prinln(memberList.get(i));
+                }
+            }
+        }
+        System.out.println("Invalid Name! Team member: " + name + " not found!");
+        // return -1;
 
     }
 
