@@ -12,7 +12,7 @@ public class managerView {
                 "6. Assign a task to a team member\n" +
                 "7. View all projects\n" +
                 "8. Schedule a meeting\n" +
-                "9. Return to Main Menu\n");
+                "9. Return to softManagement18.Main Menu\n");
         switch (managerMenuChoice) {
             case 1 -> Controller.addProject();
             case 2 -> Controller.addTask();
