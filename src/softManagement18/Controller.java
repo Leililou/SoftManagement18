@@ -126,8 +126,8 @@ public class Controller {
 	/*
 	public static void scheduleMeeting() {
 		String meetingId = UUID.randomUUID().toString();
-		String meetingDay = InputHandler.stringInput("Enter meeting date in form of dd-mm-yyyy");
-		String meetingTime = InputHandler.stringInput("Enter meeting time in form of hh:mm:ss");
+		String meetingDay = softManagement18.InputHandler.stringInput("Enter meeting date in form of dd-mm-yyyy");
+		String meetingTime = softManagement18.InputHandler.stringInput("Enter meeting time in form of hh:mm:ss");
 		String meetingD = meetingDay + " " + meetingTime;
 		Date meetingDate = null;
 		try {
@@ -135,7 +135,7 @@ public class Controller {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		String meetingAbout = InputHandler.stringInput("Please specify what the meeting is about in one word: ");
+		String meetingAbout = softManagement18.InputHandler.stringInput("Please specify what the meeting is about in one word: ");
 		Meeting meeting = new Meeting(meetingId, meetingDate, meetingAbout);
 		Meeting.meetingList.add(meeting);
 		System.out.println("\t" + meetingDate + "\n " + meetingAbout + "\n");
