@@ -3,7 +3,7 @@ public class managerView {
 // NOT YET VERIFIED
 
     public static void managerMenu() {
-        int managerMenuChoice = InputHandler.intInput("Manager Screen - Type one of the options below:\n" +
+        int managerMenuChoice = UserInput.readInt("Manager Screen - Type one of the options below:\n" +
                 "1. Add a project\n" +
                 "2. Add a task\n" +
                 "3. Team members\n" +
