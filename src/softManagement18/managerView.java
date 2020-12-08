@@ -14,19 +14,19 @@ public class managerView {
                 "8. Schedule a meeting\n" +
                 "9. Return to softManagement18.Main Menu\n");
         switch (managerMenuChoice) {
-            case 1 -> Controller.addProject();
-            case 2 -> Controller.addTask();
-            case 3 -> teamMembers();
+           // case 1 -> Controller.addProject();
+           // case 2 -> Controller.addTask();
+           // case 3 -> teamMembers();
             case 4 -> Controller.removeTask();
             case 5 -> Controller.viewTasks();
             case 6 -> Controller.assignTask();
             case 7 -> Controller.viewProjects();
-            case 8-> Meetings();
+           // case 8-> Meetings();
             default->{ }
         }
     }
 
-    public static void Meetings(){
+    /*public static void Meetings(){
         int mChoice = InputHandler.intInput("1. Schedule new meeting." +
                 "\n2. Remove a meeting." +
                 "\n3. View all scheduled meeting." +
@@ -56,6 +56,6 @@ public class managerView {
             case 4 -> Controller.searchTM();
             default -> { }
         }
-    }
+    }*/
 }
 
