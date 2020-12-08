@@ -1,7 +1,5 @@
 package softManagement18;
 
-import softManagement18.InputHandler;
-
 class Main {
     public static void main(String[] args) {
         intro();
