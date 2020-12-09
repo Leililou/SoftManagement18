@@ -1,5 +1,6 @@
 package softManagement18;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
@@ -13,6 +14,8 @@ public class Task {
     private Date endDate;
     private String priority;
     private String status;
+    
+    ArrayList<TeamMember> participants = new ArrayList<TeamMember>();
 
     public Task(String title, String description, Date startDate, Date endDate, String priority, String status) {
 
@@ -81,6 +84,12 @@ public class Task {
     public void setStatus(String status) {
         this.status = status;
     }
+    
+    void displayParticipants() {
+		for(TeamMember currentParticipant:this.participants) {
+			System.out.println(currentParticipant);
+		}
+	}
 
     public String toString() {
         return "\n\n>> Task of ID: "+this.getID()+

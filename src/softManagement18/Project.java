@@ -10,6 +10,8 @@ public class Project {
 	private String title;
 	private String description;
 	
+	
+	ArrayList<TeamMember> participants = new ArrayList<TeamMember>();
 	ArrayList<Task> tasks = new ArrayList<Task>();
 
 	public Project(String title, String description) {
@@ -34,9 +36,6 @@ public class Project {
 		return description;
 	}
 	
-	static ArrayList<Task> getTasks() {
-		return tasks;
-	}
 
 	void setTitle(String title) {
 		this.title = title;
@@ -44,6 +43,12 @@ public class Project {
 
 	void setDescription(String description) {
 		this.description = description;
+	}
+	
+	void displayParticipants() {
+		for(TeamMember currentParticipant:this.participants) {
+			System.out.println(currentParticipant);
+		}
 	}
 	
 	public String toString() {
