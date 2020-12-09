@@ -10,7 +10,7 @@ public class Project {
 	private String title;
 	private String description;
 	
-	private static ArrayList<Task> tasks = new ArrayList<Task>();
+	ArrayList<Task> tasks = new ArrayList<Task>();
 
 	public Project(String title, String description) {
 

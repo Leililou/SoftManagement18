@@ -1,5 +1,6 @@
 package softManagement18;
 import java.util.ArrayList;
+import java.util.Date;
 //import java.util.Date;
 
 public class Controller {
@@ -13,8 +14,8 @@ public class Controller {
 		listOfProjects.add(project);
 		System.out.println(project.getTitle()+" successfully added!");
 	}
-
-
+	
+	
 	//********************************
 
 	/**
@@ -29,10 +30,60 @@ public class Controller {
 
 	//Task(String title, String description, Date startDate, Date endDate, String priority, String status)
 	//Task task=new Task(title,description,startDate,endDate,priority,status);	
-	public static void addTaskToProject(String projectId) {
-
+	public static Task createNewTask(String title, String description, Date startDate, Date endDate, String priority, String status) {
+		Task task=new Task(title,description,startDate,endDate,priority,status);
+		return task;
 	}
+	
+	public static void addNewTaskToExistingProject(String projectId,String title, String description, Date startDate, Date endDate, String priority, String status) {
+		int indexOfProject=fetchProjectById(projectId);
+		if (indexOfProject>=0) {
+			Task newTask=createNewTask(title,description,startDate,endDate,priority,status);
+			listOfProjects.get(indexOfProject).tasks.add(newTask);
+		}
+		else {
+			System.out.println("Failed to add the new task to the project with ID: "+projectId);
+		}
+	}
+	
+	//fetch project by Id
+	// fetch project by ID in the list(if found returns index, else -1)
+		public static int fetchProjectById(String projectId) {
+			//-2: empty list, -1: invalid ID, i: index
+			// check the list of projects (if empty)
+			if(listOfProjects.isEmpty()) {
+				System.err.println("\nThe list of projects is empty! There is no registed project for the moment!\n");
+				return -2;
+			}else {
+				for(int i=0; i<listOfProjects.size();i++) {
+					if (projectId.equals(listOfProjects.get(i).getID())) {
+						return i;//return listOfProjects.indexOf(products.get(i));
+					}
+				}
+			}
+			System.out.println("Invalid ID! Item of ID: "+ projectId +" not found!");
+			return -1;
+		}
 
+		//fetch task by Id
+		// fetch tasks by ID in the list of a specific project with a known index(if found returns index, else -1)
+			public static int fetchTaskById(int indexOfProject,String taskID) {
+				//-2: empty list, -1: invalid ID, i: index
+				// check the list of tasks (if empty)
+				Project CurrentProject=listOfProjects.get(indexOfProject);
+				if(CurrentProject.tasks.isEmpty()) {
+					System.err.println("\nThe list of tasks is empty! There is no registed task for the moment!\n");
+					return -2;
+				}else {
+					for(int i=0; i<CurrentProject.tasks.size();i++) {
+						if (taskID.equals(CurrentProject.tasks.get(i).getID())) {
+							return i;//return CurrentProject.tasks.indexOf(products.get(i));
+						}
+					}
+				}
+				System.out.println("Invalid ID! Task of ID: "+ taskID +" not found!");
+				return -1;
+			}
 
 
 
