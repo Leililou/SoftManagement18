@@ -1,5 +1,6 @@
 package softManagement18;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class TeamMember {
@@ -7,6 +8,7 @@ public class TeamMember {
     private String id;
     private String name;
     private String role;
+    ArrayList<Task> tasks = new ArrayList<Task>();
 
 // think about assigning roles
     public TeamMember(String name, String role) {
