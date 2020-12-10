@@ -5,7 +5,7 @@ import java.util.UUID;
 
 public class TeamMember {
 	
-    private String id;
+    private String ID;
     private String name;
     private String role;
     
@@ -14,16 +14,17 @@ public class TeamMember {
 // think about assigning roles
     public TeamMember(String name, String role) {
         UUID uuid = UUID.randomUUID();
-		this.id = uuid.toString();
-		this.id = id.substring(0, Math.min(id.length(), 3)); 
+		this.ID = uuid.toString();
+		this.ID = ID.substring(0, Math.min(ID.length(), 3)); 
 		
         this.name = name;
         this.role = role;
     }
     
     public String getID() {
-        return id;
-    }
+		return ID;
+	}
+
     
     public String getName() {
         return name;
@@ -43,8 +44,9 @@ public class TeamMember {
 
 
      public String toString() {
-        return "> Team member of ID: "+this.getId()+", name: "+this.getName()+", Role: "+ this.getRole();
+        return "> Team member of ID: "+this.getID()+", name: "+this.getName()+", Role: "+ this.getRole();
     }
 
+	
 }
 
