@@ -10,7 +10,6 @@ public class Controller {
 	private ArrayList<TeamMember> listOfMembers = new ArrayList<TeamMember>();
 
 	/**Missing
-	 * add team member #2.1 Anwar
 	 * remove team member #2.2 Anwar (it's not adabted to the code (classes and names of lists))
 	 * 
 	 * 
@@ -44,7 +43,7 @@ public class Controller {
 	 * 
 	 * **** TEAM MEMBER
 	 * ** I. ADD
-	 * 6. addTeamMember //** to verify connect to project(Leila)
+	 * 6. add Team Member to the general list of members #2.1 changed by (Anwar)(Leila)
 	 * ** II. SEARCH
 	 * 8.1 Search a team member in a project(Leila)
 	 * 15. Search team member by ID in a list(To define) #2.3(Nathalie)
@@ -184,7 +183,7 @@ public class Controller {
 	public void addMember(String name,String role) {
 		TeamMember member = new TeamMember(name, role);
 		listOfMembers.add(member);
-		System.out.println("The team member:"+member.getName()+ " has been successfully added as a " + role + ". \n");
+		System.out.println("The team member:"+member.getName()+ " has been successfully added as a " + member.getRole() + ". \n");
 	}
 
 	// 7. Remove a task from a project (and from all participants' lists) (verified)
@@ -421,6 +420,8 @@ public class Controller {
 
 	//********* not yet verified
 	/*
+	 * 
+	//The team member should be removed from the lists of tasks first in case he/she is part of it then the general list
 	public static void removeMember(String idInput) {
 		for (int i = 0; i < Member.memberList.size(); i++) {
 			if (Member.memberList.get(i).getId().equals(idInput)) {
