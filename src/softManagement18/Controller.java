@@ -46,7 +46,7 @@ public class Controller {
 	 * 6. add Team Member to the general list of members #2.1 changed by (Anwar)(Leila)
 	 * ** II. SEARCH
 	 * 8.1 Search a team member in a project(Leila)
-	 * 15. Search team member by ID in a list(To define) #2.3(Nathalie)
+	 * 16. Search team member by ID in a list(To define) #2.3(Nathalie)
 	 * 9. Search team member by name #2.3(Nathalie)
 	 * 
 	 * ** III.REMOVE
@@ -66,7 +66,7 @@ public class Controller {
 	 * 8.2 Search team member by ID participating in a task in a specific project(Leila)
 	 * 
 	 * ** III.REMOVE
-	 * (Not yet implemented)
+	 * 15. Remove a participant from a task's list (verified) #5.3 (Leila)
 	 * 
 	 * ** IV. CHANGE/REPLACE
 	 * (Not yet implemented)
@@ -456,4 +456,5 @@ public class Controller {
 	}
 	 */
 }
+
 
