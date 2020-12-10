@@ -16,40 +16,108 @@ public class Controller {
 	 * 
 	 */
 
-	/**Leila
-	 * **** Project
+	/**
+	 * **** PROJECT
+	 * ** I. ADD
 	 * 1. add a project to the list of projects #1.1(Leila)
-	 * 11. Assign a team member to a project(ById)  #1.2(Leila)
+	 * 
+	 * ** II. SEARCH
 	 * 4. fetchProjectById(Leila)
+	 * 
+	 * ** III.REMOVE
+	 * (Not yet implemented)
+	 * 
+	 * ** IV. CHANGE/REPLACE
+	 * (Not yet implemented)
+	 * 
+	 * ** V. DISPLAY/SHOW LIST
 	 * 10. Display information about a specific project(calls fetch project by ID) #1.3(Leila)
 	 * 
-	 * **** Task
+	 * ** V.CONNECT TEAM MEMBER TO A PROJECT
+	 * 11. Assign a team member to a project(ById)  #1.2(Leila)
+	 *
+	 *
+	 * **** TASK
+	 * ** I. SEARCH
 	 * 17. fetch tasks by ID in a list (if found returns index, else -1)(Leila)
 	 * 
-	 * **** Team member
-	 * 15. Search team member by ID in a list(To define) #2.3(Nathalie)
+	 * 
+	 * **** TEAM MEMBER
+	 * ** I. ADD
 	 * 6. addTeamMember //** to verify connect to project(Leila)
-	 * 8.1 search a team member in a project(Leila)
+	 * ** II. SEARCH
+	 * 8.1 Search a team member in a project(Leila)
+	 * 15. Search team member by ID in a list(To define) #2.3(Nathalie)
 	 * 9. Search team member by name #2.3(Nathalie)
 	 * 
+	 * ** III.REMOVE
+	 * (Not yet implemented)
+	 * 
+	 * ** IV. CHANGE/REPLACE
+	 * (Not yet implemented)
+	 * 
+	 * ** V. DISPLAY/SHOW LIST
+	 * (Not yet implemented)
+	 * 
 	 * **** Participant in a task of a project
+	 * ** I. ADD
+	 * (Not yet implemented)
+	 * 
+	 * ** II. SEARCH
 	 * 8.2 Search team member by ID participating in a task in a specific project(Leila)
 	 * 
+	 * ** III.REMOVE
+	 * (Not yet implemented)
 	 * 
-	 * **** Tasks of project
+	 * ** IV. CHANGE/REPLACE
+	 * (Not yet implemented)
+	 * 
+	 * 
+	 * ** V. DISPLAY/SHOW LIST
+	 * (Not yet implemented)
+	 * 
+	 * **** TASKS OF A PROJECT
+	 * ** I. ADD
 	 * 2. create a new task in a project #4.1(Leila)
 	 * 3. add a new task to an existing project #4.1(Leila)
-	 * 5. fetchTaskById in a project(Leila)
-	 * 7. remove a task of a project's list of tasks #4.2(Leila)
-	 *   
-	 * **** Tasks of a team member in a project
-	 * 14. Remove a task from a team member's list #5.4(Leila)
 	 * 
-	 * **** Connection between task and a team member
+	 * ** II. SEARCH
+	 * 5. fetchTaskById in a project(Leila)
+	 * 
+	 * ** III.REMOVE
+	 * 7. remove a task of a project's list of tasks #4.2(Leila)
+	 * 
+	 * ** IV. CHANGE/REPLACE
+	 * (Not yet implemented)
+	 *  
+	 * ** V. DISPLAY/SHOW LIST
+	 * 13. Show Task By Id #4.7(Leila)
+	 * 
+	 * **** TASKS OF A TEAM MEMBER IN A PROJECT
+	 * ** I. ADD
 	 * 12. Connect a Task To a Team Member #5.2(Leila)
 	 * 
+	 * ** II. SEARCH
+	 * (Not yet implemented)
 	 * 
-	 * 13. Show Task By Id #4.7(Leila)
+	 * ** III.REMOVE
+	 * 14. Remove a task from a team member's list #5.4(Leila)
+	 * 
+	 * ** IV. CHANGE/REPLACE
+	 * (Not yet implemented)
+	 * 
+	 * ** V. DISPLAY/SHOW LIST
+	 * (Not yet implemented)
+	 * 
+	 * 
+	 * **** CONNECTION BETWEEN TEAM MEMBER AND TASK
+	 * 12. Connect a Task To a Team Member #5.2(Leila)
+	 * 
+	 * TO IMPLEMENT**
+	 * * SCHEDULE
+	 * * MEETING
+	 * * ACTIVITY
+	 * 
 	 * 
 	 */
 
@@ -83,7 +151,7 @@ public class Controller {
 	}
 
 
-	// 4. fetch project by ID in the list(if found returns index, else -1)
+	// 4. fetch project by ID in the list if found returns index, else -1
 	public int fetchProjectById(String projectId) {
 		//-2: empty list, -1: invalid ID, i: index
 		// check the list of projects (if empty)
@@ -111,7 +179,7 @@ public class Controller {
 			}
 		}
 	}
-	
+
 	// 6. Add a team member to the general list of team members 
 	public void addMember(String name,String role) {
 		TeamMember member = new TeamMember(name, role);
@@ -119,13 +187,13 @@ public class Controller {
 		System.out.println("The team member:"+member.getName()+ " has been successfully added as a " + role + ". \n");
 	}
 
-	// 7. Remove a task from a project (and from all participants' lists)
+	// 7. Remove a task from a project (and from all participants' lists) (verified)
 	public void removeTaskOfAProject(String projectID, String taskID) {
 		// fetch project by Id
 		// fetch task by ID
 		int indexOfProject=fetchProjectById(projectID);
 		if(indexOfProject>=0) {
-			int indexOfTask=fetchTaskByID(indexOfProject,taskID);
+			int indexOfTask=fetchTaskByIDInAList(listOfProjects.get(indexOfProject).tasks,taskID);
 			if(indexOfTask>=0) {
 				for(TeamMember currentParticipant:listOfProjects.get(indexOfProject).participants) {
 					removeTaskOfTeamMember(projectID,currentParticipant.getID(), taskID);
@@ -146,21 +214,21 @@ public class Controller {
 			}
 		}
 	}
-	
+
 	// 8.2. Search team member by ID participating in a task in a specific project
-		public void searchTeamMemberByIDInATaskOfaProject(String projectID,String taskID,String memberID) {
-			if(!listOfProjects.isEmpty()) {
-				for(Project currentProject:listOfProjects) {
-					if(projectID.equals(currentProject.getID())){
-						for(Task currentTask:currentProject.tasks) {
-							if(taskID.equals(currentTask.getID())){
-								searchTeamMemberByIDInAList(currentTask.participants,memberID);
-							}
-						}	
-					}
+	public void searchTeamMemberByIDInATaskOfaProject(String projectID,String taskID,String memberID) {
+		if(!listOfProjects.isEmpty()) {
+			for(Project currentProject:listOfProjects) {
+				if(projectID.equals(currentProject.getID())){
+					for(Task currentTask:currentProject.tasks) {
+						if(taskID.equals(currentTask.getID())){
+							searchTeamMemberByIDInAList(currentTask.participants,memberID);
+						}
+					}	
 				}
 			}
 		}
+	}
 
 	// 9. Search team member by name
 	public void searchTeamMemberByName(String name) {
@@ -183,12 +251,18 @@ public class Controller {
 
 
 
-	// 10. Display information about a defined project(by ID)
+
+	// 10. Display information about a defined project(by ID) (verified)
 	public void showProjectInfo(String projectID) {
-		int index=fetchProjectById(projectID);
-		if (index>=0) {
-			System.out.println(listOfProjects.get(index)+"\nThe participants in this project are:");
-			listOfProjects.get(index).displayParticipants();
+		int indexP=fetchProjectById(projectID);
+		if (indexP>=0) {
+			System.out.println(listOfProjects.get(indexP)+"\nThe participants in this project are:");
+			/*
+			for(TeamMember currentParticipant:listOfProjects.get(indexP).participants) {
+			System.out.println(currentParticipant);
+			}
+			*/
+			listOfProjects.get(indexP).displayParticipants();
 		}
 		else {
 			System.out.println("No data to display!"); 
@@ -196,13 +270,13 @@ public class Controller {
 	}
 
 
-	// 11. Assign a team member to a project(ById) 
+	// 11. Assign a team member to a project(ById) (verified)
 	public void assignTeamMemberToProject(String projectId,String memberID) {
 		int indexMember=searchTeamMemberByIDInAList(listOfMembers,memberID);
 		if (indexMember>=0) {
 			int indexProject=fetchProjectById(projectId);
 			if(indexProject>=0) {
-				TeamMember currentParticipant=listOfMembers.get(indexMember);
+				TeamMember currentParticipant = listOfMembers.get(indexMember);
 				Project currentProject=listOfProjects.get(indexProject);
 				currentProject.participants.add(currentParticipant);
 				System.out.println("Assignement of "+currentParticipant.getName()+" to the project:"+currentProject.getTitle()+" has been sucessful");
@@ -214,13 +288,13 @@ public class Controller {
 	}
 
 
-	//12. Connect a Task To a Team Member in a project
-	public void connectTaskToTeamMember(String memberID, String projectID,String taskID) {
+	//12. Connect a Task To a Team Member in a project (verified)
+	public void connectTaskToTeamMember(String memberID, String projectID, String taskID){
 		int indexProject=fetchProjectById(taskID);
 		if(indexProject>=0) {
 			int indexMember=searchTeamMemberByIDInAList(listOfProjects.get(indexProject).participants, memberID);
 			if (indexMember>=0) {
-				int indexTask=fetchTaskByID(indexProject,taskID);
+				int indexTask=fetchTaskByIDInAList(listOfProjects.get(indexProject).tasks,taskID);
 				if(indexTask>=0) {
 					Project currentProject=listOfProjects.get(indexProject);
 					TeamMember currentParticipant= currentProject.participants.get(indexMember);
@@ -236,48 +310,49 @@ public class Controller {
 		}
 	}
 
-	// 13. Show Task By Id
+	// 13. Show Task By Id (verified)
 	public void showTaskById(String projectID,String taskID) {
 		int indexProject=fetchProjectById(projectID);
 		if(indexProject>=0) {
-			int indexTask=fetchTaskByID(indexProject,taskID);
+			int indexTask=fetchTaskByIDInAList(listOfProjects.get(indexProject).tasks,taskID);
 			if(indexTask>=0) {
+
 				System.out.println(listOfProjects.get(indexProject).tasks.get(indexTask));
+				/*for(Task currentParticipant:listOfProjects.get(indexProject).tasks.get(indexTask).participants){
+				 * System.out.println(currentParticipant);
+				 * }
+				 */
 				listOfProjects.get(indexProject).tasks.get(indexTask).displayParticipants();
 			}
 		}
 	}
 
-	//14. Remove a task from a team member's list
+	//14. Remove a task from a team member's list (verified)
 	public void removeTaskOfTeamMember(String projectId,String teamMemberID, String taskID) {
-		if(!listOfProjects.isEmpty()) {
-			int indexP=fetchProjectById(projectId);
-			if(!listOfProjects.get(indexP).participants.isEmpty()) {
-				int indexTM=searchTeamMemberByID(teamMemberID);
-				if(!listOfProjects.get(indexP).participants.get(indexTM).tasks.isEmpty()) {
-					int indexT=fetchTaskByID(indexP,taskID);
-					listOfProjects.get(indexP).participants.get(indexTM).tasks.remove(indexT);	
-				}
-			}	
-		}
+		int indexP=fetchProjectById(projectId);
+		if(indexP>=0){
+			int indexTM=searchTeamMemberByIDInAList(listOfProjects.get(indexP).participants,teamMemberID);
+			if(indexTM>=0) {
+				int indexT=fetchTaskByIDInAList(listOfProjects.get(indexP).participants.get(indexTM).tasks,taskID);
+				listOfProjects.get(indexP).participants.get(indexTM).tasks.remove(indexT);	
+			}
+		}	
 	}
 
 
-	//15. Remove a participant from a task's list
-	public void removeParticipantFromTask(String projectId,String teamMemberID, String taskID) {
-		if(!listOfProjects.isEmpty()) {
-			int indexP=fetchProjectById(projectId);
-			if(!listOfProjects.get(indexP).tasks.isEmpty()) {
-				int indexT=fetchTaskByID(indexP,taskID);
-				if(!listOfProjects.get(indexP).tasks.get(indexT).participants.isEmpty()) {
-					int indexTM=searchTeamMemberByID(teamMemberID);
-					listOfProjects.get(indexP).tasks.get(indexT).participants.remove(indexTM);
-				}
+	//15. Remove a participant from a task's list (verified)
+	public void removeParticipantFromTask(String projectID,String teamMemberID, String taskID) {
+		int indexP=fetchProjectById(projectID);
+		if(indexP>=0) {
+			int indexT=fetchTaskByIDInAList(listOfProjects.get(indexP).tasks,taskID);
+			if(indexT>=0) {
+				int indexTM=searchTeamMemberByIDInAList(listOfProjects.get(indexP).tasks.get(indexT).participants,teamMemberID);
+				listOfProjects.get(indexP).tasks.get(indexT).participants.remove(indexTM);
 			}
 		}
 	}
 
-	// 16. Search team member by ID in a list(Todefine)
+	// 16. Search team member by ID in a list(To define)
 	public int searchTeamMemberByIDInAList(ArrayList<TeamMember>list,String id) {
 		//-2: empty list, -1: invalid ID, i: index
 		// check the list of products (if empty)
@@ -297,28 +372,24 @@ public class Controller {
 	}
 
 	// 17. fetch tasks by ID in a list (if found returns index, else -1)
-		public int fetchTaskByIDInAList(ArrayList<Task> taskList,String taskID) {
-			//-2: empty list, -1: invalid ID, i: index
-			// check the list of tasks (if empty)
-			if (taskList.isEmpty()) {
-				System.err.println("\nThe list is empty! There is no registered task!\n");
-				return -2;
-			} else {
-				for (int i = 0; i < taskList.size(); i++) {
-					if (taskID.equals(taskList.get(i).getID())) {
-						System.out.println(taskList.get(i));
-						return i;
-					}
+	public int fetchTaskByIDInAList(ArrayList<Task> taskList,String taskID) {
+		//-2: empty list, -1: invalid ID, i: index
+		// check the list of tasks (if empty)
+		if (taskList.isEmpty()) {
+			System.err.println("\nThe list is empty! There is no registered task!\n");
+			return -2;
+		} else {
+			for (int i = 0; i < taskList.size(); i++) {
+				if (taskID.equals(taskList.get(i).getID())) {
+					System.out.println(taskList.get(i));
+					return i;
 				}
 			}
-			System.out.println("Invalid ID! No such task of ID: " + taskID + " found!");
-			return -1;
 		}
-
-
-	public static void assignTask() {
-
+		System.out.println("Invalid ID! No such task of ID: " + taskID + " found!");
+		return -1;
 	}
+
 
 	public static void viewProjects() {
 
