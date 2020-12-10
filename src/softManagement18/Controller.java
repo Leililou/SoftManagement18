@@ -29,7 +29,8 @@ public class Controller {
 	 * ** IV. CHANGE/REPLACE
 	 * (Not yet implemented)
 	 * 
-	 * ** V. DISPLAY/SHOW LIST
+	 * ** V. DISPLAY/SHOW element by ID or LIST
+	 * 18.Display List Of Projects #1.4 (Leila)
 	 * 10. Display information about a specific project(calls fetch project by ID) #1.3(Leila)
 	 * 
 	 * ** V.CONNECT TEAM MEMBER TO A PROJECT
@@ -56,7 +57,7 @@ public class Controller {
 	 * (Not yet implemented)
 	 * 
 	 * ** V. DISPLAY/SHOW LIST
-	 * (Not yet implemented)
+	 * 19.Display The List Of TeamMembers #2.4 (Leila)
 	 * 
 	 * **** Participant in a task of a project
 	 * ** I. ADD
@@ -260,7 +261,7 @@ public class Controller {
 			for(TeamMember currentParticipant:listOfProjects.get(indexP).participants) {
 			System.out.println(currentParticipant);
 			}
-			*/
+			 */
 			listOfProjects.get(indexP).displayParticipants();
 		}
 		else {
@@ -389,13 +390,27 @@ public class Controller {
 		return -1;
 	}
 
-
-	public static void viewProjects() {
-
+	//18.DisplayListOfProjects
+	public void DisplayListOfProjects() {
+		if(listOfProjects.isEmpty()) {
+			System.out.println("No data to display! the List of projects is Empty!");
+		}
+		else{
+			for(Project currentProject:listOfProjects)  {
+				System.out.println(currentProject);
+			}
+		}
 	}
-
-	public static void viewTasks() {
-
+	//19.DisplayTheListOfTeamMmbers
+	public void DisplayTheListOfTeamMembers() {
+		if(listOfProjects.isEmpty()) {
+			System.out.println("No data to display! the List of team members is Empty!");
+		}
+		else{
+			for(TeamMember currentTM:listOfMembers)  {
+				System.out.println(currentTM);
+			}
+		}
 	}
 
 	//********* not yet verified
