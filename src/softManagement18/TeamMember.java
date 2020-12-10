@@ -8,6 +8,7 @@ public class TeamMember {
     private String id;
     private String name;
     private String role;
+    
     ArrayList<Task> tasks = new ArrayList<Task>();
 
 // think about assigning roles
@@ -20,7 +21,7 @@ public class TeamMember {
         this.role = role;
     }
     
-    public String getId() {
+    public String getID() {
         return id;
     }
     
