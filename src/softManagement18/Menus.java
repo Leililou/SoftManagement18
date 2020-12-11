@@ -69,7 +69,7 @@ public class Menus {
 				break;
 
 			case 2: //View all team members
-				System.out.println("Not yet implemented");
+				Controller.displayTheListOfTeamMembers();
 				break;
 
 			case 3: //Remove a team member

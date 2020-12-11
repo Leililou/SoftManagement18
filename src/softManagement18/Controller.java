@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class Controller {
 
-	private ArrayList<Project> listOfProjects = new ArrayList<Project>();
+	private static ArrayList<Project> listOfProjects = new ArrayList<Project>();
 	private ArrayList<Schedule> schedule = new ArrayList<Schedule>();
 	private static ArrayList<TeamMember> listOfMembers = new ArrayList<TeamMember>();
 
@@ -404,8 +404,8 @@ public class Controller {
 		}
 	}
 	//19.DisplayTheListOfTeamMmbers
-	public void DisplayTheListOfTeamMembers() {
-		if(listOfProjects.isEmpty()) {
+	public static void displayTheListOfTeamMembers() {
+		if(listOfMembers.isEmpty()) {
 			System.out.println("No data to display! the List of team members is Empty!");
 		}
 		else{
