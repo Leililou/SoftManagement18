@@ -9,7 +9,7 @@ public class Controller {
 
 	private ArrayList<Project> listOfProjects = new ArrayList<Project>();
 	private ArrayList<Schedule> schedule = new ArrayList<Schedule>();
-	private ArrayList<TeamMember> listOfMembers = new ArrayList<TeamMember>();
+	private static ArrayList<TeamMember> listOfMembers = new ArrayList<TeamMember>();
 
 	/**Missing
 	 * remove team member #2.2 Anwar (it's not adabted to the code (classes and names of lists))
@@ -183,7 +183,7 @@ public class Controller {
 	}
 
 	// 6. Add a team member to the general list of team members 
-	public void addMember(String name,String role) {
+	public static void addMember(String name,String role) {
 		TeamMember member = new TeamMember(name, role);
 		listOfMembers.add(member);
 		System.out.println("The team member:"+member.getName()+ " has been successfully added as a " + member.getRole() + ". \n");
