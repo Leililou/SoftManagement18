@@ -1,6 +1,19 @@
 package softManagement18;
 
-public class MainMenu {
+public class Main {
+	
+	 
+	public static void main(String [] args) {
+		System.out.println("\n Welcome to SoftManagement18! Your management buddy to a more organised work! :D ");
+		new Menus();
+		
+	}
+	
+	
+
+}
+/*
+public class Main {
 
 	public static void main(String[] args) {
 		intro();
@@ -12,7 +25,8 @@ public class MainMenu {
 				"2. Enter T for Team member");
 		switch (mainMenuChoice) {
 
-		case "M" -> ManagerMenu.managerMenu();
+		case "M" -> Menus.managerMenu();
 		case "T" -> { } }
 	}
 }
+*/
