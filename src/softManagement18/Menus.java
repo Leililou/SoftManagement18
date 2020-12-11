@@ -1,7 +1,50 @@
 package softManagement18;
-public class ManagerMenu {
-// NOT YET VERIFIED
 
+public class Menus {
+// NOT YET VERIFIED
+	
+	
+	public Menus() {
+		showMainMenu();
+	}
+	
+	//1. Show the MainMenu
+		private void showMainMenu() {
+			String choice="";
+			do { 
+				//Display the options
+				System.out.println("> Main Screen :");
+				System.out.println("\n Please specify your role by entering one of the options given: \n "
+						+ "1. Enter \"M\" for Manager\n "
+						+ "2. " + "Enter \"T\" for Team member \n "
+						+ "3. Enter \"X\" to exit the system");
+
+				choice = UserInput.readString("Please type your choice here >>>> : ");
+
+				switch (choice) {
+				case "M":
+					System.out.println("\nYou have selected the Manager's Menu ");
+					//showManagerMenu();
+					break;
+				case "C":
+					System.out.println("\nYou have selected the Customer Menu ");
+					//showTeamMemberMenu();
+					break;
+				case "X":
+					System.out.println("\n Thank you for using SoftManagement18 System, see you next time!");
+					System.exit(0);
+					break;
+				default:
+					System.out.println("Only type M, T or X !");
+					break;
+				}	
+			} while(! choice.equals("X") );
+		}
+
+	
+	
+	
+//***********************************************************************************************************
     public static void managerMenu() {
         int managerMenuChoice = UserInput.readInt("Manager Screen - Type one of the options below:\n" +
                 "1. Add a project\n" +
