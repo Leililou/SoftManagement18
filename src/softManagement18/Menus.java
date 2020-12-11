@@ -53,7 +53,8 @@ public class Menus {
 			System.out.println("1. Add a team member");
 			System.out.println("2. View all team members");
 			System.out.println("3. Remove a team member");
-			System.out.println("4. Return to Main Menu");
+			System.out.println("4. Add a new project");
+			System.out.println("5. Return to Main Menu");
 
 			temp = UserInput.readInt("Please type your choice here >>>> :");
 
@@ -76,8 +77,17 @@ public class Menus {
 				System.out.println("Not yet implemented");
 				break;
 				
+				//addProject(String title, String description)
+			case 4: //Add a new project
 
-			case 4: //Return to Main screen
+				System.out.println("\nAdding a new project ...");
+				System.out.println("\nPlease type the project’s:");
+				String title = UserInput.readString("Title :");
+				String description = UserInput.readString("Description :");
+				Controller.addProject(title,description);
+				break;
+
+			case 5: //Return to Main screen
 				System.out.println("Returning to the Main Screen...");
 				showMainMenu();
 				break;
@@ -87,7 +97,7 @@ public class Menus {
 				return;
 			}	
 
-		}while(temp!=4);
+		}while(temp!=5);
 	}
 
 

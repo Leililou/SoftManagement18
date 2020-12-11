@@ -127,7 +127,7 @@ public class Controller {
 
 
 	// 1. Create a new project
-	public void addProject(String title, String description) {
+	public static void addProject(String title, String description) {
 		Project project=new Project(title, description);
 		listOfProjects.add(project);
 		System.out.println(project.getTitle()+" of ID:"+project.getID()+", successfully added!");
