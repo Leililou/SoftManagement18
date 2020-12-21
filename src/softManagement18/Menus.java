@@ -51,9 +51,17 @@ public class Menus {
 
 			System.out.println("\n Manager Screen - Type one of the options below");
 			System.out.println("1. Add a team member");
-			System.out.println("2. View all team members");
-			System.out.println("3. Remove a team member");
+			System.out.println("2. View all team members registered in the system");
+			System.out.println("3. Remove a team member from the system");
 			System.out.println("4. Add a new project");
+			System.out.println("5. Manage a project");
+			System.out.println("5. fetch a project by ID");
+			System.out.println("5. Display the list of registered projects");
+			System.out.println("5. Display information about a specific project (using ID)");
+			System.out.println("5. Return to Main Menu");
+			System.out.println("5. Return to Main Menu");
+			System.out.println("5. Return to Main Menu");
+			System.out.println("5. Return to Main Menu");
 			System.out.println("5. Return to Main Menu");
 
 			temp = UserInput.readInt("Please type your choice here >>>> :");
@@ -116,6 +124,72 @@ public class Menus {
 		switch (managerMenuChoice) {
 
 		}
+	}
+	
+	public static void showProjectMenu(String projectID) {
+		String projectTitle = Controller.projectNameByID(projectID);
+		int temp=0;
+		do {
+			System.out.println(">> MANAGE THE PROJECT "+projectTitle+", of ID:"+projectID);
+			System.out.println("1. Assign a team member to this project");
+			System.out.println("2. View all team members participating in this project");
+			System.out.println("3. Remove a team member from this project");
+			System.out.println("5. Add a task to this project");
+			System.out.println("5. View the tasks of this project");
+			System.out.println("5. Remove a task from this project");
+			System.out.println("5. Assign a task to a team member");
+			System.out.println("Remove a task from a team member's list of tasks");
+			System.out.println("5. Search a team member by ID in this project");
+			System.out.println("5. Search a team member by name in this project");
+			System.out.println("5. Search a task by ID in this project");
+			System.out.println("5. Return to Manager's Menu");
+			System.out.println("5. Return to Main Menu");
+
+			temp = UserInput.readInt("Please type your choice here >>>> :");
+
+			switch (temp) {
+
+			case 1: //Add a team member
+
+				System.out.println("\nAdding a team member ...");
+				System.out.println("\nPlease type the team member’s:");
+				String name = UserInput.readString("Name :");
+				String role = UserInput.readString("Role :");
+				Controller.addMember(name,role);
+				break;
+
+			case 2: //View all team members
+				Controller.displayTheListOfTeamMembers();
+				break;
+
+			case 3: //Remove a team member
+				System.out.println("Not yet implemented");
+				break;
+				
+				//addProject(String title, String description)
+			case 4: //Add a new project
+
+				System.out.println("\nAdding a new project ...");
+				System.out.println("\nPlease type the project’s:");
+				String title = UserInput.readString("Title :");
+				String description = UserInput.readString("Description :");
+				Controller.addProject(title,description);
+				break;
+
+			case 5: //Return to Main screen
+				System.out.println("Returning to the Main Screen...");
+				showMainMenu();
+				break;
+
+			default:
+				System.out.println("Invalid choice ! please type only numbers from 1 to 4 :");
+				return;
+			}	
+
+		}while(temp!=5);
+	}
+		
+		
 	}
 
 	/*public static void Meetings(){

@@ -32,8 +32,8 @@ public class Controller {
 	 * (Not yet implemented)
 	 * 
 	 * ** V. DISPLAY/SHOW element by ID or LIST
-	 * 18.Display List Of Projects #1.4 (Leila)
-	 * 10. Display information about a specific project(calls fetch project by ID) #1.3(Leila)
+	 * 18.Display List Of Projects #1.4 (Leila) (menu)
+	 * 10. Display information about a specific project(calls fetch project by ID) #1.3(Leila) (menu)
 	 * 
 	 * ** V.CONNECT TEAM MEMBER TO A PROJECT
 	 * 11. Assign a team member to a project(ById)  #1.2(Leila)
@@ -154,7 +154,7 @@ public class Controller {
 
 
 	// 4. fetch project by ID in the list if found returns index, else -1
-	public int fetchProjectById(String projectId) {
+	public static int fetchProjectById(String projectId) {
 		//-2: empty list, -1: invalid ID, i: index
 		// check the list of projects (if empty)
 		if(listOfProjects.isEmpty()) {
@@ -169,6 +169,17 @@ public class Controller {
 		}
 		System.out.println("Invalid ID! Item of ID: "+ projectId +" not found!");
 		return -1;
+	}
+	
+	public static String projectNameByID(String projectID) {
+		int fetchProject=fetchProjectById(projectID);
+		if(fetchProject>=0) {
+			return listOfProjects.get(fetchProject).getTitle();
+		}
+		else {
+			return null;
+		}
+		
 	}
 
 	// 5. fetch tasks by ID in the list of a specific project with a known index(if found returns index, else -1)
