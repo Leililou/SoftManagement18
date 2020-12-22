@@ -13,7 +13,7 @@ public class Task {
     private Date startDate;
     private Date endDate;
     private String priority;
-    private String status;
+    private String status = "to do!";
     
     ArrayList<TeamMember> participants = new ArrayList<TeamMember>();
 
