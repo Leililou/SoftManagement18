@@ -19,7 +19,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20ee9812-773f-47ec-abf7-3dc4361d3d5c" name="Default Changelist" comment="I created an exception class to handle invalid input" />
+    <list default="true" id="20ee9812-773f-47ec-abf7-3dc4361d3d5c" name="Default Changelist" comment="I created an exception class to handle invalid input">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/softManagement18/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/softManagement18/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/softManagement18/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/softManagement18/Task.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,7 +39,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="US5.1" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -49,18 +53,20 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.google.cloudcode.ide_session_index" value="20201219_0001" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -84,6 +90,10 @@
       <workItem from="1607443999058" duration="55000" />
       <workItem from="1607444159019" duration="4950000" />
       <workItem from="1607465025397" duration="1180000" />
+      <workItem from="1607702047192" duration="739000" />
+      <workItem from="1607786091470" duration="1307000" />
+      <workItem from="1608404937665" duration="34000" />
+      <workItem from="1608406458219" duration="4184000" />
     </task>
     <task id="LOCAL-00001" summary="jdspgo">
       <created>1606471488284</created>
@@ -139,29 +149,33 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="93" y="93" width="1350" height="648" key="DiffContextDialog/0.0.1536.834@0.0.1536.834" timestamp="1606494955313" />
+    <state x="549" y="159" key="FileChooserDialogImpl" timestamp="1608550602341">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="549" y="159" key="FileChooserDialogImpl/0.0.1536.834@0.0.1536.834" timestamp="1608550602341" />
     <state x="349" y="160" key="IDE.errors.dialog" timestamp="1606471831318">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="349" y="160" key="IDE.errors.dialog/0.0.1536.834@0.0.1536.834" timestamp="1606471831318" />
-    <state x="277" y="62" key="SettingsEditor" timestamp="1606503754753">
+    <state x="277" y="0" key="SettingsEditor" timestamp="1607702076887">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="277" y="62" key="SettingsEditor/0.0.1536.834@0.0.1536.834" timestamp="1606503754753" />
+    <state x="277" y="0" key="SettingsEditor/0.0.1536.834@0.0.1536.834" timestamp="1607702076887" />
     <state x="361" y="150" key="Vcs.Push.Dialog.v2" timestamp="1607456425191">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="361" y="150" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1607456425191" />
-    <state x="583" y="331" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1607466630948">
+    <state x="583" y="331" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1608551763355">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="583" y="331" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.834@0.0.1536.834" timestamp="1607466630948" />
+    <state x="583" y="331" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.834@0.0.1536.834" timestamp="1608551763355" />
     <state x="521" y="130" key="git4idea.branch.GitSmartOperationDialog" timestamp="1606471294476">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="521" y="130" key="git4idea.branch.GitSmartOperationDialog/0.0.1536.834@0.0.1536.834" timestamp="1606471294476" />
-    <state x="254" y="38" key="new project wizard" timestamp="1607186628235">
+    <state x="254" y="38" key="new project wizard" timestamp="1608597645869">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="254" y="38" key="new project wizard/0.0.1536.834@0.0.1536.834" timestamp="1607186628235" />
+    <state x="254" y="38" key="new project wizard/0.0.1536.834@0.0.1536.834" timestamp="1608597645869" />
   </component>
 </project>
