@@ -235,15 +235,26 @@ public class Controller {
 
 
 	// 8.1. Search team member by ID participating in a specific project
-	public void searchTeamMemberByIDInProject(String projectID,String id) {
+	public static void searchTeamMemberByIDInProject(String projectID,String id) {
 		if(!listOfProjects.isEmpty()) {
 			for(Project currentProject:listOfProjects) {
 				if(projectID.equals(currentProject.getID())){
-					searchTeamMemberByIDInAList(listOfMembers,id);
+					searchTeamMemberByIDInAList(currentProject.participants,id);
 				}
 			}
 		}
 	}
+	
+	// 8.1.1. Search team member by name participating in a specific project
+		public static void searchTeamMemberByNameInProject(String projectID,String name) {
+			if(!listOfProjects.isEmpty()) {
+				for(Project currentProject:listOfProjects) {
+					if(projectID.equals(currentProject.getID())){
+						searchTeamMemberByIDInAList(currentProject.participants,name);
+					}
+				}
+			}
+		}
 
 	// 8.2. Search team member by ID participating in a task in a specific project
 	public void searchTeamMemberByIDInATaskOfaProject(String projectID,String taskID,String memberID) {
@@ -283,7 +294,7 @@ public class Controller {
 
 
 	// 10. Display information about a defined project(by ID) (verified)
-	public void showProjectInfo(String projectID) {
+	public static void showProjectInfo(String projectID) {
 		int indexP=fetchProjectById(projectID);
 		if (indexP>=0) {
 			System.out.println(listOfProjects.get(indexP)+"\nThe participants in this project are:");
@@ -301,7 +312,7 @@ public class Controller {
 
 
 	// 11. Assign a team member to a project(ById) (verified)
-	public void assignTeamMemberToProject(String projectId,String memberID) {
+	public static void assignTeamMemberToProject(String projectId,String memberID) {
 		int indexMember=searchTeamMemberByIDInAList(listOfMembers,memberID);
 		if (indexMember>=0) {
 			int indexProject=fetchProjectById(projectId);
@@ -383,7 +394,7 @@ public class Controller {
 	}
 
 	// 16. Search team member by ID in a list(To define)
-	public int searchTeamMemberByIDInAList(ArrayList<TeamMember>list,String id) {
+	public static int searchTeamMemberByIDInAList(ArrayList<TeamMember>list,String id) {
 		//-2: empty list, -1: invalid ID, i: index
 		// check the list of products (if empty)
 		if (list.isEmpty()) {
@@ -398,6 +409,24 @@ public class Controller {
 			}
 		}
 		System.out.println("Invalid ID! No such team member of ID: " + id + " found!");
+		return -1;
+	}
+	
+	public static int searchTeamMemberByNameInAList(ArrayList<TeamMember>list,String name) {
+		//-2: empty list, -1: invalid ID, i: index
+		// check the list of products (if empty)
+		if (list.isEmpty()) {
+			System.err.println("\nThe list is empty! There is no registered team member!\n");
+			return -2;
+		} else {
+			for (int i = 0; i < list.size(); i++) {
+				if (name.equals(list.get(i).getName())) {
+					System.out.println(list.get(i));
+					return i;
+				}
+			}
+		}
+		System.out.println("Invalid name! No such team member of name: " + name + " found!");
 		return -1;
 	}
 
@@ -421,7 +450,7 @@ public class Controller {
 	}
 
 	//18.DisplayListOfProjects
-	public void DisplayListOfProjects() {
+	public static void displayListOfProjects() {
 		if(listOfProjects.isEmpty()) {
 			System.out.println("No data to display! the List of projects is Empty!");
 		}
