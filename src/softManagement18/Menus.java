@@ -78,8 +78,43 @@ public class Menus {
 				System.out.println("\nAdding an employee to the system ...");
 				System.out.println("\nPlease type the employee’s:");
 				String name = UserInput.readString("Name :");
-				String role = UserInput.readString("Role :");
-				Controller.addMember(name,role);
+				String roleName="";
+				//do {
+				int role = UserInput.readInt("\nPlease choose a role from the list below\n"
+						+ "> 1. Product Owner\n"
+						+ "> 2. Scrum Master\n"
+						+ "> 3. Developer\n"
+						+ "Note: If no choice has been made, the employee will be added as Developer by default\n");
+
+				/*	switch (role) {
+					case 1://Product Owner
+						roleName="Product Owner";
+						break;
+					case 2://Scrum Master
+						roleName="Scrum Master";
+						break;
+					case 3://Developer
+						roleName="Developer";
+						break;
+					case 4://Developer
+						break;
+					default:
+						System.out.println("Invalid choice ! please type only numbers from 1 to 4 :");
+						return;	
+					}
+				}while(temp!=4);*/
+				if(role==1) {
+					roleName="Product Owner";
+				}else if(role==1) {
+					roleName="Scrum Master";
+				}else if(role==1) {
+					roleName="Developer";
+				}else {
+					System.out.println("Invalid choice ! The role will be defined as Developer by default");
+					roleName="Developer";
+				}
+
+				Controller.addMember(name,roleName);
 				break;
 
 			case 2: //View all team members
@@ -110,7 +145,14 @@ public class Menus {
 				break;
 			case 7: //Manage a project
 				String projectId = UserInput.readString("Please enter the ID of the project you want to manage: ");
-				showProjectMenu(projectId);
+				if(Controller.fetchProjectById(projectId)<0) {
+					System.out.println("You can't manage a project that doesn't exist, please retry with a valid ID\n"
+							+ "A tip: you can view the list of the existing projects by typing (5)");
+				}
+				else {
+					showProjectMenu(projectId);
+				}
+
 				break;
 			case 8: //Return to Main screen
 				System.out.println("Returning to the Main Screen...");
@@ -150,10 +192,10 @@ public class Menus {
 
 					+ "\n> SCHEDULE\n"
 					+ "12. View the schedule\n"
-					
+
 					+ "13. Add a meeting to the schedule\n"
 					+ "13. Manage a meeting\n"
-					
+
 					+ "12. Add an activity to the schedule\n"
 					+ "13. Manage an activity\n"
 
@@ -266,9 +308,9 @@ public class Menus {
 
 		}while(temp!=6);
 	}
-	
-	
-	
+
+
+
 	public void showActivityScreen(String activityID) {
 		//String projectTitle = Controller.projectNameByID(projectID);
 		int temp=0;
