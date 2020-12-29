@@ -137,19 +137,30 @@ public class Menus {
 					+ "3. Search a team member by ID in this project\n"
 					+ "4. Search a team member by name in this project\n"
 					+ "5. Remove a team member from this project\n"
-					
+
 					+ "\n> TASKS\n"
 					+ "6. Create a task in this project\n"
 					+ "7. View the tasks of this project\n"
 					+ "8. Search a task by ID in this project\n"
 					+ "9. Remove a task from this project\n"
-					
+
 					+ "\n> TEAM MEMBERS-TASKS (connection)\n"
 					+ "10. Assign a task to a team member\n"
 					+ "11. Remove a task from a team member's list of tasks\n"
+
+					+ "\n> SCHEDULE\n"
+					+ "12. View the schedule\n"
+					
+					+ "13. Add a meeting to the schedule\n"
+					+ "13. Manage a meeting\n"
+					
+					+ "12. Add an activity to the schedule\n"
+					+ "13. Manage an activity\n"
+
+
 					+ "\n> EXIT THE PROJECT MANAGEMENT SCREEN\n"
-					+ "12. Return to the Manager's Menu\n"
-					+ "13. Return to the Main Menu");
+					+ "14. Return to the Manager's Menu\n"
+					+ "15. Return to the Main Menu");
 
 			temp = UserInput.readInt("\nPlease type your choice here >>>> :");
 
@@ -189,7 +200,7 @@ public class Menus {
 				break;
 			case 11: //Remove a task from a team member's list of tasks
 				break;
-				
+
 			case 12: //Return to the Manager's Menu
 				showManagerMenu();
 				break;
@@ -200,12 +211,117 @@ public class Menus {
 				break;
 
 			default:
-				System.out.println("Invalid choice ! please type only numbers from 1 to 4 :");
+				System.out.println("Invalid choice ! please type only numbers from 1 to 13 :");
 				return;
 			}	
 
 		}while(temp!=13);
 	}
+
+
+	public void showMeetingScreen(String meetingID) {
+		//String projectTitle = Controller.projectNameByID(projectID);
+		int temp=0;
+		do {
+			System.out.println(">> MANAGEMENT OF THE MEETING /*+projectTitle+*/+, of ID:"+meetingID+":\n"
+					+ "1. Add a participant to the meeting\n"
+					+ "2. Remove a particiant from the meeting"
+					+ "3. Change the description of the meeting"
+					+ "4. Delete this meeting from the schedule"
+					+ "\n> EXIT THE MEETING MANAGEMENT SCREEN\n"
+					+ "5. Return to the Manager's Menu\n"
+					+ "6. Return to the Main Menu");
+
+			temp = UserInput.readInt("\nPlease type your choice here >>>> :");
+			switch (temp) {
+
+			case 1: //
+				System.err.println("To be implemented");
+				break;
+
+			case 2: //
+				System.err.println("To be implemented");
+				break;
+			case 3: //
+				System.err.println("To be implemented");
+				break;
+
+			case 4: //
+				System.err.println("To be implemented");
+				break;
+
+			case 5: //Return to the Manager's Menu
+				showManagerMenu();
+				break;
+
+			case 6: //Return to Main screen
+				System.out.println("Returning to the Main Screen...");
+				showMainMenu();
+				break;
+
+			default:
+				System.out.println("Invalid choice ! please type only numbers from 1 to 6 :");
+				return;
+			}	
+
+		}while(temp!=6);
+	}
+	
+	public void showActivityScreen(String activityID) {
+		//String projectTitle = Controller.projectNameByID(projectID);
+		int temp=0;
+		do {
+			System.out.println(">> MANAGEMENT OF THE ACTIVITY /*+projectTitle+*/+, of ID:"+activityID+":\n"
+					+ "1. Add a participant to the activity\n"
+					+ "2. Remove a particiant from the activity"
+					+ "3. Change the description of the activity"
+					+ "4. Delete this activity from the schedule"
+					+ "\n> EXIT THE ACTIVITY MANAGEMENT SCREEN\n"
+					+ "5. Return to the Manager's Menu\n"
+					+ "6. Return to the Main Menu");
+
+			temp = UserInput.readInt("\nPlease type your choice here >>>> :");
+			switch (temp) {
+
+			case 1: //
+				System.err.println("To be implemented");
+				break;
+
+			case 2: //
+				System.err.println("To be implemented");
+				break;
+			case 3: //
+				System.err.println("To be implemented");
+				break;
+
+			case 4: //
+				System.err.println("To be implemented");
+				break;
+
+			case 5: //Return to the Manager's Menu
+				showManagerMenu();
+				break;
+
+			case 6: //Return to Main screen
+				System.out.println("Returning to the Main Screen...");
+				showMainMenu();
+				break;
+
+			default:
+				System.out.println("Invalid choice ! please type only numbers from 1 to 6 :");
+				return;
+			}	
+
+		}while(temp!=6);
+	}
+
+
+
+
+	public void showMeetingScreen(String activityID) {
+
+	}
+
 
 
 }
