@@ -58,7 +58,7 @@ public class Menus {
 					+ "4. Add a new project\n"
 					+ "5. Display the list of registered projects\n"
 					+ "6. Display information about a specific project (using ID)\n"
-					+ "7. Manage a project\n");
+					+ "\n7. Manage a project\n");
 
 			/*
 			System.out.println("5. Return to Main Menu");
@@ -66,7 +66,7 @@ public class Menus {
 			System.out.println("5. Return to Main Menu");
 			System.out.println("5. Return to Main Menu");
 			 */
-			System.out.println("\n\n> EXIT THE SCREEN"
+			System.out.println("\n> EXIT THE SCREEN\n"
 					+ "8. Return to Main Menu");
 
 			temp = UserInput.readInt("\nPlease type your choice here >>>> :");
@@ -118,7 +118,7 @@ public class Menus {
 				break;
 
 			default:
-				System.out.println("Invalid choice ! please type only numbers from 1 to 4 :");
+				System.out.println("Invalid choice ! please type only numbers from 1 to 8 :");
 				return;
 			}	
 
@@ -267,6 +267,8 @@ public class Menus {
 		}while(temp!=6);
 	}
 	
+	
+	
 	public void showActivityScreen(String activityID) {
 		//String projectTitle = Controller.projectNameByID(projectID);
 		int temp=0;
@@ -313,13 +315,6 @@ public class Menus {
 			}	
 
 		}while(temp!=6);
-	}
-
-
-
-
-	public void showMeetingScreen(String activityID) {
-
 	}
 
 
