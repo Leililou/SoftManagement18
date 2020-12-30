@@ -84,7 +84,7 @@ public class Menus {
 						+ "> 1. Product Owner\n"
 						+ "> 2. Scrum Master\n"
 						+ "> 3. Developer\n"
-						+ "Note: If no choice has been made, the employee will be added as Developer by default\n");
+						+ "Note: If no choice has been made from the aption above, the employee \nwill be added as Developer by default.\n\nPlease type your choice here >>>> :");
 
 				/*	switch (role) {
 					case 1://Product Owner
@@ -105,9 +105,9 @@ public class Menus {
 				}while(temp!=4);*/
 				if(role==1) {
 					roleName="Product Owner";
-				}else if(role==1) {
+				}else if(role==2) {
 					roleName="Scrum Master";
-				}else if(role==1) {
+				}else if(role==3) {
 					roleName="Developer";
 				}else {
 					System.out.println("Invalid choice ! The role will be defined as Developer by default");
