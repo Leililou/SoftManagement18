@@ -503,6 +503,24 @@ public class Controller {
 			}
 		}
 	}
+	public static void scheduleMeeting() {
+		String meetingId = UUID.randomUUID().toString();
+		String meetingDate = UserInput.readString("Enter meeting date in form of dd-mm-yyyy");
+		String startTime =  UserInput.readString("Enter meeting start time in form of hh:mm:ss");
+		String endTime =  UserInput.readString("Enter meeting end time in form of hh:mm:ss");
+		String meetingDescription =  UserInput.readString("Describe what is the meeting about");
+
+		String meetingStartDate = meetingDate + " "+ startTime;
+		Date meetingDate1 = null;
+		try {
+			meetingDate1 = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").parse(meetingStartDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		Meeting meeting = new Meeting(meetingId, meetingDate1, meetingDescription, startTime, endTime);
+		schedule.add(meeting);
+		System.out.println("\t " + meetingDate1 + "\n" +  meetingDescription + "\n");
+	}
 
 	//********* not yet verified
 	/*

@@ -12,13 +12,13 @@ abstract class Schedule {
     private String ID;
     private Date date;
     private String description;
-    private int startTime;
-    private int endTime;
+    private String startTime;
+    private String endTime;
 
 
     // date(int year, int month, int date)
     //public Schedule(String meetingId,Date meetingDate, String description,Time startTime,Time endTime)
-    public Schedule(String meetingId,Date meetingDate, String description,int startTime,int endTime) {
+    public Schedule(String meetingId,Date meetingDate, String description,String startTime,String endTime) {
         UUID uuid = UUID.randomUUID();
         this.ID = uuid.toString();
         this.ID = ID.substring(0, Math.min(ID.length(), 3));
@@ -34,12 +34,12 @@ abstract class Schedule {
         return participants;
     }
 
-    public int getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
 
-    public int getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
@@ -68,12 +68,12 @@ abstract class Schedule {
         this.description = description;
     }
 
-    public void setStartTime(int startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
 
-    public void setEndTime(int endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 
