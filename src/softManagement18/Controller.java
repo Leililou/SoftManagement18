@@ -9,7 +9,7 @@ public class Controller {
 
 	private static ArrayList<Project> listOfProjects = new ArrayList<Project>();
 	private ArrayList<Schedule> schedule = new ArrayList<Schedule>();
-	private static ArrayList<TeamMember> listOfMembers = new ArrayList<TeamMember>();
+	private static ArrayList<TeamMember> listOfEmployees = new ArrayList<TeamMember>();
 
 	/**Missing
 	 * remove team member #2.2 Anwar (it's not adabted to the code (classes and names of lists))
@@ -17,7 +17,13 @@ public class Controller {
 	 *
 	 */
 
-	/**
+	/** SYSTEM
+	 * 
+	 * 15.1 Remove an employee from the system (verified) Leila
+	 * 
+	 * 
+	 * 
+	 * 
 	 * **** PROJECT
 	 * ** I. ADD
 	 * 1. add a project to the list of projects #1.1(Leila)
@@ -213,7 +219,7 @@ public class Controller {
 	// 6. Add a team member to the general list of team members
 	public static void addMember(String name,String role) {
 		TeamMember member = new TeamMember(name, role);
-		listOfMembers.add(member);
+		listOfEmployees.add(member);
 		System.out.println("The team member:"+member.getName()+ " has been successfully added as a " + member.getRole() + ". \n");
 	}
 
@@ -244,17 +250,17 @@ public class Controller {
 			}
 		}
 	}
-	
+
 	// 8.1.1. Search team member by name participating in a specific project
-		public static void searchTeamMemberByNameInProject(String projectID,String name) {
-			if(!listOfProjects.isEmpty()) {
-				for(Project currentProject:listOfProjects) {
-					if(projectID.equals(currentProject.getID())){
-						searchTeamMemberByIDInAList(currentProject.participants,name);
-					}
+	public static void searchTeamMemberByNameInProject(String projectID,String name) {
+		if(!listOfProjects.isEmpty()) {
+			for(Project currentProject:listOfProjects) {
+				if(projectID.equals(currentProject.getID())){
+					searchTeamMemberByIDInAList(currentProject.participants,name);
 				}
 			}
 		}
+	}
 
 	// 8.2. Search team member by ID participating in a task in a specific project
 	public void searchTeamMemberByIDInATaskOfaProject(String projectID,String taskID,String memberID) {
@@ -275,14 +281,14 @@ public class Controller {
 	public void searchTeamMemberByName(String name) {
 		//-2: empty list, -1: invalid ID, i: index
 		// check the list of products (if empty)
-		if (listOfMembers.isEmpty()) {
+		if (listOfEmployees.isEmpty()) {
 			System.err.println("\nThe list of team members is empty! There is no registered team members!\n");
 			// return -2;
 		} else {
-			for (int i = 0; i < listOfMembers.size(); i++) {
-				if (name.equals(listOfMembers.get(i).getName())) {
+			for (int i = 0; i < listOfEmployees.size(); i++) {
+				if (name.equals(listOfEmployees.get(i).getName())) {
 					// return i;//return products.indexOf(products.get(i));
-					System.out.println(listOfMembers.get(i));
+					System.out.println(listOfEmployees.get(i));
 				}
 			}
 		}
@@ -313,11 +319,11 @@ public class Controller {
 
 	// 11. Assign a team member to a project(ById) (verified)
 	public static void assignTeamMemberToProject(String projectId,String memberID) {
-		int indexMember=searchTeamMemberByIDInAList(listOfMembers,memberID);
+		int indexMember=searchTeamMemberByIDInAList(listOfEmployees,memberID);
 		if (indexMember>=0) {
 			int indexProject=fetchProjectById(projectId);
 			if(indexProject>=0) {
-				TeamMember currentParticipant = listOfMembers.get(indexMember);
+				TeamMember currentParticipant = listOfEmployees.get(indexMember);
 				Project currentProject=listOfProjects.get(indexProject);
 				currentProject.participants.add(currentParticipant);
 				System.out.println("Assignement of "+currentParticipant.getName()+" to the project:"+currentProject.getTitle()+" has been sucessful");
@@ -392,6 +398,32 @@ public class Controller {
 			}
 		}
 	}
+	
+	//15.1 Remove an employee from the system (verified)
+	public static void removeEmployee(String employeeID) {
+		int indexP=searchTeamMemberByIDInAList(listOfEmployees,employeeID);
+		if(indexP>=0) {
+			// remove the employee from all tasks in projects
+			for(Project currentProject: listOfProjects) {
+				for(Task currentTask: currentProject.tasks) {
+					for(TeamMember currentParticipant: currentTask.participants) {
+						if(employeeID.equals(currentParticipant.getID())) {
+							currentTask.participants.remove(currentParticipant);
+						}
+					}
+				}
+			}
+
+			//remove the employee from the lists of participants in all projects
+			for(Project currentProject: listOfProjects){
+				for(TeamMember currentTM: currentProject.participants){
+					if(employeeID.equals(currentTM.getID())) {
+						currentProject.participants.remove(currentTM);
+					}
+				}
+			}
+		}
+	}
 
 	// 16. Search team member by ID in a list(To define)
 	public static int searchTeamMemberByIDInAList(ArrayList<TeamMember>list,String id) {
@@ -411,7 +443,7 @@ public class Controller {
 		System.out.println("Invalid ID! No such team member of ID: " + id + " found!");
 		return -1;
 	}
-	
+
 	public static int searchTeamMemberByNameInAList(ArrayList<TeamMember>list,String name) {
 		//-2: empty list, -1: invalid ID, i: index
 		// check the list of products (if empty)
@@ -462,11 +494,11 @@ public class Controller {
 	}
 	//19.DisplayTheListOfTeamMembers
 	public static void displayTheListOfTeamMembers() {
-		if(listOfMembers.isEmpty()) {
+		if(listOfEmployees.isEmpty()) {
 			System.out.println("No data to display! the List of team members is Empty!");
 		}
 		else{
-			for(TeamMember currentTM:listOfMembers)  {
+			for(TeamMember currentTM:listOfEmployees)  {
 				System.out.println(currentTM);
 			}
 		}
