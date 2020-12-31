@@ -122,7 +122,8 @@ public class Menus {
 				break;
 
 			case 3: //Remove an employee from the system
-				System.out.println("Not yet implemented");
+				String employeeID=UserInput.readString("Please type the employee’s ID to remove from the system :\n>>>");
+				Controller.removeEmployee(employeeID);
 				break;
 
 				//addProject(String title, String description)
