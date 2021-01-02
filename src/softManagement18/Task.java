@@ -92,12 +92,12 @@ public class Task {
 	}
 
     public String toString() {
-        return "\n\n>> Task of ID: "+this.getID()+
+        return "\n>>> Task of ID: "+this.getID()+
                 "\n> Title: "+this.getTitle()+
                 "\n> Description: "+this.getDescription()+
                 "\n> Start date: "+this.getStartDate()+
                 "\n> End date: "+this.getEndDate()+
-                "\n>Type of priority: "+this.getPriority()+
+                "\n> Type of priority: "+this.getPriority()+
                 "\n> Status: "+this.getStatus();
     }
 
