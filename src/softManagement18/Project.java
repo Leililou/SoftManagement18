@@ -9,8 +9,8 @@ public class Project {
 	private String ID;
 	private String title;
 	private String description;
-	
-	
+
+
 	ArrayList<TeamMember> participants = new ArrayList<TeamMember>();
 	ArrayList<Task> tasks = new ArrayList<Task>();
 
@@ -35,7 +35,7 @@ public class Project {
 	String getDescription() {
 		return description;
 	}
-	
+
 
 	void setTitle(String title) {
 		this.title = title;
@@ -44,15 +44,20 @@ public class Project {
 	void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	void displayParticipants() {
-		for(TeamMember currentParticipant:this.participants) {
-			System.out.println(currentParticipant);
+		if(this.participants.isEmpty()) {
+			System.out.println("> No participant is assigned yet to this project!");
+		}
+		else {
+			for(TeamMember currentParticipant:this.participants) {
+				System.out.println(currentParticipant);
+			}
 		}
 	}
-	
+
 	public String toString() {
-		return "ID: "+this.getID()+", Project's title:"+this.getTitle()+", Description:"+this.getDescription();
+		return "\n> Project's ID: "+this.getID()+", Project's title:"+this.getTitle()+", Description:"+this.getDescription();
 	}
 
 

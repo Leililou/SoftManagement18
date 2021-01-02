@@ -99,9 +99,11 @@ public class Controller {
 	 * (Not yet implemented)
 	 *
 	 * ** V. DISPLAY/SHOW LIST
+	 * 
 	 * 13. Show Task By Id #4.7(Leila)
+	 * 13.1 display list of Tasks Of Project (Leila)
 	 *
-	 * **** TASKS OF A TEAM MEMBER IN A PROJECT
+	 * ********************************************** TASKS OF A TEAM MEMBER IN A PROJECT
 	 * ** I. ADD
 	 * 12. Connect a Task To a Team Member #5.2(Leila)
 	 *
@@ -136,22 +138,24 @@ public class Controller {
 	public static void addProject(String title, String description) {
 		Project project=new Project(title, description);
 		listOfProjects.add(project);
-		System.out.println(project.getTitle()+" of ID:"+project.getID()+", successfully added!");
+		System.out.println("\n> Project :"+project.getTitle()+" of ID:"+project.getID()+", has been successfully added!");
 	}
 
 
 	// 2. Create a new task(a helping method, called in other methods)
-	public Task createNewTask(String title, String description, Date startDate, Date endDate, String priority, String status) {
+	public static Task createNewTask(String title, String description, Date startDate, Date endDate, String priority, String status) {
 		Task task=new Task(title,description,startDate,endDate,priority,status);
 		return task;
 	}
 
 	// 3. add a new task to an existing project
-	public void addNewTaskToExistingProject(String projectId,String title, String description, Date startDate, Date endDate, String priority, String status) {
+	public static void addNewTaskToExistingProject(String projectId,String title, String description, Date startDate, Date endDate, String priority) {
 		int indexOfProject=fetchProjectById(projectId);
+
 		if (indexOfProject>=0) {
-			Task newTask=createNewTask(title,description,startDate,endDate,priority,status);
+			Task newTask=createNewTask(title,description,startDate,endDate,priority,"To Do");
 			listOfProjects.get(indexOfProject).tasks.add(newTask);
+			System.out.println(newTask+" \nhas been successfully added to the project!\n");
 		}
 		else {
 			System.out.println("Failed to add the new task to the project with ID: "+projectId);
@@ -161,9 +165,11 @@ public class Controller {
 
 	// 4. fetch project by ID in the list if found returns index, else -1
 	public static int fetchProjectById(String projectId) {
+		
 		//-2: empty list, -1: invalid ID, i: index
 		// check the list of projects (if empty)
 		if(listOfProjects.isEmpty()) {
+			
 			System.err.println("\nThe list of projects is empty! There is no registered project for the moment!\n");
 			return -2;
 		}else {
@@ -173,7 +179,7 @@ public class Controller {
 				}
 			}
 		}
-		System.out.println("Invalid ID! Item of ID: "+ projectId +" not found!");
+		System.out.println("Invalid ID! Project of ID: "+ projectId +" not found!");
 		return -1;
 	}
 
@@ -185,56 +191,58 @@ public class Controller {
 		else {
 			return null;
 		}
-
 	}
 
 	// 5. fetch tasks by ID in the list of a specific project with a known index(if found returns index, else -1)
-	public void fetchTaskByIDInAProject(String projectID,String taskID) {
+	public static int fetchTaskByIDInAProject(String projectID,String taskID) {
 		if(!listOfProjects.isEmpty()) {
+			
 			for(Project currentProject:listOfProjects) {
 				if(projectID.equals(currentProject.getID())){
-					fetchTaskByIDInAList(currentProject.tasks,taskID);
+			
+					return fetchTaskByIDInAList(currentProject.tasks,taskID);
 				}
 			}
 		}
+		return -1;
 	}
 
+	// 5.1 removeProjectByID
 	public void removeProjectByID(String projectID){
-		for (int i = 0; i < listOfProjects.size(); i++) {
-			if (listOfProjects.get(i).getID().equals(projectID)) {
-				listOfProjects.remove(i);
-				System.out.println("Project removed!");
-			} else System.out.println("Project with id" + projectID + " not found");
+		if (listOfProjects.isEmpty()) {
+			System.out.println("The list of projects is empty!");
+		}
+		else {
+			int projectIndex=fetchProjectById(projectID);
+			if (projectIndex>=0) {
+				listOfProjects.remove(projectIndex);
+				System.out.println("Project of ID:"+projectID+" has been successfully removed!");
+			} 
 		}
 	}
 
-	public void viewAllProjects() {
-		for (Project project : listOfProjects) {
-			if (project != null) {
-				System.out.println(project);
-			}
-		}
-	}
 
 	// 6. Add a team member to the general list of team members
-	public static void addMember(String name,String role) {
+	public static void addEmployee(String name,String role) {
 		TeamMember member = new TeamMember(name, role);
 		listOfEmployees.add(member);
-		System.out.println("The team member:"+member.getName()+ " has been successfully added as a " + member.getRole() + ". \n");
+		System.out.println("The employee:"+member.getName()+ " has been successfully added as a " + member.getRole() + ". \n");
 	}
 
 	// 7. Remove a task from a project (and from all participants' lists) (verified)
-	public void removeTaskOfAProject(String projectID, String taskID) {
+	public static void removeTaskOfAProject(String projectID, String taskID) {
 		// fetch project by Id
 		// fetch task by ID
 		int indexOfProject=fetchProjectById(projectID);
 		if(indexOfProject>=0) {
-			int indexOfTask=fetchTaskByIDInAList(listOfProjects.get(indexOfProject).tasks,taskID);
+			int indexOfTask=fetchTaskByIDInAProject(projectID,taskID);
 			if(indexOfTask>=0) {
 				for(TeamMember currentParticipant:listOfProjects.get(indexOfProject).participants) {
 					removeTaskOfTeamMember(projectID,currentParticipant.getID(), taskID);
 				}
+				System.out.println("Removing the task from the project's list of tasks ...");
 				listOfProjects.get(indexOfProject).tasks.remove(indexOfTask);
+				System.out.println("> The task has been succefully removed from the project,"+listOfProjects.get(indexOfProject).getTitle()+"list of tasks");
 			}
 		}
 	}
@@ -256,7 +264,7 @@ public class Controller {
 		if(!listOfProjects.isEmpty()) {
 			for(Project currentProject:listOfProjects) {
 				if(projectID.equals(currentProject.getID())){
-					searchTeamMemberByIDInAList(currentProject.participants,name);
+					searchTeamMemberByNameInAList(currentProject.participants,name);
 				}
 			}
 		}
@@ -304,11 +312,6 @@ public class Controller {
 		int indexP=fetchProjectById(projectID);
 		if (indexP>=0) {
 			System.out.println(listOfProjects.get(indexP)+"\nThe participants in this project are:");
-			/*
-			for(TeamMember currentParticipant:listOfProjects.get(indexP).participants) {
-			System.out.println(currentParticipant);
-			}
-			 */
 			listOfProjects.get(indexP).displayParticipants();
 		}
 		else {
@@ -336,8 +339,8 @@ public class Controller {
 
 
 	//12. Connect a Task To a Team Member in a project (verified)
-	public void connectTaskToTeamMember(String memberID, String projectID, String taskID){
-		int indexProject=fetchProjectById(taskID);
+	public static void connectTaskToTeamMember(String memberID, String projectID, String taskID){
+		int indexProject=fetchProjectById(projectID);
 		if(indexProject>=0) {
 			int indexMember=searchTeamMemberByIDInAList(listOfProjects.get(indexProject).participants, memberID);
 			if (indexMember>=0) {
@@ -358,13 +361,13 @@ public class Controller {
 	}
 
 	// 13. Show Task By Id (verified)
-	public void showTaskById(String projectID,String taskID) {
+	public static void showTaskById(String projectID,String taskID) {
 		int indexProject=fetchProjectById(projectID);
 		if(indexProject>=0) {
 			int indexTask=fetchTaskByIDInAList(listOfProjects.get(indexProject).tasks,taskID);
 			if(indexTask>=0) {
 
-				System.out.println(listOfProjects.get(indexProject).tasks.get(indexTask));
+				//System.out.println(listOfProjects.get(indexProject).tasks.get(indexTask));
 				/*for(Task currentParticipant:listOfProjects.get(indexProject).tasks.get(indexTask).participants){
 				 * System.out.println(currentParticipant);
 				 * }
@@ -374,14 +377,34 @@ public class Controller {
 		}
 	}
 
+	// 13.1 display Tasks Of Project
+	public static void displayTasksOfProject(String projectID) {
+		Project project=projectFromID(projectID);
+		if (project!=null) {
+			if(!(project.tasks.isEmpty())) {
+
+				int i=0;
+				for(Task currentTask:project.tasks) {
+					i++;
+					System.out.println("\n"+i+": "+currentTask);
+				}
+			}else {
+				System.out.println("The list of tasks is empty for the moment, no data to display! ");
+			}	
+		}
+	}
+
 	//14. Remove a task from a team member's list (verified)
-	public void removeTaskOfTeamMember(String projectId,String teamMemberID, String taskID) {
-		int indexP=fetchProjectById(projectId);
+	public static void removeTaskOfTeamMember(String projectId,String teamMemberID, String taskID) {int indexP=fetchProjectById(projectId);
 		if(indexP>=0){
+			System.out.println("Removing the task from team members' lists of tasks:");
 			int indexTM=searchTeamMemberByIDInAList(listOfProjects.get(indexP).participants,teamMemberID);
 			if(indexTM>=0) {
 				int indexT=fetchTaskByIDInAList(listOfProjects.get(indexP).participants.get(indexTM).tasks,taskID);
-				listOfProjects.get(indexP).participants.get(indexTM).tasks.remove(indexT);
+				if(indexT>=0) {
+					listOfProjects.get(indexP).participants.get(indexTM).tasks.remove(indexT);
+					System.out.println("> The task has been succefully removed from the team member,"+listOfProjects.get(indexP).participants.get(indexTM).getName()+" list of tasks");
+				}
 			}
 		}
 	}
@@ -395,10 +418,11 @@ public class Controller {
 			if(indexT>=0) {
 				int indexTM=searchTeamMemberByIDInAList(listOfProjects.get(indexP).tasks.get(indexT).participants,teamMemberID);
 				listOfProjects.get(indexP).tasks.get(indexT).participants.remove(indexTM);
+				System.out.println("> The team member of ID: "+teamMemberID+" is no longer assigned to the task of ID: "+taskID);
 			}
 		}
 	}
-	
+
 	//15.1 Remove an employee from the system (verified)
 	public static void removeEmployee(String employeeID) {
 		int indexP=searchTeamMemberByIDInAList(listOfEmployees,employeeID);
@@ -418,12 +442,42 @@ public class Controller {
 			for(Project currentProject: listOfProjects){
 				for(TeamMember currentTM: currentProject.participants){
 					if(employeeID.equals(currentTM.getID())) {
-						currentProject.participants.remove(currentTM);
+
 					}
 				}
 			}
 		}
 	}
+
+	public static Project projectFromID(String projectID) {
+		int indexOfProject=fetchProjectById(projectID);
+		if (indexOfProject>=0) {
+			return listOfProjects.get(indexOfProject);
+		}
+		else {
+			return null;
+		}
+	}
+
+	//Remove a team member from this project
+	public static void removeParticipantFromProject(Project project,String participantID) {
+
+		int indexP=searchTeamMemberByIDInAList(project.participants,participantID);
+		if(indexP>=0) {
+			// remove the participant from all tasks in projects
+			for(Task currentTask: project.tasks) {
+				for(TeamMember currentParticipant: currentTask.participants) {
+					if(participantID.equals(currentParticipant.getID())) {
+						currentTask.participants.remove(currentParticipant);
+
+					}
+				}
+			}
+			project.participants.remove(indexP);
+			System.out.println("Team member of ID: "+participantID+" has been successfully removed\n");
+		}
+	}
+
 
 	// 16. Search team member by ID in a list(To define)
 	public static int searchTeamMemberByIDInAList(ArrayList<TeamMember>list,String id) {
@@ -463,12 +517,11 @@ public class Controller {
 	}
 
 	// 17. fetch tasks by ID in a list (if found returns index, else -1)
-	public int fetchTaskByIDInAList(ArrayList<Task> taskList,String taskID) {
+	public static int fetchTaskByIDInAList(ArrayList<Task> taskList,String taskID) {
 		//-2: empty list, -1: invalid ID, i: index
 		// check the list of tasks (if empty)
 		if (taskList.isEmpty()) {
-			System.err.println("\nThe list is empty! There is no registered task!\n");
-			return -2;
+			System.out.println("\nThe list is empty! There is no registered task yet!\n");
 		} else {
 			for (int i = 0; i < taskList.size(); i++) {
 				if (taskID.equals(taskList.get(i).getID())) {
@@ -488,24 +541,41 @@ public class Controller {
 		}
 		else{
 			for(Project currentProject:listOfProjects)  {
-				System.out.println(currentProject);
+				System.out.println("> ID: "+currentProject.getID()+", project's title:"+currentProject.getTitle());
 			}
 		}
 	}
+
 	//19.DisplayTheListOfTeamMembers
 	public static void displayTheListOfTeamMembers() {
 		if(listOfEmployees.isEmpty()) {
 			System.out.println("No data to display! the List of team members is Empty!");
 		}
 		else{
+
 			for(TeamMember currentTM:listOfEmployees)  {
 				System.out.println(currentTM);
 			}
 		}
 	}
 
-	//********* not yet verified
-	/*
+
+
+	//20. Display the list of participants in the project
+	public static void showParticipantsProject(String projectID){
+		int projectIndex=fetchProjectById(projectID);
+		if(projectIndex>=0 && !(listOfProjects.get(projectIndex).participants.isEmpty())) {
+			listOfProjects.get(projectIndex).displayParticipants();
+		}
+		else{
+			System.out.println("No data to display! the List of projects is Empty!");
+		}
+	}	
+}
+
+
+//********* not yet verified
+/*
 	public static void scheduleMeeting() {
 		String meetingId = UUID.randomUUID().toString();
 		String meetingDay = softManagement18.InputHandler.stringInput("Enter meeting date in form of dd-mm-yyyy");
@@ -522,11 +592,11 @@ public class Controller {
 		Meeting.meetingList.add(meeting);
 		System.out.println("\t" + meetingDate + "\n " + meetingAbout + "\n");
 	}
-	 */
+ */
 
-	//********* not yet verified
-	/*
-	 * 
+//********* not yet verified
+/*
+ * 
 	//The team member should be removed from the lists of tasks first in case he/she is part of it then the general list
 	public static void removeMember(String idInput) {
 		for (int i = 0; i < Member.memberList.size(); i++) {
@@ -536,10 +606,10 @@ public class Controller {
 			} else System.out.println("Team member with id" + idInput + " not found");
 		}
 	}
-	 */
+ */
 
-	//********* not yet verified
-	/*
+//********* not yet verified
+/*
 	public static void showMeetingList() {
 		for (Meeting meeting : Meeting.meetingList) {
 			if (meeting != null) {
@@ -547,11 +617,11 @@ public class Controller {
 			}
 		}
 	}
-	 */
+ */
 
 
-	//********* not yet verified
-	/*
+//********* not yet verified
+/*
 	public static void removeMeeting(String meetingIdInput) {
 		for (int i = 0; i < Meeting.meetingList.size(); i++) {
 			if (Meeting.meetingList.get(i).getMeetingId().equals(meetingIdInput)) {
@@ -560,7 +630,7 @@ public class Controller {
 			} else System.out.println("Meeting with id" + meetingIdInput + " not found");
 		}
 	}
-	 */
-}
+ */
+
 
 

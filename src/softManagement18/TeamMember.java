@@ -44,7 +44,7 @@ public class TeamMember {
 
 
      public String toString() {
-        return "> Team member of ID: "+this.getID()+", name: "+this.getName()+", Role: "+ this.getRole();
+        return "> ID: "+this.getID()+", name: "+this.getName()+", Role: "+ this.getRole();
     }
 
 	

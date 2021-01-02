@@ -1,5 +1,7 @@
 package softManagement18;
 
+import java.util.Date;
+
 public class Menus {
 	// NOT YET VERIFIED
 
@@ -48,13 +50,13 @@ public class Menus {
 		int temp=0;
 		do {
 
-
+			
 			System.out.println("\n Manager Screen - Type one of the options below"
 					+ "\n\n> EMPLOYEE:\n"
 					+ "1. Add an employee to the system\n"
 					+ "2. View all employees registered in the system\n"
 					+ "3. Remove an employee from the system\n"
-					+ "\n\n> PROJECT:\n"
+					+ "\n> PROJECT:\n"
 					+ "4. Add a new project\n"
 					+ "5. Display the list of registered projects\n"
 					+ "6. Display information about a specific project (using ID)\n"
@@ -68,7 +70,6 @@ public class Menus {
 			 */
 			System.out.println("\n> EXIT THE SCREEN\n"
 					+ "8. Return to Main Menu");
-
 			temp = UserInput.readInt("\nPlease type your choice here >>>> :");
 
 			switch (temp) {
@@ -114,11 +115,13 @@ public class Menus {
 					roleName="Developer";
 				}
 
-				Controller.addMember(name,roleName);
+				Controller.addEmployee(name,roleName);
 				break;
 
 			case 2: //View all team members
+				System.out.println("\nThe list of all employees registered in the system :");
 				Controller.displayTheListOfTeamMembers();
+				System.out.println("\n");
 				break;
 
 			case 3: //Remove an employee from the system
@@ -137,7 +140,9 @@ public class Menus {
 				break;
 
 			case 5: //Display the list of registered projects
+				System.out.println("\nThe list of all registered projects in the system :");
 				Controller.displayListOfProjects();
+				System.out.println("\n");
 				break;
 
 			case 6: //Display information about a specific project (using ID)
@@ -171,9 +176,10 @@ public class Menus {
 
 	public static void showProjectMenu(String projectID) {
 		String projectTitle = Controller.projectNameByID(projectID);
+		Project currentProject=Controller.projectFromID(projectID);
 		int temp=0;
 		do {
-			System.out.println(">> MANAGEMENT OF THE PROJECT "+projectTitle+", of ID:"+projectID+":\n"
+			System.out.println("\n>> MANAGEMENT SCREEN OF THE PROJECT "+projectTitle+", of ID ("+projectID+"):\n"
 					+"\n> TEAM MEMBERS\n"
 					+ "1. Assign a team member to this project\n"
 					+ "2. View all team members participating in this project\n"
@@ -211,12 +217,17 @@ public class Menus {
 
 			case 1: //Assign a team member to this project
 				System.out.println("\nAssigning a team member to this project...");
-				String memberID = UserInput.readString("\nPlease type the team member’s ID that you want to assign to this project:\n");
+				System.out.println("\nThe list of all employees registered in the system :");
+				Controller.displayTheListOfTeamMembers();
+				System.out.println("\n");
+				String memberID = UserInput.readString("\nPlease pick the team member’s ID that you want to assign to this project from the list above:\n>> ");
 				Controller.assignTeamMemberToProject(projectID,memberID);
 				break;
 
 			case 2: //View all team members participating in this project
-				System.err.println("To be implemented");
+				System.out.println("\nThe participants assigned to this project are :");
+				Controller.showParticipantsProject(projectID);
+				System.out.println("\n");
 				break;
 
 			case 3: //Search a team member by ID in this project
@@ -226,22 +237,74 @@ public class Menus {
 
 			case 4: //Search a team member by name in this project
 				String tMemberName = UserInput.readString("Please enter the name of the team member:");
-				Controller.searchTeamMemberByIDInProject(projectID,tMemberName);
+				Controller.searchTeamMemberByNameInProject(projectID,tMemberName);
 				break;
+				
 			case 5: //Remove a team member from this project
-				System.err.println("To be implemented");
+				String participantID = UserInput.readString("Please enter the ID of the team member you want to remove:\n>>> ");
+				Controller.removeParticipantFromProject(currentProject,participantID);
 				break;
+				
 			case 6: //Create a task in this project
+				String title = UserInput.readString("> Title : \n>> ");
+				String description = UserInput.readString("> Description : \n>> ");
+				System.out.println("Please enter the start date : ");
+				int sYear = UserInput.readInt("> Year: ");
+				int sMonth= UserInput.readInt("> Month: ");
+				int sDate= UserInput.readInt("> Date: ");
+				@SuppressWarnings("deprecation") Date startDate= new Date(sYear-1900,sMonth-1,sDate);
+				System.out.println("Please enter the end date :");
+				int eYear = UserInput.readInt("> Year: ");
+				int eMonth= UserInput.readInt("> Month: ");
+				int eDate= UserInput.readInt("> Date: ");
+				@SuppressWarnings("deprecation") Date endDate= new Date(eYear-1900,eMonth-1,eDate);
+				int choice = UserInput.readInt("Please choose the level of priority from the list below: \n"
+						+ "(The priority will be defined as Low by default if none of below options is chosen)\n"
+						+ "1. High\n"
+						+ "2. Medium\n"
+						+ "3. Low\nPlease type your choice here >> ");
+				String priority="";
+				if(choice==1) {
+					priority="High";
+				}else if(choice==2) {
+					priority="Medium";
+				}else if(choice==3) {
+					priority="Low";
+				}else {
+					System.out.println("Invalid choice ! The priority will be defined as Low by default");
+					priority="Low";
+				}
+		
+				Controller.addNewTaskToExistingProject(projectID,title,description, startDate, endDate,priority);
 				break;
+				
 			case 7: //View the tasks of this project
+				System.out.println("\nThe list of tasks planned in this project:");
+				Controller.displayTasksOfProject(projectID);
 				break;
+				
 			case 8: //Search a task by ID in this project
+				String taskID = UserInput.readString("Please type the ID of the task you are looking for:\n>>");
+				Controller.showTaskById(projectID,taskID);
 				break;
+				
 			case 9: //Remove a task from this project
+				String taskId = UserInput.readString("Please type the ID of the task you would like to delete:\n>>");
+				Controller.removeTaskOfAProject(projectID, taskId);
 				break;
+				
 			case 10: //Assign a task to a team member
+				System.out.println("Please enter the corresponding information to assign a task to a team member:\n");
+				String memberId = UserInput.readString("ID of the team member:\n>>");
+				String tasKID = UserInput.readString("ID of the task:\n>>");
+				Controller.connectTaskToTeamMember(memberId,projectID, tasKID);
 				break;
+				
 			case 11: //Remove a task from a team member's list of tasks
+				System.out.println("Please enter the corresponding information to remove a task assigned to a team member:\n");
+				String teamMemberID = UserInput.readString("ID of the team member:\n>>");
+				taskID = UserInput.readString("ID of the task:\n>>");
+				Controller.removeTaskOfTeamMember(projectID,teamMemberID, taskID);
 				break;
 
 			case 12: //Return to the Manager's Menu
