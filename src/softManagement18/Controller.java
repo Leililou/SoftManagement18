@@ -570,7 +570,19 @@ public class Controller {
 		else{
 			System.out.println("No data to display! the List of projects is Empty!");
 		}
-	}	
+	}
+
+	//22. View the schedule
+	public static void viewAllSchedule() {
+		if(schedule.isEmpty()) {
+			System.out.println("No data to display! the schedule list is Empty!");
+		}
+		else{
+			for(Schedule currentSchedule:schedule)  {
+				System.out.println(currentSchedule);
+			}
+		}
+	}
 }
 
 
