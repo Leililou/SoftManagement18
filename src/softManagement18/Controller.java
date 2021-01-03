@@ -570,7 +570,14 @@ public class Controller {
 		else{
 			System.out.println("No data to display! the List of projects is Empty!");
 		}
-	}	
+	}
+
+	//21. Schedule a new meeting
+	public static void scheduleMeeting(String meetingId, Date meetingDate1, String meetingDescription, String startTime, String endTime) {
+		Meeting meeting = new Meeting(meetingId, meetingDate1, meetingDescription, startTime, endTime);
+		schedule.add(meeting);
+		System.out.println("\t " + meetingDate1 + "\n" +  meetingDescription + "\n");
+	}
 }
 
 

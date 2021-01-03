@@ -77,7 +77,7 @@ public class Menus {
 			case 1: //Add a team member
 
 				System.out.println("\nAdding an employee to the system ...");
-				System.out.println("\nPlease type the employee’s:");
+				System.out.println("\nPlease type the employeeï¿½s:");
 				String name = UserInput.readString("Name :");
 				String roleName="";
 				//do {
@@ -125,7 +125,7 @@ public class Menus {
 				break;
 
 			case 3: //Remove an employee from the system
-				String employeeID=UserInput.readString("Please type the employee’s ID to remove from the system :\n>>>");
+				String employeeID=UserInput.readString("Please type the employeeï¿½s ID to remove from the system :\n>>>");
 				Controller.removeEmployee(employeeID);
 				break;
 
@@ -133,7 +133,7 @@ public class Menus {
 			case 4: //Add a new project
 
 				System.out.println("\nAdding a new project ...");
-				System.out.println("\nPlease type the project’s:");
+				System.out.println("\nPlease type the projectï¿½s:");
 				String title = UserInput.readString("Title :");
 				String description = UserInput.readString("Description :");
 				Controller.addProject(title,description);
@@ -220,7 +220,7 @@ public class Menus {
 				System.out.println("\nThe list of all employees registered in the system :");
 				Controller.displayTheListOfTeamMembers();
 				System.out.println("\n");
-				String memberID = UserInput.readString("\nPlease pick the team member’s ID that you want to assign to this project from the list above:\n>> ");
+				String memberID = UserInput.readString("\nPlease pick the team memberï¿½s ID that you want to assign to this project from the list above:\n>> ");
 				Controller.assignTeamMemberToProject(projectID,memberID);
 				break;
 
@@ -311,7 +311,29 @@ public class Menus {
 				showManagerMenu();
 				break;
 
-			case 13: //Return to Main screen
+			case 13: //Add a meeting to the schedule
+				String meetingId = UUID.randomUUID().toString();
+				System.out.println("Schedule a new meeting....\nEnter meeting's:");
+				String meetingDate = UserInput.readString("Date in form of dd-mm-yyyy");
+				String startTime =  UserInput.readString("Start time in form of hh:mm:ss");
+				String endTime =  UserInput.readString("End time in form of hh:mm:ss");
+				String meetingDescription =  UserInput.readString("Description");
+
+				String meetingStartDate = meetingDate + " "+ startTime;
+				Date meetingDate1 = null;
+				try {
+					meetingDate1 = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").parse(meetingStartDate);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				Controller.scheduleMeeting(meetingId, meetingDate1, meetingDescription, startTime, endTime);
+				break;
+
+			case 14: //Return to the Manager's Menu
+				showManagerMenu();
+				break;
+
+			case 15: //Return to Main screen
 				System.out.println("Returning to the Main Screen...");
 				showMainMenu();
 				break;
@@ -321,7 +343,7 @@ public class Menus {
 				return;
 			}	
 
-		}while(temp!=13);
+		}while(temp!=15);
 	}
 
 

@@ -8,7 +8,7 @@ public class Meeting extends Schedule{
 	
 // look for how to store time (H,m)
 	// date(int year, int month, int date)
-	public Meeting(String meetingId,Date meetingDate, String description,int startTime,int endTime) {
+	public Meeting(String meetingId,Date meetingDate, String description,String startTime,String endTime) {
 		super(meetingId,meetingDate, description,startTime,endTime);
 		
 	}
