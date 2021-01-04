@@ -186,6 +186,7 @@ public class Menus {
 
 			temp = UserInput.readInt("\nPlease type your choice here >>>> :");
 			String tMemberID="";
+			String taskID="";
 
 			switch (temp) {
 
@@ -214,9 +215,18 @@ public class Menus {
 				Controller.searchTeamMemberByNameInProject(projectID,tMemberName);
 				break;
 
-			case 5: //Remove a team member from this project
+			case 5: //Manage a team member
 				tMemberID = UserInput.readString("Please enter the ID of the team member:");
-				showTeamMemberScreen(currentProject, tMemberID);
+
+				if(Controller.searchTeamMemberByIDInAList(currentProject.participants,tMemberID)<0) {
+					System.out.println("You can't edit a team member that doesn't exist, please retry with a valid ID\n"
+							+ "A tip: you can view the list of all team members participating in this projects by typing (2)");
+				}
+				else {
+					showTeamMemberScreen(currentProject, tMemberID);
+				}
+
+
 				break;
 
 			case 6: //Create a task in this project
@@ -258,13 +268,21 @@ public class Menus {
 				break;
 
 			case 8: //Search a task by ID in this project
-				String taskID = UserInput.readString("Please type the ID of the task you are looking for:\n>>");
+				taskID = UserInput.readString("Please type the ID of the task you are looking for:\n>>");
 				Controller.showTaskById(projectID,taskID);
 				break;
 
 			case 9:// Edit a task
-				String taSkID = UserInput.readString("Please enter the ID of the task you want to edit:\n>>> ");
-				showTaskScreen(currentProject,taSkID);
+				taskID = UserInput.readString("Please enter the ID of the task you want to edit:\n>>> ");
+
+				if(Controller.fetchTaskByIDInAList(currentProject.tasks,taskID)<0) {
+					System.out.println("You can't edit a task that doesn't exist, please retry with a valid ID\n"
+							+ "A tip: you can view the list of all tasks in this projects by typing (7)");
+				}
+				else {
+					showTaskScreen(currentProject,taskID);
+				}
+
 
 			case 10:// View the schedule of this project
 				System.out.println(" The schedule of the project"+currentProject.getTitle());
@@ -272,7 +290,11 @@ public class Menus {
 				break;
 
 			case 11: // Manage the schedule
-				showScheduleScreen(currentProject);
+				if (currentProject.schedule.isEmpty()) {
+					System.out.println("The schedule is empty for now!");
+				}else {
+					showScheduleScreen(currentProject);
+				}
 				break;
 
 			case 12: //Return to the Manager's Menu
@@ -496,7 +518,7 @@ public class Menus {
 				}else {
 					System.out.println("The team member "+currentTM.getName()+" will remain in this project!");	
 				}
-				
+
 				break;
 
 			case 6://Change the role of this team member
@@ -518,9 +540,9 @@ public class Menus {
 				}
 				Controller.changeTMRole(project, currentTM, role);
 				break;
-				
-		// Exit
-				
+
+				// Exit
+
 			case 7://Return to the Project's Menu
 				showProjectMenu(project.getID());
 				break;
@@ -545,15 +567,17 @@ public class Menus {
 		do {
 			System.out.println(">> MANAGEMENT OF THE SCHEDULE OF THE PROJECT "+project.getTitle()+":\n"
 					+ "\n < MEETINGS >\n"
+
+					+ "0. Display the schedule\n"
 					+ "1. Add a meeting to the schedule\n"
 					+ "2. Show only meetings\n"	
 					+ "3. Manage a meeting (edit/delete ...)\n"
-					
+
 					+ "\n < ACTIVITIES >\n"
 					+ "4. Add an activity to the schedule"
 					+ "5. Show only activities"
 					+ "6. Manage an activity (edit/delete ...)\n"
-					
+
 					+ "\n < EXIT THE MEETING MANAGEMENT SCREEN >\n"
 					+ "7. Return to the Project's Menu\n"	
 					+ "8. Return to the Manager's Menu\n"
@@ -561,6 +585,10 @@ public class Menus {
 
 			temp = UserInput.readInt("\nPlease type your choice here \n>>> : ");
 			switch (temp) {
+
+			case 0://Display the schedule
+				Controller.showSchedule(project);
+				break;
 
 			case 1: //Add a meeting to the schedule
 				/******************************************************************************************* HERE ********/
@@ -570,14 +598,17 @@ public class Menus {
 				String meetingID = UserInput.readString("ID of the meeting you want to manage:\n>>> ");
 				showMeetingScreen(meetingID);
 				break;
-				
+
 			case 3: //Add an activity to the schedule
 				System.err.println("To be implemented");
 				break;
 
 			case 4: //Manage an activity (edit/delete ...)
 				String activityID = UserInput.readString("ID of the activity you want to manage:\n>>> ");
-				showActivityScreen(activityID);
+				int indexOfActivity=Controller.searchActivityByIDInScheduleproject(project,activityID);
+				if(indexOfActivity>=0) {
+					showActivityScreen(activityID);
+				}
 				break;
 
 			case 5: //Return to the Manager's Menu
@@ -598,7 +629,7 @@ public class Menus {
 
 
 	}
-	
+
 
 	/*+ "13. Add a meeting to the schedule\n"
 					+ "14. Manage a meeting\n"// 
