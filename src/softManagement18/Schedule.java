@@ -14,15 +14,17 @@ abstract class Schedule {
     private String description;
     private int startTime;
     private int endTime;
+    private String meetingTitle;
 
 
     // date(int year, int month, int date)
     //public Schedule(String meetingId,Date meetingDate, String description,Time startTime,Time endTime)
-    public Schedule(String meetingId,Date meetingDate, String description,int startTime,int endTime) {
+    public Schedule(String meetingTitle, Date meetingDate, String description,int startTime,int endTime) {
         UUID uuid = UUID.randomUUID();
         this.ID = uuid.toString();
         this.ID = ID.substring(0, Math.min(ID.length(), 3));
 
+        this.setMeetingTitle(meetingTitle);
         this.date = meetingDate;
         this.description = description;
         this.startTime=startTime;
@@ -49,7 +51,15 @@ abstract class Schedule {
     }
 
 
-    public Date getDate() {
+    public String getMeetingTitle() {
+		return meetingTitle;
+	}
+
+	public void setMeetingTitle(String meetingTitle) {
+		this.meetingTitle = meetingTitle;
+	}
+
+	public Date getDate() {
         return date;
     }
 

@@ -8,7 +8,6 @@ import java.util.Date;
 public class Controller {
 
 	private static ArrayList<Project> listOfProjects = new ArrayList<Project>();
-	private ArrayList<Schedule> schedule = new ArrayList<Schedule>();
 	private static ArrayList<TeamMember> listOfEmployees = new ArrayList<TeamMember>();
 
 	/**Missing
@@ -165,11 +164,11 @@ public class Controller {
 
 	// 4. fetch project by ID in the list if found returns index, else -1
 	public static int fetchProjectById(String projectId) {
-		
+
 		//-2: empty list, -1: invalid ID, i: index
 		// check the list of projects (if empty)
 		if(listOfProjects.isEmpty()) {
-			
+
 			System.err.println("\nThe list of projects is empty! There is no registered project for the moment!\n");
 			return -2;
 		}else {
@@ -196,10 +195,10 @@ public class Controller {
 	// 5. fetch tasks by ID in the list of a specific project with a known index(if found returns index, else -1)
 	public static int fetchTaskByIDInAProject(String projectID,String taskID) {
 		if(!listOfProjects.isEmpty()) {
-			
+
 			for(Project currentProject:listOfProjects) {
 				if(projectID.equals(currentProject.getID())){
-			
+
 					return fetchTaskByIDInAList(currentProject.tasks,taskID);
 				}
 			}
@@ -271,13 +270,28 @@ public class Controller {
 	}
 
 	// 8.2. Search team member by ID participating in a task in a specific project
-	public void searchTeamMemberByIDInATaskOfaProject(String projectID,String taskID,String memberID) {
+	public static void searchTeamMemberByIDInATaskOfaProject(String projectID,String taskID,String memberID) {
 		if(!listOfProjects.isEmpty()) {
 			for(Project currentProject:listOfProjects) {
 				if(projectID.equals(currentProject.getID())){
 					for(Task currentTask:currentProject.tasks) {
 						if(taskID.equals(currentTask.getID())){
 							searchTeamMemberByIDInAList(currentTask.participants,memberID);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// 8.2. Search team member by ID participating in a task in a specific project
+	public static void searchTeamMemberByNameInATaskOfaProject(String projectID,String taskID,String memberName) {
+		if(!listOfProjects.isEmpty()) {
+			for(Project currentProject:listOfProjects) {
+				if(projectID.equals(currentProject.getID())){
+					for(Task currentTask:currentProject.tasks) {
+						if(taskID.equals(currentTask.getID())){
+							searchTeamMemberByNameInAList(currentTask.participants,memberName);
 						}
 					}
 				}
@@ -396,22 +410,22 @@ public class Controller {
 
 	//14. Remove a task from a team member's list (verified)
 	public static void removeTaskOfTeamMember(String projectId,String teamMemberID, String taskID) {int indexP=fetchProjectById(projectId);
-		if(indexP>=0){
-			System.out.println("Removing the task from team members' lists of tasks:");
-			int indexTM=searchTeamMemberByIDInAList(listOfProjects.get(indexP).participants,teamMemberID);
-			if(indexTM>=0) {
-				int indexT=fetchTaskByIDInAList(listOfProjects.get(indexP).participants.get(indexTM).tasks,taskID);
-				if(indexT>=0) {
-					listOfProjects.get(indexP).participants.get(indexTM).tasks.remove(indexT);
-					System.out.println("> The task has been succefully removed from the team member,"+listOfProjects.get(indexP).participants.get(indexTM).getName()+" list of tasks");
-				}
+	if(indexP>=0){
+		System.out.println("Removing the task from team members' lists of tasks:");
+		int indexTM=searchTeamMemberByIDInAList(listOfProjects.get(indexP).participants,teamMemberID);
+		if(indexTM>=0) {
+			int indexT=fetchTaskByIDInAList(listOfProjects.get(indexP).participants.get(indexTM).tasks,taskID);
+			if(indexT>=0) {
+				listOfProjects.get(indexP).participants.get(indexTM).tasks.remove(indexT);
+				System.out.println("> The task has been succefully removed from the team member,"+listOfProjects.get(indexP).participants.get(indexTM).getName()+" list of tasks");
 			}
 		}
+	}
 	}
 
 
 	//15. Remove a participant from a task's list (verified)
-	public void removeParticipantFromTask(String projectID,String teamMemberID, String taskID) {
+	public static void removeParticipantFromTask(String projectID,String teamMemberID, String taskID) {
 		int indexP=fetchProjectById(projectID);
 		if(indexP>=0) {
 			int indexT=fetchTaskByIDInAList(listOfProjects.get(indexP).tasks,taskID);
@@ -571,6 +585,85 @@ public class Controller {
 			System.out.println("No data to display! the List of projects is Empty!");
 		}
 	}	
+	//20. task object (project/task)
+	public static Task taskFromID(Project project,String taskID) {
+		int indexOftask=fetchTaskByIDInAList(project.tasks,taskID);
+		if (indexOftask>=0) {
+			return project.tasks.get(indexOftask);
+		}
+		else {
+			return null;
+		}
+	}
+
+	// change task priority
+	public static void changeTaskPriority(Project project, String taskID, String priority) {
+		Task currentTask=taskFromID(project,taskID);
+		String oldValue=currentTask.getPriority();
+		currentTask.setPriority(priority);
+		System.out.println("The priority of the task has successfully changed from: "+oldValue+", to: "+currentTask.getPriority());
+	}
+
+	// change task status
+	public static void changeTaskStatus(Project project, String taskID, String status) {
+		Task currentTask=taskFromID(project,taskID);
+		String oldStatus=currentTask.getStatus();
+		currentTask.setStatus(status);
+		System.out.println("The priority of the task has successfully changed from: "+oldStatus+", to: "+currentTask.getStatus());
+	}
+
+	public static void changeTaskdate(Project project, String taskID, Date startDate, Date endDate ) {
+		Task currentTask=taskFromID(project,taskID);
+		Date oldStartDate=currentTask.getStartDate();
+		Date oldEndDate=currentTask.getEndDate();
+
+		currentTask.setStartDate(startDate);
+		currentTask.setEndDate(endDate);
+		System.out.println("The start date of the task has successfully changed from: "+oldStartDate+", to: "+currentTask.getStartDate()+""
+				+ "\nThe end date of the task has successfully changed from: "+oldEndDate+", to: "+currentTask.getEndDate());
+	}
+
+
+	public static void showSchedule(Project project) {
+		if (project.schedule.isEmpty()) {
+			System.out.println("Nothing has been scheduled yet! No data to display!");
+		}
+
+		else{
+			for(Schedule event:project.schedule) {
+				System.out.println(event);
+			}
+		}
+	}
+
+	public static TeamMember teamMFromID(Project project,String teamMID) {
+		int indexOfteamM=searchTeamMemberByIDInAList(project.participants,teamMID);
+		if (indexOfteamM>=0) {
+			return project.participants.get(indexOfteamM);
+		}
+		else {
+			return null;
+		}
+	}
+
+	public static void displayTMInfo(Project project, TeamMember tm) {
+		int indexOfTM=searchTeamMemberByIDInAList(project.participants,tm.getID());
+		if (indexOfTM>=0) {
+			System.out.println(tm);
+			tm.displayListOfTasks();
+		}
+		else {
+		}
+	}
+
+	public void showParticipantsTaskProject(Task task, Project project) {
+		task.displayParticipants();
+
+	}
+
+
+
+
 }
 
 
@@ -593,6 +686,8 @@ public class Controller {
 		System.out.println("\t" + meetingDate + "\n " + meetingAbout + "\n");
 	}
  */
+
+
 
 //********* not yet verified
 /*
