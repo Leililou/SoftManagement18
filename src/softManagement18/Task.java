@@ -6,100 +6,106 @@ import java.util.UUID;
 
 public class Task {
 
-    //The task should have a name,a number, a description, a start date, end date and type of priority.
-    private String ID;
-    private String title;
-    private String description;
-    private Date startDate;
-    private Date endDate;
-    private String priority;
-    private String status = "to do!";
-    
-    ArrayList<TeamMember> participants = new ArrayList<TeamMember>();
+	//The task should have a name,a number, a description, a start date, end date and type of priority.
+	private String ID;
+	private String title;
+	private String description;
+	private Date startDate;
+	private Date endDate;
+	private String priority;
+	private String status = "to do!";
 
-    public Task(String title, String description, Date startDate, Date endDate, String priority, String status) {
+	ArrayList<TeamMember> participants = new ArrayList<TeamMember>();
 
-        UUID uuid = UUID.randomUUID();
-        this.ID = uuid.toString();
-        this.ID = ID.substring(0, Math.min(ID.length(), 5));
+	public Task(String title, String description, Date startDate, Date endDate, String priority, String status) {
 
-        this.title=title;
-        this.description=description;
-        this.startDate=startDate;
-        this.endDate=endDate;
-        this.priority=priority;
-        this.status=status;
-    }
+		UUID uuid = UUID.randomUUID();
+		this.ID = uuid.toString();
+		this.ID = ID.substring(0, Math.min(ID.length(), 5));
 
-    public String getStatus() {
-        return status;
-    }
+		this.title=title;
+		this.description=description;
+		this.startDate=startDate;
+		this.endDate=endDate;
+		this.priority=priority;
+		this.status=status;
+	}
 
-    String getID() {
-        return ID;
-    }
+	public String getStatus() {
+		return status;
+	}
 
-    String getTitle() {
-        return title;
-    }
+	String getID() {
+		return ID;
+	}
 
-    String getDescription() {
-        return description;
-    }
+	String getTitle() {
+		return title;
+	}
 
-    Date getStartDate() {
-        return startDate;
-    }
+	String getDescription() {
+		return description;
+	}
 
-    Date getEndDate() {
-        return endDate;
-    }
+	Date getStartDate() {
+		return startDate;
+	}
 
-    String getPriority() {
-        return priority;
-    }
+	Date getEndDate() {
+		return endDate;
+	}
 
-    void setTitle(String title) {
-        this.title = title;
-    }
+	String getPriority() {
+		return priority;
+	}
 
-    void setDescription(String description) {
-        this.description = description;
-    }
+	void setTitle(String title) {
+		this.title = title;
+	}
 
-    void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
+	void setDescription(String description) {
+		this.description = description;
+	}
 
-    void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
+	void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
 
-    //High, Medium, Low
-    void setPriority(String priority) {
-        this.priority = priority;
-    }
+	void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
 
-    //The status should be To do, Doing or Done.
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    
-    void displayParticipants() {
-		for(TeamMember currentParticipant:this.participants) {
-			System.out.println(currentParticipant);
+	//High, Medium, Low
+	void setPriority(String priority) {
+		this.priority = priority;
+	}
+
+	//The status should be To do, Doing or Done.
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	void displayParticipants() {
+		System.out.println("The team members participating in this task are :");
+		if(this.participants.isEmpty()) {
+			System.out.println("> This team member is not assigned yet to any task in this project!");
+		}
+		else {
+			for(TeamMember currentParticipant:this.participants) {
+				System.out.println(currentParticipant);
+			}
 		}
 	}
 
-    public String toString() {
-        return "\n>>> Task of ID: "+this.getID()+
-                "\n> Title: "+this.getTitle()+
-                "\n> Description: "+this.getDescription()+
-                "\n> Start date: "+this.getStartDate()+
-                "\n> End date: "+this.getEndDate()+
-                "\n> Type of priority: "+this.getPriority()+
-                "\n> Status: "+this.getStatus();
-    }
+	public String toString() {
+		return "\n>>> Task of ID: "+this.getID()+
+				"\n> Title: "+this.getTitle()+
+				"\n> Description: "+this.getDescription()+
+				"\n> Start date: "+this.getStartDate()+
+				"\n> End date: "+this.getEndDate()+
+				"\n> Type of priority: "+this.getPriority()+
+				"\n> Status: "+this.getStatus();
+	}
 
 
 }

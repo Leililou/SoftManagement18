@@ -41,6 +41,18 @@ public class TeamMember {
     public void setRole(String role) {
         this.role = role;
     }
+    
+    public void displayListOfTasks() {
+    	System.out.println("The tasks that "+this.getName()+" is assigned to:");
+    	if(this.tasks.isEmpty()) {
+			System.out.println("> This team member is not assigned yet to any task in this project!");
+		}
+		else {
+			for(Task currentTask:this.tasks) {
+				System.out.println("+ "+currentTask);
+			}
+		}
+    }
 
 
      public String toString() {

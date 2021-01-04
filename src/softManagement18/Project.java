@@ -13,6 +13,7 @@ public class Project {
 
 	ArrayList<TeamMember> participants = new ArrayList<TeamMember>();
 	ArrayList<Task> tasks = new ArrayList<Task>();
+	ArrayList<Schedule> schedule = new ArrayList<Schedule>();
 
 	public Project(String title, String description) {
 
