@@ -675,6 +675,27 @@ public class Controller {
 		tm.setRole(role);
 		System.out.println("The role of the task has successfully been changed from: "+oldRole+", to: "+tm.getRole());
 	}
+	
+	// Activity
+	
+	// 16. Search activity by ID in a list(To define)
+		public static int searchActivityByIDInScheduleproject(Project project,String activityID) {
+			//-2: empty list, -1: invalid ID, i: index
+			// check the list of products (if empty)
+			if (project.schedule.isEmpty()) {
+				System.out.println("\nThe schedule is empty! There is no registered data to display!\n");
+				return -2;
+			} else {
+				for (int i = 0; i < project.schedule.size(); i++) {
+					if ((activityID.equals(project.schedule.get(i).getID())) && (project.schedule.get(i) instanceof Activity) ) {
+						System.out.println(project.schedule.get(i));
+						return i;
+					}
+				}
+			}
+			System.out.println("Invalid ID! No such activity of ID: " + activityID + " found!");
+			return -1;
+		}
 
 
 
