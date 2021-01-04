@@ -517,7 +517,6 @@ public class Menus {
 					role=currentTM.getRole();
 				}
 				Controller.changeTMRole(project, currentTM, role);
-				//Controller
 				break;
 				
 		// Exit
@@ -545,31 +544,40 @@ public class Menus {
 		int temp=0;
 		do {
 			System.out.println(">> MANAGEMENT OF THE SCHEDULE OF THE PROJECT "+project.getTitle()+":\n"
+					+ "\n < MEETINGS >\n"
 					+ "1. Add a meeting to the schedule\n"
-					+ "2. 14. Manage a meeting (edit/delete ...)"
-					+ "3. Add an activity to the schedule"
-					+ "4. Manage an activity (edit/delete ...)\n"
-					+ "\n> EXIT THE MEETING MANAGEMENT SCREEN\n"
-					+ "5. Return to the Project's Menu"	
-					+ "6. Return to the Manager's Menu\n"
-					+ "7. Return to the Main Menu");
+					+ "2. Show only meetings\n"	
+					+ "3. Manage a meeting (edit/delete ...)\n"
+					
+					+ "\n < ACTIVITIES >\n"
+					+ "4. Add an activity to the schedule"
+					+ "5. Show only activities"
+					+ "6. Manage an activity (edit/delete ...)\n"
+					
+					+ "\n < EXIT THE MEETING MANAGEMENT SCREEN >\n"
+					+ "7. Return to the Project's Menu\n"	
+					+ "8. Return to the Manager's Menu\n"
+					+ "9. Return to the Main Menu");
 
-			temp = UserInput.readInt("\nPlease type your choice here >>>> :");
+			temp = UserInput.readInt("\nPlease type your choice here \n>>> : ");
 			switch (temp) {
 
-			case 1: //
+			case 1: //Add a meeting to the schedule
+				/******************************************************************************************* HERE ********/
+				break;
+
+			case 2: //Manage a meeting (edit/delete ...)
+				String meetingID = UserInput.readString("ID of the meeting you want to manage:\n>>> ");
+				showMeetingScreen(meetingID);
+				break;
+				
+			case 3: //Add an activity to the schedule
 				System.err.println("To be implemented");
 				break;
 
-			case 2: //
-				System.err.println("To be implemented");
-				break;
-			case 3: //
-				System.err.println("To be implemented");
-				break;
-
-			case 4: //
-				System.err.println("To be implemented");
+			case 4: //Manage an activity (edit/delete ...)
+				String activityID = UserInput.readString("ID of the activity you want to manage:\n>>> ");
+				showActivityScreen(activityID);
 				break;
 
 			case 5: //Return to the Manager's Menu
@@ -601,15 +609,16 @@ public class Menus {
 	//activity: conference, event, workshop, training,
 
 
-	public void showMeetingScreen(String meetingID) {
+	public static void showMeetingScreen(String meetingID) {
 		//String projectTitle = Controller.projectNameByID(projectID);
 		int temp=0;
 		do {
 			System.out.println(">> MANAGEMENT OF THE MEETING /*+projectTitle+*/+, of ID:"+meetingID+":\n"
 					+ "1. Add a participant to the meeting\n"
-					+ "2. Remove a particiant from the meeting"
-					+ "3. Change the description of the meeting"
-					+ "4. Delete this meeting from the schedule"
+					// show participants
+					+ "2. Remove a particiant from the meeting\n"
+					+ "3. Change the description of the meeting\n"
+					+ "4. Delete this meeting from the schedule\n"
 					+ "\n> EXIT THE MEETING MANAGEMENT SCREEN\n"
 					+ "5. Return to the Manager's Menu\n"
 					+ "6. Return to the Main Menu");
@@ -651,15 +660,16 @@ public class Menus {
 
 
 
-	public void showActivityScreen(String activityID) {
+	public static void showActivityScreen(String activityID) {
 		//String projectTitle = Controller.projectNameByID(projectID);
 		int temp=0;
 		do {
-			System.out.println(">> MANAGEMENT OF THE ACTIVITY /*+projectTitle+*/+, of ID:"+activityID+":\n"
+			System.out.println(">> MANAGEMENT OF THE ACTIVITY of ID:"+activityID+":\n"
 					+ "1. Add a participant to the activity\n"
-					+ "2. Remove a particiant from the activity"
-					+ "3. Change the description of the activity"
-					+ "4. Delete this activity from the schedule"
+					//show participants
+					+ "2. Remove a particiant from the activity\n"
+					+ "3. Change the description of the activity\n"
+					+ "4. Delete this activity from the schedule\n"
 					+ "\n> EXIT THE ACTIVITY MANAGEMENT SCREEN\n"
 					+ "5. Return to the Manager's Menu\n"
 					+ "6. Return to the Main Menu");
