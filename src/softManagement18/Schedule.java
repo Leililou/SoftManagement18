@@ -10,22 +10,20 @@ abstract class Schedule {
 
     private ArrayList<TeamMember> participants=new ArrayList<TeamMember>();
     private String ID;
-    private Date date;
     private String description;
-    private int startTime;
-    private int endTime;
+    private Date startTime;
+    private Date endTime;
     private String meetingTitle;
 
 
     // date(int year, int month, int date)
     //public Schedule(String meetingId,Date meetingDate, String description,Time startTime,Time endTime)
-    public Schedule(String meetingTitle, Date meetingDate, String description,int startTime,int endTime) {
+    public Schedule(String meetingTitle, String description,Date startTime,Date endTime) {
         UUID uuid = UUID.randomUUID();
         this.ID = uuid.toString();
         this.ID = ID.substring(0, Math.min(ID.length(), 3));
 
         this.setMeetingTitle(meetingTitle);
-        this.date = meetingDate;
         this.description = description;
         this.startTime=startTime;
         this.endTime=endTime;
@@ -36,12 +34,12 @@ abstract class Schedule {
         return participants;
     }
 
-    public int getStartTime() {
+    public Date getStartTime() {
         return startTime;
     }
 
 
-    public int getEndTime() {
+    public Date getEndTime() {
         return endTime;
     }
 
@@ -59,18 +57,9 @@ abstract class Schedule {
 		this.meetingTitle = meetingTitle;
 	}
 
-	public Date getDate() {
-        return date;
-    }
-
 
     public String getDescription() {
         return description;
-    }
-
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
 
@@ -78,12 +67,12 @@ abstract class Schedule {
         this.description = description;
     }
 
-    public void setStartTime(int startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
 
-    public void setEndTime(int endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 

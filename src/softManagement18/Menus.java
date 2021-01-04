@@ -401,7 +401,7 @@ public class Menus {
 						+ "1. To Do\n"
 						+ "2. In progress\n"
 						+ "3. On hold\n"
-						+ "3. Done\n"
+						+ "4. Done\n"
 						+ "Please type your choice here\n"
 						+ ">>> ");
 				String status="";
@@ -411,7 +411,7 @@ public class Menus {
 					status="In progress";
 				}else if(choice==3) {
 					status="On hold";
-				}else if(choice==3) {
+				}else if(choice==4) {
 					status="Done";
 				}else {
 					System.out.println("Invalid choice ! The status will remain the same");
@@ -600,10 +600,56 @@ public class Menus {
 				break;
 
 			case 3: //Add an activity to the schedule
-				System.err.println("To be implemented");
+				//Date(int year, int month, int date, int hrs, int min)
+				
+				//Project project,String activityTitle, Date meetingDate, 
+				//String description,int startTime,int endTime,String activityType
+				
+				//1 type:activity: conference, event, workshop, training,
+				String activityType="";
+				int choice = UserInput.readInt("Please choose the type from the list below: \n"
+						+ "1. Conference\n"
+						+ "2. Event\n"
+						+ "3. Workshop\n"
+						+ "4. Training\n"
+						+ "Please type your choice here\n"
+						+ ">>> ");
+				String status="";
+				if(choice==1) {
+					activityType="Conference";
+				}else if(choice==2) {
+					activityType="Event";
+				}else if(choice==3) {
+					activityType="Workshop";
+				}else if(choice==4) {
+					activityType="Training";
+				}else {
+					System.out.println("Invalid choice ! The type will be Activity by default");
+					activityType="Activity";
+				}
+
+				
+				String activityTitle = UserInput.readString("Please enter the title of the activity:\n>>> ");
+				String activityDescription = UserInput.readString("Please give a brief description aboutthe activity:\n>>> ");
+				System.out.println("Please enter the date : ");
+				int sYear = UserInput.readInt("> Year: ");
+				int sMonth= UserInput.readInt("> Month: ");
+				int sDate= UserInput.readInt("> Date: ");
+				System.out.println("Please enter the start time : ");
+				int sHour= UserInput.readInt("> Hour: ");
+				int sMin= UserInput.readInt("> Min: ");
+				
+				@SuppressWarnings("deprecation") Date startTime= new Date(sYear-1900,sMonth-1,sDate,sHour,sMin);
+				System.out.println("Please enter the end time :");
+				int eHour= UserInput.readInt("> Hour: ");
+				int eMin= UserInput.readInt("> Min: ");
+				@SuppressWarnings("deprecation") Date endTime= new Date(sYear-1900,sMonth-1,sDate,eHour,eMin);
+				
+				Controller.addActivity(project,activityTitle, activityDescription,startTime,endTime,activityType);
 				break;
 
 			case 4: //Manage an activity (edit/delete ...)
+				
 				String activityID = UserInput.readString("ID of the activity you want to manage:\n>>> ");
 				int indexOfActivity=Controller.searchActivityByIDInScheduleproject(project,activityID);
 				if(indexOfActivity>=0) {
