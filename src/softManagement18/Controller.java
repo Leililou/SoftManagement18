@@ -678,7 +678,7 @@ public class Controller {
 	
 	// Activity
 	
-	// 16. Search activity by ID in a list(To define)
+	// Search activity by ID in a list(To define)
 		public static int searchActivityByIDInScheduleproject(Project project,String activityID) {
 			//-2: empty list, -1: invalid ID, i: index
 			// check the list of products (if empty)
@@ -696,10 +696,17 @@ public class Controller {
 			System.out.println("Invalid ID! No such activity of ID: " + activityID + " found!");
 			return -1;
 		}
-
-
-
-
+		
+		
+		// Add an activity
+		public static void addActivity(Project project,String activityTitle, 
+				String description,Date startTime,Date endTime,String activityType) 
+		{
+			Activity activity= new Activity(activityTitle,description,startTime,endTime,activityType);
+			project.schedule.add(activity);	
+		}
+		
+		
 }
 
 
