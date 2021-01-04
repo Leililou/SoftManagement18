@@ -409,18 +409,19 @@ public class Controller {
 	}
 
 	//14. Remove a task from a team member's list (verified)
-	public static void removeTaskOfTeamMember(String projectId,String teamMemberID, String taskID) {int indexP=fetchProjectById(projectId);
-	if(indexP>=0){
-		System.out.println("Removing the task from team members' lists of tasks:");
-		int indexTM=searchTeamMemberByIDInAList(listOfProjects.get(indexP).participants,teamMemberID);
-		if(indexTM>=0) {
-			int indexT=fetchTaskByIDInAList(listOfProjects.get(indexP).participants.get(indexTM).tasks,taskID);
-			if(indexT>=0) {
-				listOfProjects.get(indexP).participants.get(indexTM).tasks.remove(indexT);
-				System.out.println("> The task has been succefully removed from the team member,"+listOfProjects.get(indexP).participants.get(indexTM).getName()+" list of tasks");
+	public static void removeTaskOfTeamMember(String projectId,String teamMemberID, String taskID) {
+		int indexP=fetchProjectById(projectId);
+		if(indexP>=0){
+			System.out.println("Removing the task from team member's list of tasks:");
+			int indexTM=searchTeamMemberByIDInAList(listOfProjects.get(indexP).participants,teamMemberID);
+			if(indexTM>=0) {
+				int indexT=fetchTaskByIDInAList(listOfProjects.get(indexP).participants.get(indexTM).tasks,taskID);
+				if(indexT>=0) {
+					listOfProjects.get(indexP).participants.get(indexTM).tasks.remove(indexT);
+					System.out.println("> The task has been succefully removed from the team member,"+listOfProjects.get(indexP).participants.get(indexTM).getName()+" list of tasks");
+				}
 			}
 		}
-	}
 	}
 
 
@@ -652,13 +653,27 @@ public class Controller {
 			System.out.println(tm);
 			tm.displayListOfTasks();
 		}
-		else {
-		}
 	}
 
-	public void showParticipantsTaskProject(Task task, Project project) {
+	public static void showParticipantsTaskProject(Project project,Task task) {
 		task.displayParticipants();
+	}
 
+	public static void showTasksTMProject(Project project,TeamMember tM) {
+		tM.displayListOfTasks();
+	}
+
+	public static void displayTaskInfoTM(Project project,TeamMember TM, String taskID) {
+		int indexTask=fetchTaskByIDInAList(TM.tasks,taskID);
+		if (indexTask>=0) {
+			System.out.println(TM.tasks.get(indexTask));
+		}
+	}
+	
+	public static void changeTMRole(Project project, TeamMember tm, String role) {
+		String oldRole=tm.getRole();
+		tm.setRole(role);
+		System.out.println("The role of the task has successfully been changed from: "+oldRole+", to: "+tm.getRole());
 	}
 
 
