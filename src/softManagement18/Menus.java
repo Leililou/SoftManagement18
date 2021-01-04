@@ -576,7 +576,7 @@ public class Menus {
 					+ "\n < ACTIVITIES >\n"
 					+ "4. Add an activity to the schedule"
 					+ "5. Show only activities"
-					+ "6. Manage an activity (edit/delete ...)\n"
+					+ "6. Manage an activity (assign participants, edit/delete ...)\n"
 
 					+ "\n < EXIT THE MEETING MANAGEMENT SCREEN >\n"
 					+ "7. Return to the Project's Menu\n"	
@@ -600,12 +600,8 @@ public class Menus {
 				break;
 
 			case 3: //Add an activity to the schedule
+				
 				//Date(int year, int month, int date, int hrs, int min)
-				
-				//Project project,String activityTitle, Date meetingDate, 
-				//String description,int startTime,int endTime,String activityType
-				
-				//1 type:activity: conference, event, workshop, training,
 				String activityType="";
 				int choice = UserInput.readInt("Please choose the type from the list below: \n"
 						+ "1. Conference\n"
@@ -648,7 +644,7 @@ public class Menus {
 				Controller.addActivity(project,activityTitle, activityDescription,startTime,endTime,activityType);
 				break;
 
-			case 4: //Manage an activity (edit/delete ...)
+			case 4: //Manage an activity (edit/delete assign participants...)
 				
 				String activityID = UserInput.readString("ID of the activity you want to manage:\n>>> ");
 				int indexOfActivity=Controller.searchActivityByIDInScheduleproject(project,activityID);
