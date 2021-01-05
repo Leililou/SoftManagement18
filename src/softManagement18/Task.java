@@ -88,7 +88,7 @@ public class Task {
 	void displayParticipants() {
 		System.out.println("The team members participating in this task are :");
 		if(this.participants.isEmpty()) {
-			System.out.println("> This team member is not assigned yet to any task in this project!");
+			System.out.println("> No team member is assigned yet to this task in this project!");
 		}
 		else {
 			for(TeamMember currentParticipant:this.participants) {
