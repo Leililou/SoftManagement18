@@ -743,6 +743,14 @@ public class Controller {
 			activity.listOfParticipants();
 		}
 		
+		public static void setDateActivity(Project project, Activity activity,Date startTime, Date endTime) {
+			activity.setStartTime(startTime);
+			activity.setEndTime(endTime);
+			System.out.println("The new date is:\n"
+					+ "> Start Time:"+ activity.getStartTime()+"\n"
+					+ "> End Time: "+activity.getEndTime()+"\n"); 
+		}
+		
 		
 }
 
