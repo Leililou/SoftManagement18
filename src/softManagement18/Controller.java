@@ -759,6 +759,14 @@ public class Controller {
 			
 		}
 		
+		public void displayOnlyActivities(Project project) {
+			for(Schedule currentevent:project.schedule) {
+				if (currentevent instanceof Activity) {
+					System.out.println(currentevent);
+				}
+			}
+		}
+		
 		
 }
 

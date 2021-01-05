@@ -44,12 +44,10 @@ public class Menus {
 	}
 
 
-
 	// 2. Show the Manager's Menu
 	private static void showManagerMenu() {
 		int temp=0;
 		do {
-
 
 			System.out.println("\n Manager Screen - Type one of the options below"
 					+ "\n\n> EMPLOYEE:\n"
@@ -178,8 +176,6 @@ public class Menus {
 					+ "10. View the schedule\n"
 					+ "11. Manage the schedule\n"
 
-
-
 					+ "\n> EXIT THE PROJECT MANAGEMENT SCREEN\n"
 					+ "12. Return to the Manager's Menu\n"
 					+ "13. Return to the Main Menu");
@@ -225,7 +221,6 @@ public class Menus {
 				else {
 					showTeamMemberScreen(currentProject, tMemberID);
 				}
-
 
 				break;
 
@@ -438,6 +433,8 @@ public class Menus {
 
 			case 9:// Delete this task"
 				Controller.removeTaskOfAProject(currentProject.getID(), taskID);
+				System.out.println("\nReturning to the Project' screen ...");
+				showProjectMenu(currentProject.getID());
 				break;
 
 			case 10://Return to the Project's Menu
@@ -515,6 +512,7 @@ public class Menus {
 				String option = UserInput.readString("Are you sure of removing this team member from this project? (yes/no):\n>>> ");
 				if(option.equals("yes")||option.equals("Yes")) {
 					Controller.removeParticipantFromProject(project,currentTM.getID());
+					showProjectMenu(project.getID());
 				}else {
 					System.out.println("The team member "+currentTM.getName()+" will remain in this project!");	
 				}
@@ -594,12 +592,16 @@ public class Menus {
 				/******************************************************************************************* HERE ********/
 				break;
 
-			case 2: //Manage a meeting (edit/delete ...)
+			case 2://Show only meetings
+				break;
+				
+			case 3: //Manage a meeting (edit/delete ...)
 				String meetingID = UserInput.readString("ID of the meeting you want to manage:\n>>> ");
 				showMeetingScreen(meetingID);
 				break;
-
-			case 3: //Add an activity to the schedule
+				
+			
+			case 4: //Add an activity to the schedule
 
 				//Date(int year, int month, int date, int hrs, int min)
 				String activityType="";
@@ -641,8 +643,10 @@ public class Menus {
 
 				Controller.addActivity(project,activityTitle, activityDescription,startTime,endTime,activityType);
 				break;
-
-			case 4: //Manage an activity (edit/delete assign participants...)
+				
+			case 5://Show only activities
+				Controller.displayOnlyActivities(project);
+			case 6: //Manage an activity (edit/delete assign participants...)
 
 				String activityID = UserInput.readString("ID of the activity you want to manage:\n>>> ");
 				int indexOfActivity=Controller.searchActivityByIDInScheduleproject(project,activityID);
@@ -653,37 +657,26 @@ public class Menus {
 
 				// Exit
 
-			case 5://Return to the Project's Menu
+			case 7://Return to the Project's Menu
 				showProjectMenu(project.getID());
 				break;
 
-			case 6: //Return to the Manager's Menu
+			case 8: //Return to the Manager's Menu
 				showManagerMenu();
 				break;
 
-			case 7: //Return to Main screen
+			case 9: //Return to Main screen
 				System.out.println("Returning to the Main Screen...");
 				showMainMenu();
 				break;
 
 			default:
-				System.out.println("Invalid choice ! please type only numbers from  to 7 :");
+				System.out.println("Invalid choice ! please type only numbers from 0 to 9 :");
 				return;
 			}	
 
-		}while(temp!=7);
-
-
+		}while(temp!=9);
 	}
-
-
-	/*+ "13. Add a meeting to the schedule\n"
-					+ "14. Manage a meeting\n"// 
-
-					+ "15. Add an activity to the schedule\n"
-					+ "13. Manage an activity\n"*/
-
-	//activity: conference, event, workshop, training,
 
 
 	public static void showMeetingScreen(String meetingID) {
