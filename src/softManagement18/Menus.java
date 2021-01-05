@@ -610,7 +610,6 @@ public class Menus {
 						+ "4. Training\n"
 						+ "Please type your choice here\n"
 						+ ">>> ");
-				String status="";
 				if(choice==1) {
 					activityType="Conference";
 				}else if(choice==2) {
@@ -624,7 +623,6 @@ public class Menus {
 					activityType="Activity";
 				}
 
-				
 				String activityTitle = UserInput.readString("Please enter the title of the activity:\n>>> ");
 				String activityDescription = UserInput.readString("Please give a brief description aboutthe activity:\n>>> ");
 				System.out.println("Please enter the date : ");
@@ -649,25 +647,31 @@ public class Menus {
 				String activityID = UserInput.readString("ID of the activity you want to manage:\n>>> ");
 				int indexOfActivity=Controller.searchActivityByIDInScheduleproject(project,activityID);
 				if(indexOfActivity>=0) {
-					showActivityScreen(activityID);
+					showActivityScreen(project,activityID);
 				}
 				break;
 
-			case 5: //Return to the Manager's Menu
+				// Exit
+
+			case 5://Return to the Project's Menu
+				showProjectMenu(project.getID());
+				break;
+				
+			case 6: //Return to the Manager's Menu
 				showManagerMenu();
 				break;
 
-			case 6: //Return to Main screen
+			case 7: //Return to Main screen
 				System.out.println("Returning to the Main Screen...");
 				showMainMenu();
 				break;
 
 			default:
-				System.out.println("Invalid choice ! please type only numbers from 1 to 6 :");
+				System.out.println("Invalid choice ! please type only numbers from  to 7 :");
 				return;
 			}	
 
-		}while(temp!=6);
+		}while(temp!=7);
 
 
 	}
@@ -733,8 +737,9 @@ public class Menus {
 
 
 
-	public static void showActivityScreen(String activityID) {
+	public static void showActivityScreen(Project project,String activityID) {
 		//String projectTitle = Controller.projectNameByID(projectID);
+		Activity currentActivity=Controller.activityFromID(project,activityID);
 		int temp=0;
 		do {
 			System.out.println(">> MANAGEMENT OF THE ACTIVITY of ID:"+activityID+":\n"
@@ -751,7 +756,8 @@ public class Menus {
 			switch (temp) {
 
 			case 1: //
-				System.err.println("To be implemented");
+				String participantID = UserInput.readString("ID of the participant you want to add:\n>>> ");
+				Controller.addParticipantActivity(participantID,project, currentActivity);77
 				break;
 
 			case 2: //

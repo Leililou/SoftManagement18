@@ -704,6 +704,40 @@ public class Controller {
 		{
 			Activity activity= new Activity(activityTitle,description,startTime,endTime,activityType);
 			project.schedule.add(activity);	
+			System.out.println("The Activity " + activity.getMeetingTitle() + " has been successfully added to the schedule!");
+		}
+		
+		// add participant to project/schedule/activity
+		public static void addParticipantActivity(String participantID,Project project, Activity activity) {
+			TeamMember participant=teamMFromID(project,participantID);
+			if(participant!= null) {
+				activity.participants.add(participant);
+				System.out.println("The participant"+participant.getName()+"has been successfuly added to the activity"+activity.getType()+".");
+			}		
+		}
+		
+		// Activity object from ID
+		public static Activity activityFromID(Project project,String activityID) {
+			int indexOfactivity=searchActivityByIDInScheduleproject(project,activityID);
+			if (indexOfactivity>=0) {
+				return (Activity) project.schedule.get(indexOfactivity);
+			}
+			else {
+				return null;
+			}
+		}
+		
+		//remove a participant from an activity
+		
+		public void removeParticipantActivity(Project project, Activity activity, String participantId) {
+			int indexParticipantActivity=searchTeamMemberByIDInAList(activity.participants,participantId);
+			if(indexParticipantActivity>=0) {
+				String nameP= activity.participants.get(indexParticipantActivity).getName();
+				String idP= activity.participants.get(indexParticipantActivity).getID();
+				activity.participants.remove(indexParticipantActivity);
+				System.out.println("The participant: "+nameP+" of ID:"+idP+" has bees successfull removed from the "+activity.getType()+".");
+				
+			}
 		}
 		
 		
