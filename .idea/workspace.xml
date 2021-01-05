@@ -19,10 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20ee9812-773f-47ec-abf7-3dc4361d3d5c" name="Default Changelist" comment="I created an exception class to handle invalid input">
+    <list default="true" id="20ee9812-773f-47ec-abf7-3dc4361d3d5c" name="Default Changelist" comment="Moved the userinput for schedulemeeting to menus">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/softManagement18/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/softManagement18/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/softManagement18/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/softManagement18/Task.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,24 +52,11 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.google.cloudcode.ide_session_index" value="20201219_0001" />
+    <property name="com.google.cloudcode.ide_session_index" value="20210103_0000" />
     <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
-  </component>
-  <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -94,6 +80,7 @@
       <workItem from="1607786091470" duration="1307000" />
       <workItem from="1608404937665" duration="34000" />
       <workItem from="1608406458219" duration="4184000" />
+      <workItem from="1609634576138" duration="986000" />
     </task>
     <task id="LOCAL-00001" summary="jdspgo">
       <created>1606471488284</created>
@@ -157,18 +144,18 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="349" y="160" key="IDE.errors.dialog/0.0.1536.834@0.0.1536.834" timestamp="1606471831318" />
-    <state x="277" y="0" key="SettingsEditor" timestamp="1607702076887">
+    <state x="277" y="0" key="SettingsEditor" timestamp="1609634730205">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="277" y="0" key="SettingsEditor/0.0.1536.834@0.0.1536.834" timestamp="1607702076887" />
+    <state x="277" y="0" key="SettingsEditor/0.0.1536.834@0.0.1536.834" timestamp="1609634730205" />
     <state x="361" y="150" key="Vcs.Push.Dialog.v2" timestamp="1607456425191">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="361" y="150" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1607456425191" />
-    <state x="583" y="331" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1608551763355">
+    <state x="583" y="331" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1609636557322">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="583" y="331" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.834@0.0.1536.834" timestamp="1608551763355" />
+    <state x="583" y="331" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.834@0.0.1536.834" timestamp="1609636557322" />
     <state x="521" y="130" key="git4idea.branch.GitSmartOperationDialog" timestamp="1606471294476">
       <screen x="0" y="0" width="1536" height="834" />
     </state>

@@ -23,25 +23,30 @@ public class Menus {
 
 			choice = UserInput.readString("Please type your choice here >>>> : ");
 
-			switch (choice) {
-			case "M":
-				System.out.println("\nYou have selected the Manager's Menu ");
-				showManagerMenu();
-				break;
-			case "T":
-				System.out.println("\nYou have selected the team member's Menu ");
-				//showTeamMemberMenu();
-				break;
-			case "X":
-				System.out.println("\n Thank you for using SoftManagement18 System, see you next time!");
-				System.exit(0);
-				break;
-			default:
-				System.out.println("Only type M, T or X !");
-				break;
-			}	
-		} while(! choice.equals("X") );
-	}
+            switch (choice) {
+                case "M" -> {
+                    String managerPassword = "1234";
+                    String inputPassword = UserInput.readString("Enter password");
+                    if (!inputPassword.equals(managerPassword)) {
+                        System.out.print("Invalid password! ");
+                        showMainMenu();
+                    } else { showManagerMenu();}
+                }
+
+                case "T" ->
+                        System.out.println("\nYou have selected the team member's Menu ");
+                //showTeamMemberMenu();
+                case "X" -> {
+                    System.out.println("\n Thank you for using SoftManagement18 System, see you next time!");
+                    System.exit(0);
+                }
+
+                default ->
+                        System.out.println("Only type M, T or X !");
+
+            }
+        } while(! choice.equals("X") );
+    }
 
 
 
@@ -72,7 +77,7 @@ public class Menus {
 			case 1: //Add a team member
 
 				System.out.println("\nAdding an employee to the system ...");
-				System.out.println("\nPlease type the employee’s:");
+				System.out.println("\nPlease type the employeeï¿½s:");
 				String name = UserInput.readString("Name :");
 				String roleName="";
 				//do {
@@ -103,7 +108,7 @@ public class Menus {
 				break;
 
 			case 3: //Remove an employee from the system
-				String employeeID=UserInput.readString("Please type the employee’s ID to remove from the system :\n>>>");
+				String employeeID=UserInput.readString("Please type the employeeï¿½s ID to remove from the system :\n>>>");
 				Controller.removeEmployee(employeeID);
 				break;
 
@@ -111,7 +116,7 @@ public class Menus {
 			case 4: //Add a new project
 
 				System.out.println("\nAdding a new project ...");
-				System.out.println("\nPlease type the project’s:");
+				System.out.println("\nPlease type the projectï¿½s:");
 				String title = UserInput.readString("Title :");
 				String description = UserInput.readString("Description :");
 				Controller.addProject(title,description);
@@ -195,7 +200,7 @@ public class Menus {
 				System.out.println("\nThe list of all employees registered in the system :");
 				Controller.displayTheListOfTeamMembers();
 				System.out.println("\n");
-				tMemberID = UserInput.readString("\nPlease pick the team member’s ID that you want to assign to this project from the list above:\n>> ");
+				tMemberID = UserInput.readString("\nPlease pick the team memberï¿½s ID that you want to assign to this project from the list above:\n>> ");
 				Controller.assignTeamMemberToProject(projectID,tMemberID);
 				break;
 
