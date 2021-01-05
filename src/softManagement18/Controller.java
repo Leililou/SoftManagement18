@@ -728,8 +728,7 @@ public class Controller {
 		}
 		
 		//remove a participant from an activity
-		
-		public void removeParticipantActivity(Project project, Activity activity, String participantId) {
+		public static void removeParticipantActivity(Project project, Activity activity, String participantId) {
 			int indexParticipantActivity=searchTeamMemberByIDInAList(activity.participants,participantId);
 			if(indexParticipantActivity>=0) {
 				String nameP= activity.participants.get(indexParticipantActivity).getName();
@@ -738,6 +737,10 @@ public class Controller {
 				System.out.println("The participant: "+nameP+" of ID:"+idP+" has bees successfull removed from the "+activity.getType()+".");
 				
 			}
+		}
+		
+		public static void displayParticipantsActivity(Project project, Activity activity ) {
+			activity.listOfParticipants();
 		}
 		
 		

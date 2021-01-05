@@ -753,15 +753,23 @@ public class Menus {
 					+ "6. Return to the Main Menu");
 
 			temp = UserInput.readInt("\nPlease type your choice here >>>> :");
+			String participantID="";
 			switch (temp) {
-
+			
+			case 0:// Display participants in activity
+				System.out.println("<The list of participants in this "+currentActivity.getType()+">");
+				Controller.displayParticipantsActivity(project, currentActivity);
+			
 			case 1: //
-				String participantID = UserInput.readString("ID of the participant you want to add:\n>>> ");
-				Controller.addParticipantActivity(participantID,project, currentActivity);77
+				Controller.showParticipantsProject(project.getID());
+				participantID = UserInput.readString("ID of the participant you want to add to this activity (Please select from the list above):\n>>> ");
+				Controller.addParticipantActivity(participantID,project, currentActivity);
 				break;
+				
 
 			case 2: //
-				System.err.println("To be implemented");
+				participantID = UserInput.readString("ID of the participant you want to remove:\n>>> ");
+				Controller.removeParticipantActivity(project, currentActivity, participantID);
 				break;
 			case 3: //
 				System.err.println("To be implemented");
