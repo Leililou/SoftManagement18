@@ -137,7 +137,7 @@ public class Controller {
 	public static void addProject(String title, String description) {
 		Project project=new Project(title, description);
 		listOfProjects.add(project);
-		System.out.println("\n> Project :"+project.getTitle()+" of ID:"+project.getID()+", has been successfully added!");
+		System.out.println("\n> Project: "+project.getTitle()+" of ID: "+project.getID()+", has been successfully added!");
 	}
 
 
@@ -225,7 +225,7 @@ public class Controller {
 	public static void addEmployee(String name,String role) {
 		TeamMember member = new TeamMember(name, role);
 		listOfEmployees.add(member);
-		System.out.println("The employee:"+member.getName()+ " has been successfully added as a " + member.getRole() + ". \n");
+		System.out.println("The employee: "+member.getName()+ ", has been successfully added as a " + member.getRole() + ". \n");
 	}
 
 	// 7. Remove a task from a project (and from all participants' lists) (verified)
@@ -365,7 +365,7 @@ public class Controller {
 					Task currentTask=currentProject.tasks.get(indexTask);
 					currentParticipant.tasks.add(currentTask);
 					currentTask.participants.add(currentParticipant);
-					System.out.println("Connection of "+currentParticipant.getName()+" to the task:"+currentTask.getTitle()+" Of the project:"+currentProject.getTitle()+" has been sucessful");
+					System.out.println("Connection of "+currentParticipant.getName()+" to the task: "+currentTask.getTitle()+" Of the project: "+currentProject.getTitle()+" has been sucessful.");
 				}
 			}
 		}
@@ -380,12 +380,6 @@ public class Controller {
 		if(indexProject>=0) {
 			int indexTask=fetchTaskByIDInAList(listOfProjects.get(indexProject).tasks,taskID);
 			if(indexTask>=0) {
-
-				//System.out.println(listOfProjects.get(indexProject).tasks.get(indexTask));
-				/*for(Task currentParticipant:listOfProjects.get(indexProject).tasks.get(indexTask).participants){
-				 * System.out.println(currentParticipant);
-				 * }
-				 */
 				listOfProjects.get(indexProject).tasks.get(indexTask).displayParticipants();
 			}
 		}
@@ -432,8 +426,10 @@ public class Controller {
 			int indexT=fetchTaskByIDInAList(listOfProjects.get(indexP).tasks,taskID);
 			if(indexT>=0) {
 				int indexTM=searchTeamMemberByIDInAList(listOfProjects.get(indexP).tasks.get(indexT).participants,teamMemberID);
+				if (indexTM>=0) {
 				listOfProjects.get(indexP).tasks.get(indexT).participants.remove(indexTM);
 				System.out.println("> The team member of ID: "+teamMemberID+" is no longer assigned to the task of ID: "+taskID);
+				}
 			}
 		}
 	}
@@ -673,7 +669,7 @@ public class Controller {
 	public static void changeTMRole(Project project, TeamMember tm, String role) {
 		String oldRole=tm.getRole();
 		tm.setRole(role);
-		System.out.println("The role of the task has successfully been changed from: "+oldRole+", to: "+tm.getRole());
+		System.out.println("The role of the team member "+tm.getName()+" has been successfully changed from: "+oldRole+", to: "+tm.getRole());
 	}
 	
 	// Activity
@@ -712,7 +708,7 @@ public class Controller {
 			TeamMember participant=teamMFromID(project,participantID);
 			if(participant!= null) {
 				activity.participants.add(participant);
-				System.out.println("The participant"+participant.getName()+"has been successfuly added to the activity"+activity.getType()+".");
+				System.out.println("The participant "+participant.getName()+" has been successfuly added to the activity "+activity.getType()+".");
 			}		
 		}
 		
@@ -759,11 +755,16 @@ public class Controller {
 			
 		}
 		
-		public void displayOnlyActivities(Project project) {
+		public static void displayOnlyActivities(Project project){
+			int counter=0;
 			for(Schedule currentevent:project.schedule) {
 				if (currentevent instanceof Activity) {
+					counter++;
 					System.out.println(currentevent);
 				}
+			}
+			if (counter==0) {
+				System.out.println("There is no registered activity for the moment! ");
 			}
 		}
 		

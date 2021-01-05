@@ -19,7 +19,7 @@ public class Menus {
 			System.out.println("\n Please specify your role by entering one of the options given: \n "
 					+ "1. Enter \"M\" for Manager\n "
 					+ "2. " + "Enter \"T\" for Team member \n "
-					+ "3. Enter \"X\" to exit the system");
+					+ "3. Enter \"X\" to exit the system\n");
 
 			choice = UserInput.readString("Please type your choice here >>>> : ");
 
@@ -60,7 +60,7 @@ public class Menus {
 					+ "6. Display information about a specific project (using ID)\n"
 					+ "\n7. Manage a project\n"
 					+ "\n> EXIT THE SCREEN\n"
-					+ "8. Return to Main Menu");
+					+ "8. Return to Main Menu\n");
 
 			temp = UserInput.readInt("\nPlease type your choice below: "
 					+ "\n>>> ");
@@ -71,14 +71,14 @@ public class Menus {
 
 				System.out.println("\nAdding an employee to the system ...");
 				System.out.println("\nPlease type the employee’s:");
-				String name = UserInput.readString("Name :");
+				String name = UserInput.readString("Name : ");
 				String roleName="";
 				//do {
 				int role = UserInput.readInt("\nPlease choose a role from the list below:\n"
 						+ "> 1. Product Owner\n"
 						+ "> 2. Scrum Master\n"
 						+ "> 3. Developer\n"
-						+ "Note: If no choice has been made from the aption above, the employee \nwill be added as a Developer by default.\n\nPlease type your choice here >>>> :");
+						+ "Note: If no choice has been made from the aption above, the employee \nwill be added as a Developer by default.\n\nPlease type your choice below \n>>> ");
 
 				if(role==1) {
 					roleName="Product Owner";
@@ -110,8 +110,8 @@ public class Menus {
 
 				System.out.println("\nAdding a new project ...");
 				System.out.println("\nPlease type the project’s:");
-				String title = UserInput.readString("Title :");
-				String description = UserInput.readString("Description :");
+				String title = UserInput.readString("Title : ");
+				String description = UserInput.readString("Description : ");
 				Controller.addProject(title,description);
 				break;
 
@@ -122,11 +122,11 @@ public class Menus {
 				break;
 
 			case 6: //Display information about a specific project (using ID)
-				String projectID = UserInput.readString("Please enter the ID of the project you want to get information about :");
+				String projectID = UserInput.readString("Please enter the ID of the project you want to get information about: \nID: ");
 				Controller.showProjectInfo(projectID);
 				break;
 			case 7: //Manage a project
-				String projectId = UserInput.readString("Please enter the ID of the project you want to manage: ");
+				String projectId = UserInput.readString("Please enter the ID of the project you want to manage: \nID :");
 				if(Controller.fetchProjectById(projectId)<0) {
 					System.out.println("You can't manage a project that doesn't exist, please retry with a valid ID\n"
 							+ "A tip: you can view the list of the existing projects by typing (5)");
@@ -277,19 +277,20 @@ public class Menus {
 				else {
 					showTaskScreen(currentProject,taskID);
 				}
+				break;
 
 
 			case 10:// View the schedule of this project
-				System.out.println(" The schedule of the project"+currentProject.getTitle());
+				System.out.println(" < The schedule of the project "+currentProject.getTitle()+" >");
 				Controller.showSchedule(currentProject);
 				break;
 
 			case 11: // Manage the schedule
-				if (currentProject.schedule.isEmpty()) {
+				/*if (currentProject.schedule.isEmpty()) {
 					System.out.println("The schedule is empty for now!");
-				}else {
+				}else {*/
 					showScheduleScreen(currentProject);
-				}
+				//}
 				break;
 
 			case 12: //Return to the Manager's Menu
@@ -320,19 +321,21 @@ public class Menus {
 		int temp=0;
 		do {
 			System.out.println("\n>> MANAGEMENT SCREEN OF THE TASK: "+currentTask.getTitle()+" of ID ("+taskID+"):\n"
-					+"\n> TEAM MEMBERS\n"
+					+"\n< TEAM MEMBERS >\n"
 					+ "0. Display information about this task\n"
 					+ "1. Assign a team member to this task\n"
 					+ "2. View all team members assigned to this task\n"
 					+ "3. Search a team member by ID in this task\n"
 					+ "4. Search a team member by name in this task\n"
 					+ "5. Remove a team member from this task\n"
+					
+					+"\n< TASK >\n"
 					+ "6. Change the priority of this task\n"
 					+ "7. Change the status of this task\n"
 					+ "8. Change the start and end dates of the task\n"
-					+ "9. Delete this task"
+					+ "9. Delete this task\n"
 
-					+ "\n> EXIT THE TASK MANAGEMENT SCREEN\n"
+					+ "\n< EXIT THE TASK MANAGEMENT SCREEN >\n"
 					+ "10. Return to the Project's Menu\n"
 					+ "11. Return to the Manager's Menu\n"
 					+ "12. Return to the Main Menu"
@@ -343,10 +346,11 @@ public class Menus {
 			switch (temp) {
 			case 0:
 				Controller.showTaskById(currentProject.getID(),taskID);
+				break;
 
 			case 1://Assign a team member to this task
 				System.out.println("Please enter the corresponding information to assign a team member to this task:\n");
-				String memberId = UserInput.readString("ID of the team member:\n>>");
+				String memberId = UserInput.readString("ID of the team member:\n>>> ");
 				Controller.connectTaskToTeamMember(memberId,currentProject.getID(), taskID);
 				break;
 
@@ -486,10 +490,11 @@ public class Menus {
 
 			case 0:
 				Controller.displayTMInfo(project, currentTM);
-
+				break;
+				
 			case 1://Assign a team member to this task
-				System.out.println("Please enter the corresponding information to assign a team member to this task:\n");
-				taskID = UserInput.readString("ID of the task:\n>>");
+				System.out.println("Please enter the corresponding information to assign a team member to a task:\n");
+				taskID = UserInput.readString("ID of the task >> ");
 				Controller.connectTaskToTeamMember(currentTM.getID(),project.getID(), taskID);
 				break;
 
@@ -508,7 +513,7 @@ public class Menus {
 				Controller.removeTaskOfTeamMember(project.getID(),currentTM.getID(), taskID);
 				break;
 
-			case 5: //Remove a team member from this project
+			case 6: //Remove a team member from this project
 				String option = UserInput.readString("Are you sure of removing this team member from this project? (yes/no):\n>>> ");
 				if(option.equals("yes")||option.equals("Yes")) {
 					Controller.removeParticipantFromProject(project,currentTM.getID());
@@ -519,7 +524,7 @@ public class Menus {
 
 				break;
 
-			case 6://Change the role of this team member
+			case 5://Change the role of this team member
 				choice = UserInput.readInt("Please choose the role of the team member from the list below: \n"
 						+ "(The role will remain the same if none of the options blow is chosen)\n"
 						+ "1. Product Owner\n"
@@ -563,17 +568,18 @@ public class Menus {
 	public static void showScheduleScreen(Project project) {
 		int temp=0;
 		do {
-			System.out.println(">> MANAGEMENT OF THE SCHEDULE OF THE PROJECT "+project.getTitle()+":\n"
-					+ "\n < MEETINGS >\n"
+			System.out.println("\n>> MANAGEMENT OF THE SCHEDULE OF THE PROJECT "+project.getTitle()+":\n"
+					
 
-					+ "0. Display the schedule\n"
+					+ "\n0. Display the schedule\n"
+					+ "\n < MEETINGS >\n"
 					+ "1. Add a meeting to the schedule\n"
 					+ "2. Show only meetings\n"	
 					+ "3. Manage a meeting (edit/delete ...)\n"
 
 					+ "\n < ACTIVITIES >\n"
-					+ "4. Add an activity to the schedule"
-					+ "5. Show only activities"
+					+ "4. Add an activity to the schedule\n"
+					+ "5. Show only activities\n"
 					+ "6. Manage an activity (assign participants, edit/delete ...)\n"
 
 					+ "\n < EXIT THE MEETING MANAGEMENT SCREEN >\n"
@@ -589,23 +595,24 @@ public class Menus {
 				break;
 
 			case 1: //Add a meeting to the schedule
+
 				/******************************************************************************************* HERE ********/
 				break;
 
 			case 2://Show only meetings
 				break;
-				
+
 			case 3: //Manage a meeting (edit/delete ...)
 				String meetingID = UserInput.readString("ID of the meeting you want to manage:\n>>> ");
 				showMeetingScreen(meetingID);
 				break;
-				
-			
+
+
 			case 4: //Add an activity to the schedule
 
 				//Date(int year, int month, int date, int hrs, int min)
 				String activityType="";
-				int choice = UserInput.readInt("Please choose the type from the list below: \n"
+				int choice = UserInput.readInt("Please choose the type of activity from the list below: \n"
 						+ "1. Conference\n"
 						+ "2. Event\n"
 						+ "3. Workshop\n"
@@ -626,7 +633,7 @@ public class Menus {
 				}
 
 				String activityTitle = UserInput.readString("Please enter the title of the activity:\n>>> ");
-				String activityDescription = UserInput.readString("Please give a brief description aboutthe activity:\n>>> ");
+				String activityDescription = UserInput.readString("Please give a brief description about the activity:\n>>> ");
 				System.out.println("Please enter the date : ");
 				int sYear = UserInput.readInt("> Year: ");
 				int sMonth= UserInput.readInt("> Month: ");
@@ -643,11 +650,12 @@ public class Menus {
 
 				Controller.addActivity(project,activityTitle, activityDescription,startTime,endTime,activityType);
 				break;
-				
+
 			case 5://Show only activities
 				Controller.displayOnlyActivities(project);
-			case 6: //Manage an activity (edit/delete assign participants...)
+				break;
 
+			case 6: //Manage an activity (edit/delete assign participants...)
 				String activityID = UserInput.readString("ID of the activity you want to manage:\n>>> ");
 				int indexOfActivity=Controller.searchActivityByIDInScheduleproject(project,activityID);
 				if(indexOfActivity>=0) {
@@ -735,7 +743,7 @@ public class Menus {
 		Activity currentActivity=Controller.activityFromID(project,activityID);
 		int temp=0;
 		do {
-			System.out.println(">> MANAGEMENT OF THE "+currentActivity.getType()+" of ID:"+activityID+":\n"
+			System.out.println("\n>> MANAGEMENT OF THE "+currentActivity.getType()+" of ID:"+activityID+"\n\n"
 					+ "0. Display the list of participants in this activity\n"
 					+ "1. Add a participant to the activity\n"
 					+ "2. Remove a particiant from the activity\n"
@@ -759,6 +767,7 @@ public class Menus {
 
 			case 1: //Add a participant to the activity
 				Controller.showParticipantsProject(project.getID());
+				
 				participantID = UserInput.readString("ID of the participant you want to add to this activity (Please select from the list above):\n>>> ");
 				Controller.addParticipantActivity(participantID,project, currentActivity);
 				break;
@@ -791,17 +800,17 @@ public class Menus {
 				System.out.println(" Returning to the schedule screen ...");
 				showScheduleScreen(project);
 				break;
-				
+
 				// Exit
 
 			case 5://Return to the schedule screen
 				showScheduleScreen(project);
 				break;
-				
+
 			case 6://Return to the Project's Menu
 				showProjectMenu(project.getID());
 				break;
-				
+
 			case 7: //Return to the Manager's Menu
 				showManagerMenu();
 				break;
