@@ -751,6 +751,14 @@ public class Controller {
 					+ "> End Time: "+activity.getEndTime()+"\n"); 
 		}
 		
+		public static void removeActivity(Project project, Activity activity) {
+			String activityType= activity.getType();
+			String activityID= activity.getID();
+			project.schedule.remove(activity);
+			System.out.println("The "+activityType+" of ID:"+activityID+" has bees successfully removed from the schedule.");
+			
+		}
+		
 		
 }
 
