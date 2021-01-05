@@ -554,11 +554,11 @@ public class Menus {
 				break;
 
 			default:
-				System.out.println("Invalid choice ! please type only numbers from 0 to 11 :");
+				System.out.println("Invalid choice ! please type only numbers from 0 to 9 :");
 				return;
 			}	
 
-		}while(temp!=11);
+		}while(temp!=9);
 	}
 
 
@@ -600,7 +600,7 @@ public class Menus {
 				break;
 
 			case 3: //Add an activity to the schedule
-				
+
 				//Date(int year, int month, int date, int hrs, int min)
 				String activityType="";
 				int choice = UserInput.readInt("Please choose the type from the list below: \n"
@@ -632,18 +632,18 @@ public class Menus {
 				System.out.println("Please enter the start time : ");
 				int sHour= UserInput.readInt("> Hour: ");
 				int sMin= UserInput.readInt("> Min: ");
-				
+
 				@SuppressWarnings("deprecation") Date startTime= new Date(sYear-1900,sMonth-1,sDate,sHour,sMin);
 				System.out.println("Please enter the end time :");
 				int eHour= UserInput.readInt("> Hour: ");
 				int eMin= UserInput.readInt("> Min: ");
 				@SuppressWarnings("deprecation") Date endTime= new Date(sYear-1900,sMonth-1,sDate,eHour,eMin);
-				
+
 				Controller.addActivity(project,activityTitle, activityDescription,startTime,endTime,activityType);
 				break;
 
 			case 4: //Manage an activity (edit/delete assign participants...)
-				
+
 				String activityID = UserInput.readString("ID of the activity you want to manage:\n>>> ");
 				int indexOfActivity=Controller.searchActivityByIDInScheduleproject(project,activityID);
 				if(indexOfActivity>=0) {
@@ -656,7 +656,7 @@ public class Menus {
 			case 5://Return to the Project's Menu
 				showProjectMenu(project.getID());
 				break;
-				
+
 			case 6: //Return to the Manager's Menu
 				showManagerMenu();
 				break;
@@ -742,41 +742,40 @@ public class Menus {
 		Activity currentActivity=Controller.activityFromID(project,activityID);
 		int temp=0;
 		do {
-			System.out.println(">> MANAGEMENT OF THE ACTIVITY of ID:"+activityID+":\n"
+			System.out.println(">> MANAGEMENT OF THE "+currentActivity.getType()+" of ID:"+activityID+":\n"
 					+ "0. Display the list of participants in this activity\n"
 					+ "1. Add a participant to the activity\n"
 					+ "2. Remove a particiant from the activity\n"
-					+ "3. Delete this activity from the schedule\n"
-					+ "4. Change the date and time \n"
+					+ "3. Change the date and time \n"
+					+ "4. Delete this activity from the schedule\n"
+
 					+ "\n> EXIT THE ACTIVITY MANAGEMENT SCREEN\n"
-					+ "5. Return to the Project's Menu\n"	
-					+ "6. Return to the Manager's Menu\n"
-					+ "7. Return to the Main Menu");
+					+ "5. Return to the schedule screen\n"
+					+ "6. Return to the Project's Menu\n"	
+					+ "7. Return to the Manager's Menu\n"
+					+ "8. Return to the Main Menu");
 
 			temp = UserInput.readInt("\nPlease type your choice here >>>> :");
 			String participantID="";
 			switch (temp) {
-			
+
 			case 0:// Display participants in activity
 				System.out.println("<The list of participants in this "+currentActivity.getType()+">");
 				Controller.displayParticipantsActivity(project, currentActivity);
-			
+				break;
+
 			case 1: //Add a participant to the activity
 				Controller.showParticipantsProject(project.getID());
 				participantID = UserInput.readString("ID of the participant you want to add to this activity (Please select from the list above):\n>>> ");
 				Controller.addParticipantActivity(participantID,project, currentActivity);
 				break;
-				
+
 			case 2: //Remove a particiant from the activity
 				participantID = UserInput.readString("ID of the participant you want to remove:\n>>> ");
 				Controller.removeParticipantActivity(project, currentActivity, participantID);
 				break;
-				
-			case 3: //Delete this activity from the schedule
-				System.err.println("To be implemented");
-				break;
 
-			case 4: //Change the date and time
+			case 3: //Change the date and time
 				System.out.println("Please enter the new date and time: ");
 				int sYear = UserInput.readInt("> Year: ");
 				int sMonth= UserInput.readInt("> Month: ");
@@ -784,34 +783,47 @@ public class Menus {
 				System.out.println("Please enter the new start time : ");
 				int sHour= UserInput.readInt("> Hour: ");
 				int sMin= UserInput.readInt("> Min: ");
-				
+
 				@SuppressWarnings("deprecation") Date startTime= new Date(sYear-1900,sMonth-1,sDate,sHour,sMin);
 				System.out.println("Please enter the new end time :");
 				int eHour= UserInput.readInt("> Hour: ");
 				int eMin= UserInput.readInt("> Min: ");
 				@SuppressWarnings("deprecation") Date endTime= new Date(sYear-1900,sMonth-1,sDate,eHour,eMin);
-				
+
 				Controller.setDateActivity(project, currentActivity,startTime, endTime);
-				
 				break;
 
+			case 4: //Delete this activity from the schedule
+				Controller.removeActivity(project, currentActivity);
+				System.out.println(" Returning to the schedule screen ...");
+				showScheduleScreen(project);
+				break;
 				
-				//*****
-			case 5: //Return to the Manager's Menu
+				// Exit
+
+			case 5://Return to the schedule screen
+				showScheduleScreen(project);
+				break;
+				
+			case 6://Return to the Project's Menu
+				showProjectMenu(project.getID());
+				break;
+				
+			case 7: //Return to the Manager's Menu
 				showManagerMenu();
 				break;
 
-			case 6: //Return to Main screen
+			case 8: //Return to Main screen
 				System.out.println("Returning to the Main Screen...");
 				showMainMenu();
 				break;
 
 			default:
-				System.out.println("Invalid choice ! please type only numbers from 1 to 6 :");
+				System.out.println("Invalid choice ! please type only numbers from 0 to 8 :");
 				return;
 			}	
 
-		}while(temp!=6);
+		}while(temp!=8);
 	}
 
 
