@@ -8,7 +8,7 @@ import java.util.UUID;
 abstract class Schedule {
 
 
-    private ArrayList<TeamMember> participants=new ArrayList<TeamMember>();
+    ArrayList<TeamMember> participants=new ArrayList<TeamMember>();
     private String ID;
     private String description;
     private Date startTime;
