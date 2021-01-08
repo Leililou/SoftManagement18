@@ -427,8 +427,8 @@ public class Controller {
 			if(indexT>=0) {
 				int indexTM=searchTeamMemberByIDInAList(listOfProjects.get(indexP).tasks.get(indexT).participants,teamMemberID);
 				if (indexTM>=0) {
-				listOfProjects.get(indexP).tasks.get(indexT).participants.remove(indexTM);
-				System.out.println("> The team member of ID: "+teamMemberID+" is no longer assigned to the task of ID: "+taskID);
+					listOfProjects.get(indexP).tasks.get(indexT).participants.remove(indexTM);
+					System.out.println("> The team member of ID: "+teamMemberID+" is no longer assigned to the task of ID: "+taskID);
 				}
 			}
 		}
@@ -665,110 +665,134 @@ public class Controller {
 			System.out.println(TM.tasks.get(indexTask));
 		}
 	}
-	
+
 	public static void changeTMRole(Project project, TeamMember tm, String role) {
 		String oldRole=tm.getRole();
 		tm.setRole(role);
 		System.out.println("The role of the team member "+tm.getName()+" has been successfully changed from: "+oldRole+", to: "+tm.getRole());
 	}
-	
+
 	// Activity
-	
+
 	// Search activity by ID in a list(To define)
-		public static int searchActivityByIDInScheduleproject(Project project,String activityID) {
-			//-2: empty list, -1: invalid ID, i: index
-			// check the list of products (if empty)
-			if (project.schedule.isEmpty()) {
-				System.out.println("\nThe schedule is empty! There is no registered data to display!\n");
-				return -2;
-			} else {
-				for (int i = 0; i < project.schedule.size(); i++) {
-					if ((activityID.equals(project.schedule.get(i).getID())) && (project.schedule.get(i) instanceof Activity) ) {
-						System.out.println(project.schedule.get(i));
-						return i;
-					}
+	public static int searchActivityByIDInScheduleproject(Project project,String activityID) {
+		//-2: empty list, -1: invalid ID, i: index
+		// check the list of products (if empty)
+		if (project.schedule.isEmpty()) {
+			System.out.println("\nThe schedule is empty! There is no registered data to display!\n");
+			return -2;
+		} else {
+			for (int i = 0; i < project.schedule.size(); i++) {
+				if ((activityID.equals(project.schedule.get(i).getID())) && (project.schedule.get(i) instanceof Activity) ) {
+					System.out.println(project.schedule.get(i));
+					return i;
 				}
 			}
-			System.out.println("Invalid ID! No such activity of ID: " + activityID + " found!");
-			return -1;
 		}
-		
-		
-		// Add an activity
-		public static void addActivity(Project project,String activityTitle, 
-				String description,Date startTime,Date endTime,String activityType) 
-		{
-			Activity activity= new Activity(activityTitle,description,startTime,endTime,activityType);
-			project.schedule.add(activity);	
-			System.out.println("The Activity " + activity.getMeetingTitle() + " has been successfully added to the schedule!");
+		System.out.println("Invalid ID! No such activity of ID: " + activityID + " found!");
+		return -1;
+	}
+
+
+	// Add an activity
+	public static void addActivity(Project project,String activityTitle, 
+			String description,Date startTime,Date endTime,String activityType) 
+	{
+		Activity activity= new Activity(activityTitle,description,startTime,endTime,activityType);
+		project.schedule.add(activity);	
+		System.out.println("The Activity " + activity.getMeetingTitle() + " has been successfully added to the schedule!");
+	}
+
+	// add participant to project/schedule/activity
+	public static void addParticipantActivity(String participantID,Project project, Activity activity) {
+		TeamMember participant=teamMFromID(project,participantID);
+		if(participant!= null) {
+			activity.participants.add(participant);
+			System.out.println("The participant "+participant.getName()+" has been successfuly added to the activity "+activity.getType()+".");
+		}		
+	}
+
+	// Activity object from ID
+	public static Activity activityFromID(Project project,String activityID) {
+		int indexOfactivity=searchActivityByIDInScheduleproject(project,activityID);
+		if (indexOfactivity>=0) {
+			return (Activity) project.schedule.get(indexOfactivity);
 		}
-		
-		// add participant to project/schedule/activity
-		public static void addParticipantActivity(String participantID,Project project, Activity activity) {
-			TeamMember participant=teamMFromID(project,participantID);
-			if(participant!= null) {
-				activity.participants.add(participant);
-				System.out.println("The participant "+participant.getName()+" has been successfuly added to the activity "+activity.getType()+".");
-			}		
+		else {
+			return null;
 		}
-		
-		// Activity object from ID
-		public static Activity activityFromID(Project project,String activityID) {
-			int indexOfactivity=searchActivityByIDInScheduleproject(project,activityID);
-			if (indexOfactivity>=0) {
-				return (Activity) project.schedule.get(indexOfactivity);
+	}
+
+	//remove a participant from an activity
+	public static void removeParticipantActivity(Project project, Activity activity, String participantId) {
+		int indexParticipantActivity=searchTeamMemberByIDInAList(activity.participants,participantId);
+		if(indexParticipantActivity>=0) {
+			String nameP= activity.participants.get(indexParticipantActivity).getName();
+			String idP= activity.participants.get(indexParticipantActivity).getID();
+			activity.participants.remove(indexParticipantActivity);
+			System.out.println("The participant: "+nameP+" of ID:"+idP+" has bees successfull removed from the "+activity.getType()+".");
+
+		}
+	}
+
+	public static void displayParticipantsActivity(Project project, Activity activity ) {
+		activity.listOfParticipants();
+	}
+
+	public static void setDateActivity(Project project, Activity activity,Date startTime, Date endTime) {
+		activity.setStartTime(startTime);
+		activity.setEndTime(endTime);
+		System.out.println("The new date is:\n"
+				+ "> Start Time:"+ activity.getStartTime()+"\n"
+				+ "> End Time: "+activity.getEndTime()+"\n"); 
+	}
+
+	public static void removeActivity(Project project, Activity activity) {
+		String activityType= activity.getType();
+		String activityID= activity.getID();
+		project.schedule.remove(activity);
+		System.out.println("The "+activityType+" of ID:"+activityID+" has bees successfully removed from the schedule.");
+
+	}
+
+	public static void displayOnlyActivities(Project project){
+		int counter=0;
+		for(Schedule currentevent:project.schedule) {
+			if (currentevent instanceof Activity) {
+				counter++;
+				System.out.println(currentevent);
 			}
-			else {
-				return null;
-			}
 		}
-		
-		//remove a participant from an activity
-		public static void removeParticipantActivity(Project project, Activity activity, String participantId) {
-			int indexParticipantActivity=searchTeamMemberByIDInAList(activity.participants,participantId);
-			if(indexParticipantActivity>=0) {
-				String nameP= activity.participants.get(indexParticipantActivity).getName();
-				String idP= activity.participants.get(indexParticipantActivity).getID();
-				activity.participants.remove(indexParticipantActivity);
-				System.out.println("The participant: "+nameP+" of ID:"+idP+" has bees successfull removed from the "+activity.getType()+".");
-				
-			}
+		if (counter==0) {
+			System.out.println("There is no registered activity for the moment! ");
 		}
-		
-		public static void displayParticipantsActivity(Project project, Activity activity ) {
-			activity.listOfParticipants();
-		}
-		
-		public static void setDateActivity(Project project, Activity activity,Date startTime, Date endTime) {
-			activity.setStartTime(startTime);
-			activity.setEndTime(endTime);
-			System.out.println("The new date is:\n"
-					+ "> Start Time:"+ activity.getStartTime()+"\n"
-					+ "> End Time: "+activity.getEndTime()+"\n"); 
-		}
-		
-		public static void removeActivity(Project project, Activity activity) {
-			String activityType= activity.getType();
-			String activityID= activity.getID();
-			project.schedule.remove(activity);
-			System.out.println("The "+activityType+" of ID:"+activityID+" has bees successfully removed from the schedule.");
-			
-		}
-		
-		public static void displayOnlyActivities(Project project){
-			int counter=0;
-			for(Schedule currentevent:project.schedule) {
-				if (currentevent instanceof Activity) {
-					counter++;
-					System.out.println(currentevent);
+	}
+
+	// Meeting
+
+	// Search meeting by ID in a list(To define)
+	public static int searchMeetingByIDInScheduleproject(Project project,String meetingID) {
+		//-2: empty list, -1: invalid ID, i: index
+		// check the list of products (if empty)
+		if (project.schedule.isEmpty()) {
+			System.out.println("\nThe schedule is empty! There is no registered data to display!\n");
+			return -2;
+		} else {
+			for (int i = 0; i < project.schedule.size(); i++) {
+				if ((meetingID.equals(project.schedule.get(i).getID())) && (project.schedule.get(i) instanceof Meeting) ) {
+					System.out.println(project.schedule.get(i));
+					return i;
 				}
 			}
-			if (counter==0) {
-				System.out.println("There is no registered activity for the moment! ");
-			}
 		}
-		
-		
+		System.out.println("Invalid ID! No such Meeting of ID: " + meetingID + " found!");
+		return -1;
+	}
+	
+	
+
+
+
 }
 
 
