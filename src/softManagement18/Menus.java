@@ -744,8 +744,10 @@ public class Menus {
 				Controller.setDateMeeting(project, currentMeeting,startTime, endTime);
 				break;
 
-			case 4: //
-				System.err.println("To be implemented");
+			case 4: //Delete this meeting from the schedule
+				Controller.removeMeeting(project, currentMeeting);
+				System.out.println(" Returning to the schedule screen ...");
+				showScheduleScreen(project);
 				break;
 
 			case 5: //Return to the Manager's Menu
