@@ -788,25 +788,26 @@ public class Controller {
 		System.out.println("Invalid ID! No such Meeting of ID: " + meetingID + " found!");
 		return -1;
 	}
-
+	
 	// Add an meeting
-	public static void addMeeting(Project project,String meetingTitle, 
-			String description,Date startTime,Date endTime) 
-	{
-		Meeting meeting= new Meeting(meetingTitle,description,startTime,endTime);
-		project.schedule.add(meeting);	
-		System.out.println("The meeting :" + meeting.getMeetingTitle() + " has been successfully added to the schedule!");
-	}
+		public static void addMeeting(Project project,String meetingTitle, 
+				String description,Date startTime,Date endTime) 
+		{
+			Meeting meeting= new Meeting(meetingTitle,description,startTime,endTime);
+			project.schedule.add(meeting);	
+			System.out.println("The meeting :" + meeting.getMeetingTitle() + " has been successfully added to the schedule!");
+		}
 
-	// add participant to project/schedule/meeting
-	public static void addParticipantMeeting(String participantID,Project project, Meeting meeting) {
-		TeamMember participant=teamMFromID(project,participantID);
-		if(participant!= null) {
-			meeting.participants.add(participant);
-			System.out.println("The participant "+participant.getName()+" has been successfuly added to the meeting .");
-		}		
-	}
+		// add participant to project/schedule/meeting
+		public static void addParticipantMeeting(String participantID,Project project, Meeting meeting) {
+			TeamMember participant=teamMFromID(project,participantID);
+			if(participant!= null) {
+				meeting.participants.add(participant);
+				System.out.println("The participant "+participant.getName()+" has been successfuly added to the meeting .");
+			}		
+		}
 
 
 
 }
+
