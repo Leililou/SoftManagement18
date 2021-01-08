@@ -818,6 +818,17 @@ public class Controller {
 		}
 	}
 
+	//remove a participant from an meeting
+	public static void removeParticipantMeeting(Project project, Meeting meeting, String participantId) {
+		int indexParticipantMeeting=searchTeamMemberByIDInAList(meeting.participants,participantId);
+		if(indexParticipantMeeting>=0) {
+			String nameP= meeting.participants.get(indexParticipantMeeting).getName();
+			String idP= meeting.participants.get(indexParticipantMeeting).getID();
+			meeting.participants.remove(indexParticipantMeeting);
+			System.out.println("The participant: "+nameP+" of ID:"+idP+" has bees successfull removed from the meeting");
+		}
+	}
+
 
 
 
