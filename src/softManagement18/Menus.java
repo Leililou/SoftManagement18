@@ -717,14 +717,15 @@ public class Menus {
 				
 			case 1: //Add a participant to the meeting
 				Controller.showParticipantsProject(project.getID());
-				participantID = UserInput.readString("ID of the participant you want to add to this activity (Please select from the list above):\n>>> ");
+				participantID = UserInput.readString("ID of the participant you want to add to this meeting (Please select from the list above):\n>>> ");
 				Controller.addParticipantMeeting(participantID,project, currentMeeting);
 				break;
 
-
-			case 2: //
-				System.err.println("To be implemented");
+			case 2: //Remove a particiant from the meeting
+				participantID = UserInput.readString("ID of the participant you want to remove:\n>>> ");
+				Controller.removeParticipantMeeting(project, currentMeeting, participantID);
 				break;
+				
 			case 3: //
 				System.err.println("To be implemented");
 				break;
