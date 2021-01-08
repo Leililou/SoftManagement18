@@ -835,7 +835,7 @@ public class Controller {
 	}
 	
 	// remove meeting
-	public void removeMeeting(Project project, Meeting meeting) {
+	public static void removeMeeting(Project project, Meeting meeting) {
 		String meetingID= meeting.getID();
 		project.schedule.remove(meeting);
 		System.out.println("The meeting of ID:"+meetingID+" has bees successfully removed from the schedule.");
