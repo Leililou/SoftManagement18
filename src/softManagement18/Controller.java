@@ -819,7 +819,7 @@ public class Controller {
 	}
 
 	//remove a participant from an meeting
-	public void removeParticipantMeeting(Project project, Meeting meeting, String participantId) {
+	public static void removeParticipantMeeting(Project project, Meeting meeting, String participantId) {
 		int indexParticipantMeeting=searchTeamMemberByIDInAList(meeting.participants,participantId);
 		if(indexParticipantMeeting>=0) {
 			String nameP= meeting.participants.get(indexParticipantMeeting).getName();
