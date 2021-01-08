@@ -289,7 +289,7 @@ public class Menus {
 				/*if (currentProject.schedule.isEmpty()) {
 					System.out.println("The schedule is empty for now!");
 				}else {*/
-					showScheduleScreen(currentProject);
+				showScheduleScreen(currentProject);
 				//}
 				break;
 
@@ -328,7 +328,7 @@ public class Menus {
 					+ "3. Search a team member by ID in this task\n"
 					+ "4. Search a team member by name in this task\n"
 					+ "5. Remove a team member from this task\n"
-					
+
 					+"\n< TASK >\n"
 					+ "6. Change the priority of this task\n"
 					+ "7. Change the status of this task\n"
@@ -491,7 +491,7 @@ public class Menus {
 			case 0:
 				Controller.displayTMInfo(project, currentTM);
 				break;
-				
+
 			case 1://Assign a team member to this task
 				System.out.println("Please enter the corresponding information to assign a team member to a task:\n");
 				taskID = UserInput.readString("ID of the task >> ");
@@ -569,7 +569,7 @@ public class Menus {
 		int temp=0;
 		do {
 			System.out.println("\n>> MANAGEMENT OF THE SCHEDULE OF THE PROJECT "+project.getTitle()+":\n"
-					
+
 
 					+ "\n0. Display the schedule\n"
 					+ "\n < MEETINGS >\n"
@@ -709,12 +709,12 @@ public class Menus {
 			temp = UserInput.readInt("\nPlease type your choice here >>>> :");
 			String participantID="";
 			switch (temp) {
-			
+
 			case 0:// Display participants in meeting
 				System.out.println("<The list of participants in this meeting");
 				Controller.displayParticipantsMeeting(project, currentMeeting);
 				break;
-				
+
 			case 1: //Add a participant to the meeting
 				Controller.showParticipantsProject(project.getID());
 				participantID = UserInput.readString("ID of the participant you want to add to this meeting (Please select from the list above):\n>>> ");
@@ -725,7 +725,7 @@ public class Menus {
 				participantID = UserInput.readString("ID of the participant you want to remove:\n>>> ");
 				Controller.removeParticipantMeeting(project, currentMeeting, participantID);
 				break;
-				
+
 			case 3: //Change the date and time
 				System.out.println("Please enter the new date and time: ");
 				int sYear = UserInput.readInt("> Year: ");
@@ -750,21 +750,31 @@ public class Menus {
 				showScheduleScreen(project);
 				break;
 
-			case 5: //Return to the Manager's Menu
+				// Exit
+
+			case 5://Return to the schedule screen
+				showScheduleScreen(project);
+				break;
+
+			case 6://Return to the Project's Menu
+				showProjectMenu(project.getID());
+				break;
+
+			case 7: //Return to the Manager's Menu
 				showManagerMenu();
 				break;
 
-			case 6: //Return to Main screen
+			case 8: //Return to Main screen
 				System.out.println("Returning to the Main Screen...");
 				showMainMenu();
 				break;
 
 			default:
-				System.out.println("Invalid choice ! please type only numbers from 1 to 6 :");
+				System.out.println("Invalid choice ! please type only numbers from 0 to 8 :");
 				return;
 			}	
 
-		}while(temp!=6);
+		}while(temp!=8);
 	}
 
 
@@ -798,7 +808,7 @@ public class Menus {
 
 			case 1: //Add a participant to the activity
 				Controller.showParticipantsProject(project.getID());
-				
+
 				participantID = UserInput.readString("ID of the participant you want to add to this activity (Please select from the list above):\n>>> ");
 				Controller.addParticipantActivity(participantID,project, currentActivity);
 				break;
