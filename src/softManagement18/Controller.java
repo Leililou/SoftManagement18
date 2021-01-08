@@ -7,8 +7,8 @@ import java.util.Date;
 
 public class Controller {
 
-	private static ArrayList<Project> listOfProjects = new ArrayList<Project>();
-	private static ArrayList<TeamMember> listOfEmployees = new ArrayList<TeamMember>();
+	static ArrayList<Project> listOfProjects = new ArrayList<Project>();
+	static ArrayList<TeamMember> listOfEmployees = new ArrayList<TeamMember>();
 
 	/**Missing
 	 * remove team member #2.2 Anwar (it's not adabted to the code (classes and names of lists))
@@ -771,7 +771,7 @@ public class Controller {
 	// Meeting
 
 	// Search meeting by ID in a list(To define)
-	public int searchMeetingByIDInScheduleproject(Project project,String meetingID) {
+	public static int searchMeetingByIDInScheduleproject(Project project,String meetingID) {
 		//-2: empty list, -1: invalid ID, i: index
 		// check the list of products (if empty)
 		if (project.schedule.isEmpty()) {
@@ -790,7 +790,7 @@ public class Controller {
 	}
 
 	// Add an meeting
-	public void addMeeting(Project project,String meetingTitle, 
+	public static void addMeeting(Project project,String meetingTitle, 
 			String description,Date startTime,Date endTime) 
 	{
 		Meeting meeting= new Meeting(meetingTitle,description,startTime,endTime);
@@ -808,7 +808,7 @@ public class Controller {
 	}
 
 	// Meeting object from ID
-	public Meeting meetingFromID(Project project,String meetingID) {
+	public static Meeting meetingFromID(Project project,String meetingID) {
 		int indexOfMeeting=searchMeetingByIDInScheduleproject(project,meetingID);
 		if (indexOfMeeting>=0) {
 			return (Meeting) project.schedule.get(indexOfMeeting);
@@ -843,7 +843,7 @@ public class Controller {
 	}
 	
 	// display meetings
-	public void displayOnlyMeetings(Project project){
+	public static void displayOnlyMeetings(Project project){
 		int counter=0;
 		for(Schedule currentevent:project.schedule) {
 			if (currentevent instanceof Meeting) {

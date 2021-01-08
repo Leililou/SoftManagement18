@@ -54,13 +54,15 @@ public class Menus {
 					+ "1. Add an employee to the system\n"
 					+ "2. View all employees registered in the system\n"
 					+ "3. Remove an employee from the system\n"
+					+ "4. Import employees from the data base\n"
 					+ "\n> PROJECT:\n"
-					+ "4. Add a new project\n"
-					+ "5. Display the list of registered projects\n"
-					+ "6. Display information about a specific project (using ID)\n"
-					+ "\n7. Manage a project\n"
+					+ "5. Add a new project\n"
+					+ "6. Import projects from the data base\n"
+					+ "7. Display the list of registered projects\n"
+					+ "8. Display information about a specific project (using ID)\n"
+					+ "\n9. Manage a project\n"
 					+ "\n> EXIT THE SCREEN\n"
-					+ "8. Return to Main Menu\n");
+					+ "10. Return to Main Menu\n");
 
 			temp = UserInput.readInt("\nPlease type your choice below: "
 					+ "\n>>> ");
@@ -105,8 +107,12 @@ public class Menus {
 				Controller.removeEmployee(employeeID);
 				break;
 
-				//addProject(String title, String description)
-			case 4: //Add a new project
+			case 4://Import employees from the data base
+				Import.ImportEmployees();
+				break;
+
+
+			case 5: //Add a new project
 
 				System.out.println("\nAdding a new project ...");
 				System.out.println("\nPlease type the project’s:");
@@ -115,17 +121,25 @@ public class Menus {
 				Controller.addProject(title,description);
 				break;
 
-			case 5: //Display the list of registered projects
+			case 6: //Import projects from the data base
+				Import.importProjects();
+				
+				break;
+
+			case 7: //Display the list of registered projects
 				System.out.println("\nThe list of all registered projects in the system :");
 				Controller.displayListOfProjects();
 				System.out.println("\n");
 				break;
 
-			case 6: //Display information about a specific project (using ID)
+
+
+			case 8: //Display information about a specific project (using ID)
 				String projectID = UserInput.readString("Please enter the ID of the project you want to get information about: \nID: ");
 				Controller.showProjectInfo(projectID);
 				break;
-			case 7: //Manage a project
+
+			case 9: //Manage a project
 				String projectId = UserInput.readString("Please enter the ID of the project you want to manage: \nID :");
 				if(Controller.fetchProjectById(projectId)<0) {
 					System.out.println("You can't manage a project that doesn't exist, please retry with a valid ID\n"
@@ -136,7 +150,8 @@ public class Menus {
 				}
 
 				break;
-			case 8: //Return to Main screen
+
+			case 10: //Return to Main screen
 				System.out.println("Returning to the Main Screen...");
 				showMainMenu();
 				break;
@@ -146,7 +161,7 @@ public class Menus {
 				return;
 			}	
 
-		}while(temp!=8);
+		}while(temp!=10);
 	}
 
 
@@ -596,15 +611,35 @@ public class Menus {
 
 			case 1: //Add a meeting to the schedule
 
-				/******************************************************************************************* HERE ********/
+				String meetingTitle = UserInput.readString("Please enter the title of the meeting:\n>>> ");
+				String meetingDescription = UserInput.readString("Please give a brief description about the meeting:\n>>> ");
+				System.out.println("Please enter the date : ");
+				int sYear = UserInput.readInt("> Year: ");
+				int sMonth= UserInput.readInt("> Month: ");
+				int sDate= UserInput.readInt("> Date: ");
+				System.out.println("Please enter the start time : ");
+				int sHour= UserInput.readInt("> Hour: ");
+				int sMin= UserInput.readInt("> Min: ");
+
+				@SuppressWarnings("deprecation") Date startTime= new Date(sYear-1900,sMonth-1,sDate,sHour,sMin);
+				System.out.println("Please enter the end time :");
+				int eHour= UserInput.readInt("> Hour: ");
+				int eMin= UserInput.readInt("> Min: ");
+				@SuppressWarnings("deprecation") Date endTime= new Date(sYear-1900,sMonth-1,sDate,eHour,eMin);
+
+				Controller.addMeeting(project,meetingTitle, meetingDescription,startTime,endTime);
 				break;
 
 			case 2://Show only meetings
+				Controller.displayOnlyMeetings(project);
 				break;
 
 			case 3: //Manage a meeting (edit/delete ...)
 				String meetingID = UserInput.readString("ID of the meeting you want to manage:\n>>> ");
-				showMeetingScreen(meetingID);
+				int indexOfMeeting=Controller.searchMeetingByIDInScheduleproject(project,meetingID);
+				if(indexOfMeeting>=0) {
+					showMeetingScreen(project,meetingID);
+				}
 				break;
 
 
@@ -635,20 +670,20 @@ public class Menus {
 				String activityTitle = UserInput.readString("Please enter the title of the activity:\n>>> ");
 				String activityDescription = UserInput.readString("Please give a brief description about the activity:\n>>> ");
 				System.out.println("Please enter the date : ");
-				int sYear = UserInput.readInt("> Year: ");
-				int sMonth= UserInput.readInt("> Month: ");
-				int sDate= UserInput.readInt("> Date: ");
+				int sYEar = UserInput.readInt("> Year: ");
+				int sMOnth= UserInput.readInt("> Month: ");
+				int sDAte= UserInput.readInt("> Date: ");
 				System.out.println("Please enter the start time : ");
-				int sHour= UserInput.readInt("> Hour: ");
-				int sMin= UserInput.readInt("> Min: ");
+				int sHOur= UserInput.readInt("> Hour: ");
+				int sMIn= UserInput.readInt("> Min: ");
 
-				@SuppressWarnings("deprecation") Date startTime= new Date(sYear-1900,sMonth-1,sDate,sHour,sMin);
+				@SuppressWarnings("deprecation") Date startTIme= new Date(sYEar-1900,sMOnth-1,sDAte,sHOur,sMIn);
 				System.out.println("Please enter the end time :");
-				int eHour= UserInput.readInt("> Hour: ");
-				int eMin= UserInput.readInt("> Min: ");
-				@SuppressWarnings("deprecation") Date endTime= new Date(sYear-1900,sMonth-1,sDate,eHour,eMin);
+				int eHOur= UserInput.readInt("> Hour: ");
+				int eMIn= UserInput.readInt("> Min: ");
+				@SuppressWarnings("deprecation") Date endTIme= new Date(sYEar-1900,sMOnth-1,sDAte,eHOur,eMIn);
 
-				Controller.addActivity(project,activityTitle, activityDescription,startTime,endTime,activityType);
+				Controller.addActivity(project,activityTitle, activityDescription,startTIme,endTIme,activityType);
 				break;
 
 			case 5://Show only activities
