@@ -828,6 +828,12 @@ public class Controller {
 			System.out.println("The participant: "+nameP+" of ID:"+idP+" has bees successfull removed from the meeting");
 		}
 	}
+	
+	
+	public static void displayParticipantsMeeting(Project project, Meeting meeting ) {
+		meeting.listOfParticipants();
+	}
+	
 
 
 
