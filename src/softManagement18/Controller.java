@@ -855,6 +855,14 @@ public class Controller {
 			System.out.println("There is no registered meeting for the moment! ");
 		}
 	}
+	
+	public static void setDateMeeting(Project project, Meeting meeting,Date startTime, Date endTime) {
+		meeting.setStartTime(startTime);
+		meeting.setEndTime(endTime);
+		System.out.println("The new date is:\n"
+				+ "> Start Time:"+ meeting.getStartTime()+"\n"
+				+ "> End Time: "+meeting.getEndTime()+"\n"); 
+	}
 
 
 

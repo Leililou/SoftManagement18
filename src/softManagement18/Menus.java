@@ -726,8 +726,22 @@ public class Menus {
 				Controller.removeParticipantMeeting(project, currentMeeting, participantID);
 				break;
 				
-			case 3: //
-				System.err.println("To be implemented");
+			case 3: //Change the date and time
+				System.out.println("Please enter the new date and time: ");
+				int sYear = UserInput.readInt("> Year: ");
+				int sMonth= UserInput.readInt("> Month: ");
+				int sDate= UserInput.readInt("> Date: ");
+				System.out.println("Please enter the new start time : ");
+				int sHour= UserInput.readInt("> Hour: ");
+				int sMin= UserInput.readInt("> Min: ");
+
+				@SuppressWarnings("deprecation") Date startTime= new Date(sYear-1900,sMonth-1,sDate,sHour,sMin);
+				System.out.println("Please enter the new end time :");
+				int eHour= UserInput.readInt("> Hour: ");
+				int eMin= UserInput.readInt("> Min: ");
+				@SuppressWarnings("deprecation") Date endTime= new Date(sYear-1900,sMonth-1,sDate,eHour,eMin);
+
+				Controller.setDateMeeting(project, currentMeeting,startTime, endTime);
 				break;
 
 			case 4: //
