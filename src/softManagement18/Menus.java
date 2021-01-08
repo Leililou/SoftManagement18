@@ -687,26 +687,40 @@ public class Menus {
 	}
 
 
-	public static void showMeetingScreen(String meetingID) {
+	public static void showMeetingScreen(Project project,String meetingID) {
 		//String projectTitle = Controller.projectNameByID(projectID);
+		Meeting currentMeeting=Controller.meetingFromID(project,meetingID);
 		int temp=0;
 		do {
 			System.out.println(">> MANAGEMENT OF THE MEETING /*+projectTitle+*/+, of ID:"+meetingID+":\n"
-					+ "1. Add a participant to the meeting\n"
-					// show participants
+					+ "0. Display the list of participants in this meeting\n"
+					+ "1. Add a participant to the meting\n"
 					+ "2. Remove a particiant from the meeting\n"
-					+ "3. Change the description of the meeting\n"
+					+ "3. Change the date and time \n"
 					+ "4. Delete this meeting from the schedule\n"
-					+ "\n> EXIT THE MEETING MANAGEMENT SCREEN\n"
-					+ "5. Return to the Manager's Menu\n"
-					+ "6. Return to the Main Menu");
+
+					+ "\n> EXIT THE ACTIVITY MANAGEMENT SCREEN\n"
+					+ "5. Return to the schedule screen\n"
+					+ "6. Return to the Project's Menu\n"	
+					+ "7. Return to the Manager's Menu\n"
+					+ "8. Return to the Main Menu");
+
 
 			temp = UserInput.readInt("\nPlease type your choice here >>>> :");
+			String participantID="";
 			switch (temp) {
-
-			case 1: //
-				System.err.println("To be implemented");
+			
+			case 0:// Display participants in meeting
+				System.out.println("<The list of participants in this meeting");
+				Controller.displayParticipantsMeeting(project, currentMeeting);
 				break;
+				
+			case 1: //Add a participant to the meeting
+				Controller.showParticipantsProject(project.getID());
+				participantID = UserInput.readString("ID of the participant you want to add to this activity (Please select from the list above):\n>>> ");
+				Controller.addParticipantMeeting(participantID,project, currentMeeting);
+				break;
+
 
 			case 2: //
 				System.err.println("To be implemented");

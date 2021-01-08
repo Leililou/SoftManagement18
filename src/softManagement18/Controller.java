@@ -771,7 +771,7 @@ public class Controller {
 	// Meeting
 
 	// Search meeting by ID in a list(To define)
-	public static int searchMeetingByIDInScheduleproject(Project project,String meetingID) {
+	public int searchMeetingByIDInScheduleproject(Project project,String meetingID) {
 		//-2: empty list, -1: invalid ID, i: index
 		// check the list of products (if empty)
 		if (project.schedule.isEmpty()) {
@@ -790,7 +790,7 @@ public class Controller {
 	}
 
 	// Add an meeting
-	public static void addMeeting(Project project,String meetingTitle, 
+	public void addMeeting(Project project,String meetingTitle, 
 			String description,Date startTime,Date endTime) 
 	{
 		Meeting meeting= new Meeting(meetingTitle,description,startTime,endTime);
@@ -808,7 +808,7 @@ public class Controller {
 	}
 
 	// Meeting object from ID
-	public static Meeting meetingFromID(Project project,String meetingID) {
+	public Meeting meetingFromID(Project project,String meetingID) {
 		int indexOfMeeting=searchMeetingByIDInScheduleproject(project,meetingID);
 		if (indexOfMeeting>=0) {
 			return (Meeting) project.schedule.get(indexOfMeeting);
@@ -819,7 +819,7 @@ public class Controller {
 	}
 
 	//remove a participant from an meeting
-	public static void removeParticipantMeeting(Project project, Meeting meeting, String participantId) {
+	public void removeParticipantMeeting(Project project, Meeting meeting, String participantId) {
 		int indexParticipantMeeting=searchTeamMemberByIDInAList(meeting.participants,participantId);
 		if(indexParticipantMeeting>=0) {
 			String nameP= meeting.participants.get(indexParticipantMeeting).getName();
@@ -835,7 +835,7 @@ public class Controller {
 	}
 	
 	// remove meeting
-	public static void removeMeeting(Project project, Meeting meeting) {
+	public void removeMeeting(Project project, Meeting meeting) {
 		String meetingID= meeting.getID();
 		project.schedule.remove(meeting);
 		System.out.println("The meeting of ID:"+meetingID+" has bees successfully removed from the schedule.");
@@ -843,7 +843,7 @@ public class Controller {
 	}
 	
 	// display meetings
-	public static void displayOnlyMeetings(Project project){
+	public void displayOnlyMeetings(Project project){
 		int counter=0;
 		for(Schedule currentevent:project.schedule) {
 			if (currentevent instanceof Meeting) {
