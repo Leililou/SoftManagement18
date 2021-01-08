@@ -789,72 +789,25 @@ public class Controller {
 		return -1;
 	}
 	
-	
+	// Add an meeting
+		public static void addMeeting(Project project,String meetingTitle, 
+				String description,Date startTime,Date endTime) 
+		{
+			Meeting meeting= new Meeting(meetingTitle,description,startTime,endTime);
+			project.schedule.add(meeting);	
+			System.out.println("The meeting :" + meeting.getMeetingTitle() + " has been successfully added to the schedule!");
+		}
+
+		// add participant to project/schedule/meeting
+		public static void addParticipantMeeting(String participantID,Project project, Meeting meeting) {
+			TeamMember participant=teamMFromID(project,participantID);
+			if(participant!= null) {
+				meeting.participants.add(participant);
+				System.out.println("The participant "+participant.getName()+" has been successfuly added to the meeting .");
+			}		
+		}
 
 
 
 }
-
-
-//********* not yet verified
-/*
-	public static void scheduleMeeting() {
-		String meetingId = UUID.randomUUID().toString();
-		String meetingDay = softManagement18.InputHandler.stringInput("Enter meeting date in form of dd-mm-yyyy");
-		String meetingTime = softManagement18.InputHandler.stringInput("Enter meeting time in form of hh:mm:ss");
-		String meetingD = meetingDay + " " + meetingTime;
-		Date meetingDate = null;
-		try {
-			meetingDate = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").parse(meetingD);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		String meetingAbout = softManagement18.InputHandler.stringInput("Please specify what the meeting is about in one word: ");
-		Meeting meeting = new Meeting(meetingId, meetingDate, meetingAbout);
-		Meeting.meetingList.add(meeting);
-		System.out.println("\t" + meetingDate + "\n " + meetingAbout + "\n");
-	}
- */
-
-
-
-//********* not yet verified
-/*
- * 
-	//The team member should be removed from the lists of tasks first in case he/she is part of it then the general list
-	public static void removeMember(String idInput) {
-		for (int i = 0; i < Member.memberList.size(); i++) {
-			if (Member.memberList.get(i).getId().equals(idInput)) {
-				Member.memberList.remove(i);
-				System.out.println("Member removed!");
-			} else System.out.println("Team member with id" + idInput + " not found");
-		}
-	}
- */
-
-//********* not yet verified
-/*
-	public static void showMeetingList() {
-		for (Meeting meeting : Meeting.meetingList) {
-			if (meeting != null) {
-				System.out.println(meeting);
-			}
-		}
-	}
- */
-
-
-//********* not yet verified
-/*
-	public static void removeMeeting(String meetingIdInput) {
-		for (int i = 0; i < Meeting.meetingList.size(); i++) {
-			if (Meeting.meetingList.get(i).getMeetingId().equals(meetingIdInput)) {
-				Meeting.meetingList.remove(i);
-				System.out.println("Meeting removed!");
-			} else System.out.println("Meeting with id" + meetingIdInput + " not found");
-		}
-	}
- */
-
-
 
