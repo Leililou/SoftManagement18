@@ -829,11 +829,12 @@ public class Controller {
 		}
 	}
 	
-	
+	// display participants
 	public static void displayParticipantsMeeting(Project project, Meeting meeting ) {
 		meeting.listOfParticipants();
 	}
 	
+	// remove meeting
 	public static void removeMeeting(Project project, Meeting meeting) {
 		String meetingID= meeting.getID();
 		project.schedule.remove(meeting);
@@ -841,6 +842,20 @@ public class Controller {
 		
 	}
 	
+	// display meetings
+	public static void displayOnlyMeetings(Project project){
+		int counter=0;
+		for(Schedule currentevent:project.schedule) {
+			if (currentevent instanceof Meeting) {
+				counter++;
+				System.out.println(currentevent);
+			}
+		}
+		if (counter==0) {
+			System.out.println("There is no registered meeting for the moment! ");
+		}
+	}
+
 
 
 
